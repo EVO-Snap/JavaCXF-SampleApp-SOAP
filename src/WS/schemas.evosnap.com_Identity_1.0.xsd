@@ -1,0 +1,115 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/Identity/1.0/" elementFormDefault="qualified" targetNamespace="http://schemas.evosnap.com/Identity/1.0/">
+	<xs:complexType name="STSUnavailableFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="STSUnavailableFault" nillable="true" type="tns:STSUnavailableFault"/>
+	<xs:complexType name="BaseFault">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ErrorID" type="xs:int"/>
+			<xs:element minOccurs="0" name="HelpURL" nillable="true" type="xs:string"/>
+			<xs:element minOccurs="0" name="Operation" nillable="true" type="xs:string"/>
+			<xs:element minOccurs="0" name="ProblemType" nillable="true" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BaseFault" nillable="true" type="tns:BaseFault"/>
+	<xs:complexType name="ExpiredTokenFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ExpiredTokenFault" nillable="true" type="tns:ExpiredTokenFault"/>
+	<xs:complexType name="InvalidTokenFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="InvalidTokenFault" nillable="true" type="tns:InvalidTokenFault"/>
+	<xs:complexType name="AuthenticationFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="AuthenticationFault" nillable="true" type="tns:AuthenticationFault"/>
+	<xs:complexType name="BadAttemptThresholdExceededFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BadAttemptThresholdExceededFault" nillable="true" type="tns:BadAttemptThresholdExceededFault"/>
+	<xs:complexType name="PasswordExpiredFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PasswordExpiredFault" nillable="true" type="tns:PasswordExpiredFault"/>
+	<xs:complexType name="OneTimePasswordFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="OneTimePasswordFault" nillable="true" type="tns:OneTimePasswordFault"/>
+	<xs:complexType name="LockedByAdminFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="LockedByAdminFault" nillable="true" type="tns:LockedByAdminFault"/>
+	<xs:complexType name="SendEmailFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SendEmailFault" nillable="true" type="tns:SendEmailFault"/>
+	<xs:complexType name="GeneratePasswordFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GeneratePasswordFault" nillable="true" type="tns:GeneratePasswordFault"/>
+	<xs:complexType name="PasswordInvalidFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="PasswordInvalidFault" nillable="true" type="tns:PasswordInvalidFault"/>
+	<xs:complexType name="UserNotFoundFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UserNotFoundFault" nillable="true" type="tns:UserNotFoundFault"/>
+	<xs:complexType name="InvalidEmailFault">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="InvalidEmailFault" nillable="true" type="tns:InvalidEmailFault"/>
+</xs:schema>

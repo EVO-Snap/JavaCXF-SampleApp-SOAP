@@ -1,0 +1,285 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:i1="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/DataServices" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:i0="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" name="CWSTransactionManagement" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/DataServices">
+	<wsdl:import namespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS" location="CwsTransactionManagement.wsdl"/>
+	<wsdl:import namespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing" location="CwsDataServicesBilling.wsdl"/>
+	<wsdl:types/>
+	<wsdl:binding name="BasicHttpBinding_ITMSOperations" type="i0:ITMSOperations">
+		<wsp:PolicyReference URI="#BasicHttpBinding_ITMSOperations_policy"/>
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="Ping">
+			<soap:operation soapAction="http://schemas.evosnap.com/Ipc.General.WCF.Contracts.Common/IExternallyFacingStandardOperations/Ping" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="QueryBatch">
+			<soap:operation soapAction="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryBatch" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="InvalidTokenFaultFault">
+				<soap:fault name="InvalidTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnavailableFaultFault">
+				<soap:fault name="TMSUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="DataServicesUnavailableFaultFault">
+				<soap:fault name="DataServicesUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSValidationResultFaultFault">
+				<soap:fault name="TMSValidationResultFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ExpiredTokenFaultFault">
+				<soap:fault name="ExpiredTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AuthenticationFaultFault">
+				<soap:fault name="AuthenticationFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSTransactionFailedFaultFault">
+				<soap:fault name="TMSTransactionFailedFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSOperationNotSupportedFaultFault">
+				<soap:fault name="TMSOperationNotSupportedFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+				<soap:fault name="TMSUnknownServiceKeyFaultFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="QueryTransactionFamilies">
+			<soap:operation soapAction="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryTransactionFamilies" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="TMSValidationResultFaultFault">
+				<soap:fault name="TMSValidationResultFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="DataServicesUnavailableFaultFault">
+				<soap:fault name="DataServicesUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+				<soap:fault name="TMSUnknownServiceKeyFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ExpiredTokenFaultFault">
+				<soap:fault name="ExpiredTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidTokenFaultFault">
+				<soap:fault name="InvalidTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AuthenticationFaultFault">
+				<soap:fault name="AuthenticationFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSTransactionFailedFaultFault">
+				<soap:fault name="TMSTransactionFailedFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnavailableFaultFault">
+				<soap:fault name="TMSUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="QueryTransactionsDetail">
+			<soap:operation soapAction="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryTransactionsDetail" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="InvalidTokenFaultFault">
+				<soap:fault name="InvalidTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ExpiredTokenFaultFault">
+				<soap:fault name="ExpiredTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSValidationResultFaultFault">
+				<soap:fault name="TMSValidationResultFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AuthenticationFaultFault">
+				<soap:fault name="AuthenticationFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSTransactionFailedFaultFault">
+				<soap:fault name="TMSTransactionFailedFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnavailableFaultFault">
+				<soap:fault name="TMSUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="DataServicesUnavailableFaultFault">
+				<soap:fault name="DataServicesUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+				<soap:fault name="TMSUnknownServiceKeyFaultFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="QueryTransactionsSummary">
+			<soap:operation soapAction="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryTransactionsSummary" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="TMSValidationResultFaultFault">
+				<soap:fault name="TMSValidationResultFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="DataServicesUnavailableFaultFault">
+				<soap:fault name="DataServicesUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+				<soap:fault name="TMSUnknownServiceKeyFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnavailableFaultFault">
+				<soap:fault name="TMSUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ExpiredTokenFaultFault">
+				<soap:fault name="ExpiredTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidTokenFaultFault">
+				<soap:fault name="InvalidTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AuthenticationFaultFault">
+				<soap:fault name="AuthenticationFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSTransactionFailedFaultFault">
+				<soap:fault name="TMSTransactionFailedFaultFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="QueryRejectedSummary">
+			<soap:operation soapAction="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryRejectedSummary" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="TMSUnavailableFaultFault">
+				<soap:fault name="TMSUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSTransactionFailedFaultFault">
+				<soap:fault name="TMSTransactionFailedFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="DataServicesUnavailableFaultFault">
+				<soap:fault name="DataServicesUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSOperationNotSupportedFaultFault">
+				<soap:fault name="TMSOperationNotSupportedFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+				<soap:fault name="TMSUnknownServiceKeyFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSValidationResultFaultFault">
+				<soap:fault name="TMSValidationResultFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ExpiredTokenFaultFault">
+				<soap:fault name="ExpiredTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidTokenFaultFault">
+				<soap:fault name="InvalidTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AuthenticationFaultFault">
+				<soap:fault name="AuthenticationFaultFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="QueryRejectedDetail">
+			<soap:operation soapAction="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryRejectedDetail" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="TMSOperationNotSupportedFaultFault">
+				<soap:fault name="TMSOperationNotSupportedFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnavailableFaultFault">
+				<soap:fault name="TMSUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+				<soap:fault name="TMSUnknownServiceKeyFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSValidationResultFaultFault">
+				<soap:fault name="TMSValidationResultFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ExpiredTokenFaultFault">
+				<soap:fault name="ExpiredTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidTokenFaultFault">
+				<soap:fault name="InvalidTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AuthenticationFaultFault">
+				<soap:fault name="AuthenticationFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="TMSTransactionFailedFaultFault">
+				<soap:fault name="TMSTransactionFailedFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="DataServicesUnavailableFaultFault">
+				<soap:fault name="DataServicesUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="BasicHttpBinding_IDataServicesBilling" type="i1:IDataServicesBilling">
+		<wsp:PolicyReference URI="#BasicHttpBinding_IDataServicesBilling_policy"/>
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="QueryBillingEventSummary">
+			<soap:operation soapAction="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummary" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DataServicesUnavailableFaultFault">
+				<soap:fault name="DataServicesUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="BillingTransactionFailedFaultFault">
+				<soap:fault name="BillingTransactionFailedFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ExpiredTokenFaultFault">
+				<soap:fault name="ExpiredTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="InvalidTokenFaultFault">
+				<soap:fault name="InvalidTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AuthenticationFaultFault">
+				<soap:fault name="AuthenticationFaultFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="QueryBillingEventDetail">
+			<soap:operation soapAction="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetail" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="InvalidTokenFaultFault">
+				<soap:fault name="InvalidTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="BillingTransactionFailedFaultFault">
+				<soap:fault name="BillingTransactionFailedFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="ExpiredTokenFaultFault">
+				<soap:fault name="ExpiredTokenFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="DataServicesUnavailableFaultFault">
+				<soap:fault name="DataServicesUnavailableFaultFault" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="AuthenticationFaultFault">
+				<soap:fault name="AuthenticationFaultFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CWSTransactionManagement">
+		<wsdl:port name="BasicHttpBinding_ITMSOperations" binding="tns:BasicHttpBinding_ITMSOperations">
+			<soap:address location="https://api.ciptest.goevo.local/2.0.19/DataServices/TMS"/>
+		</wsdl:port>
+		<wsdl:port name="BasicHttpBinding_IDataServicesBilling" binding="tns:BasicHttpBinding_IDataServicesBilling">
+			<soap:address location="https:/localhost/2.0.19/DataServices/Billing"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

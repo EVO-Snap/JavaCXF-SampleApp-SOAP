@@ -1,0 +1,5482 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q1="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q2="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q3="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q4="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q5="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q6="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q7="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q8="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q9="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q10="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q11="http://schemas.evosnap.com/CWS/v2.0/Transactions" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions" schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions.xsd"/>
+	<xs:complexType name="BankcardTransactionData" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the Bankcard transaction data. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="q1:TransactionData">
+				<xs:sequence>
+					<xs:element name="AccountType" type="tns:AccountType" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the bank account type. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="AlternativeMerchantData" type="q1:AlternativeMerchantData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Alternative merchant data to appear on accountholder statements. Subject to Issuer discretion. Conditional, optional if BankcardService.AlternativeMerchantData is true. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ApprovalCode" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Approval code for this authorization. Conditional, required if prior authorization approval was obtained. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CashBackAmount" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies a cash back amount for PIN Debit transactions. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CustomerPresent" type="tns:CustomerPresent" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Presence of cardholder relative to the transaction point of service. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EmployeeId" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Clerk/cashier identifier. Conditional, required for Retail, Restaurant, and MOTO industry types. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EntryMode" type="q1:EntryMode" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates how the cardholder data was retrieved. When authorizing with stored card data, either locally or with CardDataToken, indicate that the card data was manually collected (keyed or one of its variants). Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="GoodsType" type="tns:GoodsType" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Type of goods purchased. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="InternetTransactionData" type="tns:InternetTransactionData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Gets or sets the internet transaction data value. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="InvoiceNumber" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Informational field used to track invoice/receipt number. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OrderNumber" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Order number as assigned by the merchant. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SignatureCaptured" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies whether the cardholder provided a signature for the transaction. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TerminalId" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Gets or sets the internet transaction data value. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TipAmount" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Tip amount, if known at the time of authorization. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="BatchAssignment" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specific batch number assignment, when allowed. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IsPartialShipment" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates whether or not the transaction represents a partial shipment. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FeeAmount" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies a fee amount associated with the authorization, such as convenience fees. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LaneId" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Identifies the cashier location at which the transaction occurred. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PartialApprovalCapable" type="tns:PartialApprovalSupportType" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates whether the merchant is capable of processing a partial approval for this transaction. When 'false', the merchant is not capable of processing partial approvals, resulting in more declined transactions. Conditional, required if ServiceInformation.Tenders.PartialApprovalSupportType = 'Enabled'. Otherwise, not present. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ScoreThreshold" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies the score threshold used in accepting or declining certain transactions. Optional </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IsQuasiCash" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> If ‘true’, specifies that this transaction represents a sale of items that are directly convertible to cash, such as casino gaming chips, money orders, deposits, wire transfer money orders, Travelers Cheques, and foreign currency. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TransactionCode" type="tns:TransactionCode" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the transaction code. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardTransactionData" type="tns:BankcardTransactionData" nillable="true"/>
+	<xs:complexType name="BankcardTransaction" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="q2:Transaction">
+				<xs:sequence>
+					<xs:element name="ApplicationConfigurationData" type="tns:BankcardApplicationConfigurationData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Details about the way this application instance is configured, if different from the values set in ServiceInformation. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TenderData" type="tns:BankcardTenderData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Details about the card tender used for the transaction. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TransactionData" type="tns:BankcardTransactionData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Contains transaction detail information. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardTransaction" type="tns:BankcardTransaction" nillable="true"/>
+	<xs:simpleType name="BillPayment">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the nature of the recurring or installment transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DeferredBilling">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Payment for goods that were invoiced for later payment. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SinglePayment">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Single payment being made to a bill. For example, utility bill or credit balance. Typically customer initiated. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Installment">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Bill payment transaction that is recurring in nature but has a finite duration. For example, payment 2 of 3 for goods purchased. When used in settlement, CurrentInstallmentNumber and TotalNumberOfInstallments must be populated. Initial payments are customer initiated and subsequent transactions are typically merchant initiated. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Recurring">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Bill payment transaction that is recurring in nature but has no specified end point. Transactions are typically of the same amount. Initial payments are customer initiated and subsequent transactions are typically merchant initiated. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="BillPayment" type="tns:BillPayment" nillable="true"/>
+	<xs:simpleType name="RequestCommercialCard">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Request commercial card status for the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Disable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Disable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Enable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Enable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="RequestCommercialCard" type="tns:RequestCommercialCard" nillable="true"/>
+	<xs:simpleType name="ExistingDebt">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates recurring or installment transaction is on existing debt. Required if BillPayment is set. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotExistingDebt">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not existing debt. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IsExistingDebt">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Is existing debt. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ExistingDebt" type="tns:ExistingDebt" nillable="true"/>
+	<xs:simpleType name="RequestACI">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Authorization Characteristics Indicator. Identifies the request as potentially qualifying for the Visa CPS or MasterCard Merit programs. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotCPSMeritCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not CPS/Merit capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IsCPSMeritCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Is CPS/Merit capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CPSMeritCapableIncAuth">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CPS/Merit capable incremental authorization. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PremierCustomer">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Premier customer. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RecurringInstallment">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Recurring/installment. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="RequestACI" type="tns:RequestACI" nillable="true"/>
+	<xs:simpleType name="RequestAdvice">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates whether to include advice on declined recurring payment transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Capable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="RequestAdvice" type="tns:RequestAdvice" nillable="true"/>
+	<xs:complexType name="BankcardTenderData" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the Bankcard transaction tender data. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="q3:TransactionTenderData">
+				<xs:sequence>
+					<xs:element name="CardData" type="tns:CardData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Card data. Conditional, required if any one of the following must be provided: CardDataToken, SecureCardData, or CardData. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CardSecurityData" type="tns:CardSecurityData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Security data for card transactions, such as AVS and CVV. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EcommerceSecurityData" type="tns:EcommerceSecurityData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Ecommerce security elements. Conditional, optional for Ecommerce transactions, otherwise not present. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardTenderData" type="tns:BankcardTenderData" nillable="true"/>
+	<xs:complexType name="CardData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the payment card. Conditional, required for Authorize and AuthorizeAndCapture transactions. May be required for undoing PIN Debit transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CardType" type="tns:TypeCardType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Type of card used in the transaction. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CardholderName" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Cardholder name embossed on the front of the card. Optional, but recommended for MOTO and Ecommerce industry types. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PAN" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Cardholder Primary Account Number embossed on the front of the card. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Expire" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The 4-digit expiration date embossed on the front of a card. Conditional, required for authorization, not required for settlement. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Track1Data" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The actual data read from the magnetic stripe on a card. Application should strip Start and End Sentinels, LRC, and Track separators. Conditional, required if at least one track data is required for authorizations unless card not present or keyed entry. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Track2Data" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The actual data read from the magnetic stripe on a card. Application should strip Start and End Sentinels, LRC, and Track separators. Conditional, required if at least one track data is required for authorizations unless card not present or keyed entry. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CardData" type="tns:CardData" nillable="true"/>
+	<xs:simpleType name="TypeCardType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Type of card used in the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PrivateLabel">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Private Label. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Visa">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Visa. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MasterCard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MasterCard. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AmericanExpress">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> American Express. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DinersCartBlanche">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Diners/Cart Blanche. DEPRECATED: Use MasterCard instead. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Discover">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Discover. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JCB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JCB. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CitibankFinancial">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Citibank Financial. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RevolutionCard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RevolutionCard. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnbrandedATM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UnbrandedATM. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Dankort">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Dankort </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Solo">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Solo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Maestro">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Maestro </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LaserCard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LaserCard </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Electron">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Electron </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Finax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Finax </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kopkort">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Köpkort </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CarteAurore">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Carte Aurore </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CartesBancaires">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Cartes Bancaires </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DinersClub">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Diners Club (International) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TypeCardType" type="tns:TypeCardType" nillable="true"/>
+	<xs:complexType name="CardSecurityData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains security information for the payment card. Conditional, required for PIN Debit transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AVSData" type="tns:AVSData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Cardholder address data for Address Verification System (AVS). Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CVDataProvided" type="q4:CVDataProvided" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates whether or not CV data provided. Optional, but recommended for card not present authorizations, not used in settlement. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CVData" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Card Verification (CV) data applies to Visa (CVV), MasterCard (CVC), AMEX (CID), and Discover (CID), and is contained on the signature line of the physical credit card. Conditional, required in authorizations if CVDataInd = 'Provided', not used in settlement. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KeySerialNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Key serial number for DUK/PT PIN encryption. Conditional, required for PIN Debit transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PIN" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Encrypted PIN. Conditional, required for PIN Debit transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IdentificationInformation" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies identifying information about the tender, such as a magnetic stripe fingerprint. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CardSecurityData" type="tns:CardSecurityData" nillable="true"/>
+	<xs:complexType name="AVSData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Cardholder address data for Address Verification System (AVS). Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CardholderName" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Cardholder name embossed on the front of the card. Conditional, required if specified in AVSData.CardholderName (ServiceInformation). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Street" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Street Address. Conditional, required if specified in AVSData.Street (ServiceInformation). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="City" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> City. Conditional, required if specified in AVSData.City (ServiceInformation). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StateProvince" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> State or Province. Conditional, required if specified in AVSData.StateProvince (ServiceInformation). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostalCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Postal Code. Conditional, required if specified in AVSData.PostalCode (ServiceInformation). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Country" type="q5:TypeISOCountryCodeA3" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Country. Conditional, required if specified in AVSData.Country (ServiceInformation). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Phone" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Cardholder phone number. Conditional, required if specified in AVSData.Phone (ServiceInformation). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Email" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Cardholder email address. Conditional, reference AVS/Email service configuration for level of service provider support. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AVSData" type="tns:AVSData" nillable="true"/>
+	<xs:complexType name="EcommerceSecurityData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Ecommerce security elements. Conditional, optional for Ecommerce transactions, otherwise not present. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TokenData" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Contains actual data for token. VPAS or UCAF value must be in its original base64 encoded form. Conditional, required for Electronic Commerce transactions using VPAS, UCAF, or SET w/certificate. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TokenIndicator" type="tns:TokenIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies VPAS, UCAF, or SET Certificate S/N. Conditional, required for Electronic Commerce transactions using VPAS, UCAF, or SET w/certificate. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="XID" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction identifier in its original, base64 encoded form for Electronic Commerce transactions w/VPAS. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="EcommerceSecurityData" type="tns:EcommerceSecurityData" nillable="true"/>
+	<xs:simpleType name="TokenIndicator">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies VPAS, UCAF, or SET certificate S/N. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet"/>
+			<xs:enumeration value="VPAS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> For Vbv </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UCAFWithData">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> For MCSC when token is sent to provider </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UCAFWithoutData">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> For MCSC when token is not sent to provider </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AttemptedCardUnsupported">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Merchant supports service but customer card does not </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AttemptedServiceUnavailable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Both merchant and card support service but it could not be accessed </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TokenIndicator" type="tns:TokenIndicator" nillable="true"/>
+	<xs:complexType name="BankcardApplicationConfigurationData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Overrides application data for the specific transaction. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ApplicationAttended" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates whether the application is attended or unattended, if different from the value set in ServiceInformation. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ApplicationLocation" type="tns:ApplicationLocation" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Location of the application relative to the merchant, if different from the value set in ServiceInformation. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="HardwareType" type="tns:HardwareType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Type of device running the application, if different from the value set in ServiceInformation. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PINCapability" type="tns:PINCapability" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates support for cardholder Personal Identification Number (PIN), if different from the value set in ServiceInformation. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReadCapability" type="tns:ReadCapability" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Capability of the device to read cardholder data, if different from the value set in ServiceInformation. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BankcardApplicationConfigurationData" type="tns:BankcardApplicationConfigurationData" nillable="true"/>
+	<xs:simpleType name="ApplicationLocation">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Location of the application relative to the merchant. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OnPremises">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> On premises. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OffPremises">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Off premises. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HomeInternet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Home/Internet. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ApplicationLocation" type="tns:ApplicationLocation" nillable="true"/>
+	<xs:simpleType name="HardwareType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Type of device running the application. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PC. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DialTerminal">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Dial Terminal. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ElectronicCashRegister">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Electronic Cash Register. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="InStoreController">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> In-Store Controller. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Mainframe">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Mainframe. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ThirdPartyDeveloper">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Third party developer. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POSPort">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> POS Port. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POSPartner">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> POS Partner. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TicketMachine">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Ticket Machine/Kiosk. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ATM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATM </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ScripDevice">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Scrip Device </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Telephone">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Telephone </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="InitiatedCAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Initiated CAT </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VirtualTerminal">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Virtual Terminal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MobileBanking">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Mobile Banking </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="HardwareType" type="tns:HardwareType" nillable="true"/>
+	<xs:simpleType name="PINCapability">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates support for cardholder Personal Identification Number (PIN). </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PINSupported">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Supports PIN. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PINNotSupported">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Does not support PIN. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PINVerifiedByDevice">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PIN verified by device. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PINPadInoperative">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PIN pad inoperative. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="PINCapability" type="tns:PINCapability" nillable="true"/>
+	<xs:simpleType name="ReadCapability">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Capability of the device to read cardholder data. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HasMSR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Has MSR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoMSR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No MSR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KeyOnly">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Key only. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Chip">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Chip. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ContactlessChip">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Contactless chip. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ContactlessMSR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Contactless MSR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ECR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ECR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VSCCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VSC capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RFIDCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RFID capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EmvICC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EMV ICC. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MSREMVICC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MSR/EMV ICC. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OCRReader">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OCR reader. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BarCodeReader">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Bar code reader. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotSpecified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not specified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARUIVR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARU/IVR (Automated Response Unit/Interactive Voice Response) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoTerminal">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No terminal. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NFCCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NFC capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ReadCapability" type="tns:ReadCapability" nillable="true"/>
+	<xs:simpleType name="AccountType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the bank account type. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SavingsAccount">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Savings account. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CheckingAccount">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Checking account. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="AccountType" type="tns:AccountType" nillable="true"/>
+	<xs:simpleType name="CustomerPresent">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Presence of cardholder relative to the transaction point of service. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Present">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Cardholder and card present. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Suspicious">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Suspicious. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BillPayment">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Bill payment transaction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Transponder">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Transponder. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOTO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MOTO. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VisaOpenNetworkTransaction">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Open network transaction (Visa only). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VisaCardPresentStripeUnreadable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Card present, stripe can't be read (Visa only). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MailFax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Mail/fax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ecommerce">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Ecommerce. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TelARU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Telephone ARU (Automated Response Unit). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOTOCC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MOTO call center. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VoiceResponse">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Voice response system. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CustomerPresent" type="tns:CustomerPresent" nillable="true"/>
+	<xs:simpleType name="GoodsType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Type of goods purchased. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DigitalGoods">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Digital Goods. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PhysicalGoods">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Physical Goods. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="GoodsType" type="tns:GoodsType" nillable="true"/>
+	<xs:complexType name="InternetTransactionData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the internet connection. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IpAddress" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The IP Address of the client application. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SessionId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Session Id of the application. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="InternetTransactionData" type="tns:InternetTransactionData" nillable="true"/>
+	<xs:simpleType name="PartialApprovalSupportType">
+		<xs:annotation>
+			<xs:appinfo/>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Capable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Merchant is capable of handling partial approval </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Merchant is not capable of handling partial approval </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="PartialApprovalSupportType" type="tns:PartialApprovalSupportType" nillable="true"/>
+	<xs:simpleType name="TransactionCode">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Type of goods purchased. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Override">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Override - indicates to return response from duplicate transaction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TransactionCode" type="tns:TransactionCode" nillable="true"/>
+	<xs:complexType name="ManagedBilling">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Configuration to setup and perform an automated recurring payment on behalf of the merchant. Conditional, optional if ManagedBilling (ServiceInformation) = 'true', otherwise not present. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="DownPayment" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Amount the cardholder is initially paying towards the purchase. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Installments" type="tns:ManagedBillingInstallments" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Installment data. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Interval" type="tns:Interval" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Unit used in calculating the period. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Period" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Number of intervals between each payment. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StartDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Date when the recurring payments should be initiated. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ManagedBilling" type="tns:ManagedBilling" nillable="true"/>
+	<xs:complexType name="ManagedBillingInstallments">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Installment data. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Amount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Amount the cardholder should be billed in each installment. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Count" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Number of times the cardholder should be billed. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ManagedBillingInstallments" type="tns:ManagedBillingInstallments" nillable="true"/>
+	<xs:simpleType name="Interval">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Unit used in calculating the period. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Day">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Day. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Week">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Week. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Month">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Month. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Year">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Year. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Interval" type="tns:Interval" nillable="true"/>
+	<xs:complexType name="Level2Data">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Aggregate of elements specific to Level 2/Purchase Card transactions. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BaseAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Base amount of the transaction, not including freight, handling, and tax amounts. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CommodityCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Commodity code for the entire purchase. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CompanyName" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Name of company making purchase. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomerCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Code provided by cardholder to appear on invoice. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DestinationCountryCode" type="q6:TypeISOCountryCodeA3" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Destination country code of the goods being shipped. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DestinationPostal" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Destination postal code. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Description of the purchase. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DiscountAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Discount amount. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DutyAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Duty amount. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FreightAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Freight amount. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MiscHandlingAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Miscellaneous handling charges. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrderDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Date the order was placed. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrderNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Order number. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RequesterName" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Name of the person making the request. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ShipFromPostalCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The zip/postal code of the location from which the goods are shipped. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ShipmentId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Number of the shipment. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaxExempt" type="tns:TaxExempt" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Tax exemption indicator and number. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tax" type="tns:Tax" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Aggregate of tax information. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Level2Data" type="tns:Level2Data" nillable="true"/>
+	<xs:complexType name="TaxExempt">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Tax exemption indicator and number. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IsTaxExempt" type="tns:IsTaxExempt" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates tax exempt status for the transaction. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaxExemptNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the tax exempt number for the transaction. Conditional, required if IsTaxExempt = 'Exempt' or 'NotExemptTaxInfoProvided'. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TaxExempt" type="tns:TaxExempt" nillable="true"/>
+	<xs:simpleType name="IsTaxExempt">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates tax exempt status of the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Exempt">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Exempt. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotExemptTaxInfoNotProvided">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not exempt but tax information not provided. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotExemptTaxInfoProvided">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not exempt tax information is provided. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="IsTaxExempt" type="tns:IsTaxExempt" nillable="true"/>
+	<xs:complexType name="Tax">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Aggregate of tax information. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Amount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Total amount of tax applied. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Rate" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Total tax rate. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InvoiceNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Tax invoice number. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ItemizedTaxes" type="tns:ArrayOfItemizedTax" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of itemized tax information. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Tax" type="tns:Tax" nillable="true"/>
+	<xs:complexType name="ArrayOfItemizedTax">
+		<xs:sequence>
+			<xs:element name="ItemizedTax" type="tns:ItemizedTax" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfItemizedTax" type="tns:ArrayOfItemizedTax" nillable="true"/>
+	<xs:complexType name="ItemizedTax">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains itemized tax information. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Amount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Amount of tax applied. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Rate" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Rate of tax applied. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="tns:TypeTaxType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Type of tax applied. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ItemizedTax" type="tns:ItemizedTax" nillable="true"/>
+	<xs:simpleType name="TypeTaxType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Type of tax applied. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CityTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> City Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CountyTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> County Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CountyParishTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> County/Parish Sales Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EnergyTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Energy Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FederalTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Federal Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EnvironmentalTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Environmental Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GoodsServicesTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Goods and Services Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HarmonizedTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Harmonized Tax (HST). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LuxuryTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Luxury Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LocalSalesTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Local Sales Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MunicipalTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Municipal Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OccupancyTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Occupancy Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OtherTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Other Not Specified Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QuebecSalesTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Quebec Sales Tax (QST). </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RoomTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Room Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="StateLocalSalesTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> State and Local Sales Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="StateProvincialGoodsTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> State or Provincial Tax on Goods. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="StateSalesTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> State Sales Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="StateProvincialTax">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> State/Provincial Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value Added Tax. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TypeTaxType" type="tns:TypeTaxType" nillable="true"/>
+	<xs:complexType name="ArrayOfLineItemDetail">
+		<xs:sequence>
+			<xs:element name="LineItemDetail" type="tns:LineItemDetail" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfLineItemDetail" type="tns:ArrayOfLineItemDetail" nillable="true"/>
+	<xs:complexType name="LineItemDetail">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Aggregate containing a collection of line item data. Allowed by some Service Providers. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Amount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Line item total cost. Use DiscountIncluded and TaxIncluded to specify whether this amount is inclusive of DiscountAmount and Tax. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CommodityCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Line item commodity code. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Line item description. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DiscountAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Discount amount for this line item. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DiscountIncluded" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates whether amount is inclusive of discount. Conditional, required if DiscountAmount is specified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProductCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Line item product code. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Quantity" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Quantity of item. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Tax" type="tns:Tax" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Tax details for this line item. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaxIncluded" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates whether amount is inclusive of tax. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnitOfMeasure" type="tns:TypeUnitOfMeasure" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Units used to measure quantity. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnitPrice" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Price per unit of line item. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UPC" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Line item UPC code. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="LineItemDetail" type="tns:LineItemDetail" nillable="true"/>
+	<xs:simpleType name="TypeUnitOfMeasure">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Units used to measure quantity. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Acre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ACR - 077 - Acre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AmpereHour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AMH - 263 - Ampere Hour </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ampere">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AMP - 260 - Ampere </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Year">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ANN - 366 - Year </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TroyOunceOrApothecariesOunce">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> APZ - 201 - Troy Ounce Or Apothecaries Ounce </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Are">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARE - 109 - Are </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AlcoholicStrengthByMass">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ASM - 820 - Alcoholic Strength By Mass </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AlcoholicStrengthByVolume">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ASU - 821 - Alcoholic Strength By Volume </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="StandardAtmosphere">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATM - 300 - Standard Atmosphere </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TechnicalAtmosphere">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATT - 301 - Technical Atmosphere </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Bar">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAR - 309 - Bar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BoardFoot">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BFT - 154 - Board Foot </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BrakeHorsePower">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BHP - 213 - Brake Horse Power </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BillionEURTrillionUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BIL - 801 - Billion (EUR)/Trillion (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DryBarrelUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BLD - 151 - Dry Barrel (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BarrelUSPetroleumEtc">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BLL - 146 - Barrel (US) (Petroleum Etc.) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Becquerel">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BQL - 323 - Becquerel </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BritishThermalUnit">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BTU - 275 - British Thermal Unit </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BushelUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BUA - 150 - Bushel (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BushelUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BUI - 140 - Bushel (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CarryingCapacityInMetricTon">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CCT - 185 - Carrying Capacity In Metric Ton </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Candela">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CDL - 282 - Candela </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DegreeCelsius">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CEL - 280 - Degree Celsius </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hundred">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CEN - 797 - Hundred </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Centigram">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CGM - 173 - Centigram </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CoulombPerKilogram">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CKG - 349 - Coulomb Per Kilogram </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HundredLeave">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CLF - 626 - Hundred Leave </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Centilitre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CLT - 117 - Centilitre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Centiliter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CLT - 117 - Centiliter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareCentimetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CMK - 051 - Square Centimetre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareCentimeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CMK - 051 - Square Centimeter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicCentimetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CMQ - 111 - Cubic Centimetre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicCentimeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CMQ - 111 - Cubic Centimeter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Centimetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CMT - 004 - Centimetre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Centimeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CMT - 004 - Centimeter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HundredPack">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CNP - 781 - Hundred Pack </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CentalUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CNT - 192 - Cental (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Coulomb">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COU - 270 - Coulomb </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MetricCarat">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CTM - 162 - Metric Carat </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Curie">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CUR - 305 - Curie </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HundredPoundsCWTHundredWeightUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CWA - 193 - Hundred Pounds (CWT)/Hundred Weight (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HundredWeightUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CWI - 194 - Hundred Weight (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Decare">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DAA - 058 - Decare </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TenDay">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DAD - 361 - Ten Day </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Day">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DAY - 359 - Day </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Decade">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DEC - 368 - Decade </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Decilitre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DLT - 118 - Decilitre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Deciliter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DLT - 118 - Deciliter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareDecimetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DMK - 053 - Square Decimetre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareDecimeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DMK - 053 - Square Decimeter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicDecimetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DMQ - 112 - Cubic Decimetre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicDecimeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DMQ - 112 - Cubic Decimeter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Decimetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DMT - 005 - Decimetre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Decimeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DMT - 005 - Decimeter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DozenPiece">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DPC - 740 - Dozen Piece </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DozenPair">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DPR - 733 - Dozen Pair </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DisplacementTonnage">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DPT - 184 - Displacement Tonnage </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DramUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DRA - 200 - Dram (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DramUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DRI - 188 - Dram (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DozenRoll">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DRL - 737 - Dozen Roll </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DrachmUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DRM - 199 - Drachm (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DecitonneCentnerMetric100KgQuintalMetric100Kg">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DTN - 206 - Decitonne / Centner - Metric 100 Kg / Quintal - Metric 100 Kg </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Pennyweight">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DWT - 198 - Pennyweight </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Dozen">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DZN - 641 - Dozen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DozenPack">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DZP - 780 - Dozen Pack </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DegreeFahrenheit">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FAH - 281 - Degree Fahrenheit </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Farad">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FAR - 314 - Farad </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Foot">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FOT - 041 - Foot </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareFoot">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FTK - 073 - Square Foot </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicFoot">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FTQ - 132 - Cubic Foot </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Gigabecquerel">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GBQ - 302 - Gigabecquerel </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GramOfFissileIsotope">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GFI - 306 - Gram Of Fissile Isotope </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GreatGross">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GGR - 731 - Great Gross </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GillUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GIA - 142 - Gill (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GillUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GII - 136 - Gill (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DryGallonUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GLD - 149 - Dry Gallon (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GallonUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GLI - 139 - Gallon (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GallonUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GLL - 145 - Gallon (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Gram">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRM - 163 - Gram </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Grain">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRN - 189 - Grain </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Gross">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRO - 638 - Gross </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GrossRegisterTon">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRT - 181 - Gross Register Ton </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GigawattHour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GWH - 247 - Gigawatt Hour </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hectare">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HAR - 059 - Hectare </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hectobar">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HBA - 310 - Hectobar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HundredBox">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HBX - 683 - Hundred Box </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hectogram">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HGM - 160 - Hectogram </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HundredInternationalUnit">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HIU - 853 - Hundred International Unit </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hectolitre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HLT - 122 - Hectolitre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hectoliter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HLT - 122 - Hectoliter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MillionCubicMetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HMQ - 159 - Million Cubic Metre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MillionCubicMeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HMQ - 159 - Million Cubic Meter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hectometre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HMT - 017 - Hectometre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hectometer">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HMT - 017 - Hectometer </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HectolitreOfPureAlcohol">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HPA - 833 - Hectolitre Of Pure Alcohol </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HectoliterOfPureAlcohol">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HPA - 833 - Hectoliter Of Pure Alcohol </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hertz">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HTZ - 290 - Hertz </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HUR - 356 - Hour </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Inch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> INH - 039 - Inch </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareInch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> INK - 071 - Square Inch </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicInch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> INQ - 131 - Cubic Inch </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Joule">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JOU - 271 - Joule </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilobar">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KBA - 312 - Kilobar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kelvin">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KEL - 288 - Kelvin </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilogram">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KGM - 166 - Kilogram </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramPerSecond">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KGS - 499 - Kilogram Per Second </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilohertz">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KHZ - 291 - Kilohertz </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilojoule">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KJO - 273 - Kilojoule </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilometrePerHour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KMH - 333 - Kilometre Per Hour </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilometerPerHour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KMH - 333 - Kilometer Per Hour </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareKilometre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KMK - 061 - Square Kilometre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareKilometer">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KMK - 061 - Square Kilometer </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramPerCubicMetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KMQ - 316 - Kilogram Per Cubic Metre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramPerCubicMeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KMQ - 316 - Kilogram Per Cubic Meter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilometre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KMT - 008 - Kilometre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilometer">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KMT - 008 - Kilometer </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramOfNitrogen">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KNI - 861 - Kilogram Of Nitrogen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramNamedSubstance">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KNS - 841 - Kilogram Named Substance </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Knot">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KNT - 327 - Knot </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilopascal">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KPA - 297 - Kilopascal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramOfPotassiumHydroxideCausticPotash">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KPH - 859 - Kilogram Of Potassium Hydroxide (Caustic Potash) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramOfPotassiumOxide">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KPO - 857 - Kilogram Of Potassium Oxide </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramOfPhosphorusPentoxidePhosphoricAnhydride">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KPP - 865 - Kilogram Of Phosphorus Pentoxide (Phosphoric Anhydride) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramOfSubstance90PercentDry">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KSD - 845 - Kilogram Of Substance 90% Dry </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramOfSodiumHydroxideCausticSoda">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KSH - 863 - Kilogram Of Sodium Hydroxide (Caustic Soda) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilotonne">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KTN - 170 - Kilotonne </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilogramOfUranium">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KUR - 867 - Kilogram Of Uranium </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilovoltAmpere">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KVA - 227 - Kilovolt - Ampere </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilovar">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KVR - 230 - Kilovar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilovolt">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KVT - 223 - Kilovolt </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KilowattHour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KWH - 245 - Kilowatt Hour </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Kilowatt">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KWT - 214 - Kilowatt </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Pound">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LBR - 186 - Pound </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TroyPoundUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LBT - 202 - Troy Pound (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Leaf">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LEF - 625 - Leaf </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LitreOfPureAlcohol">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LPA - 831 - Litre Of Pure Alcohol </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LiterOfPureAlcohol">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LPA - 831 - Liter Of Pure Alcohol </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TonUKorLongTonUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LTN - 196 - Ton (UK) or Long Ton (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Litre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LTR - 112 - Litre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Liter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LTR - 112 - Liter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Lumen">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUM - 284 - Lumen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Lux">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUX - 283 - Lux </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MegaLitre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAL - 126 - Mega Litre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MegaLiter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAL - 126 - Mega Liter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Megametre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAM - 009 - Megametre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Megameter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAM - 009 - Megameter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Megawatt">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAW - 215 - Megawatt </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ThousandStandardBrickEquivalent">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MBE - 630 - Thousand Standard Brick Equivalent </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ThousandBoardFeet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MBF - 155 - Thousand Board Feet </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Millibar">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MBR - 308 - Millibar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Millicurie">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MCU - 304 - Millicurie </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Milligram">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MGM - 161 - Milligram </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Megahertz">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MHZ - 292 - Megahertz </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareMile">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MIK - 079 - Square Mile </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Thousand">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MIL - 798 - Thousand </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Minute">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MIN - 355 - Minute </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Million">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MIO - 799 - Million </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MillionInternationalUnit">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MIU - 855 - Million International Unit </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MilliardBillionUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MLD - 800 - Milliard/Billion (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Millilitre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MLT - 111 - Millilitre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Milliliter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MLT - 111 - Milliliter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareMillimetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MMK - 050 - Square Millimetre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareMillimeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MMK - 050 - Square Millimeter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicMillimetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MMQ - 110 - Cubic Millimetre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicMillimeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MMQ - 110 - Cubic Millimeter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Millimetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MMT - 003 - Millimetre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Millimeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MMT - 003 - Millimeter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Month">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MON - 362 - Month </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Megapascal">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MPA - 298 - Megapascal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicMetrePerHour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MQH - 598 - Cubic Metre Per Hour </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicMeterPerHour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MQH - 598 - Cubic Meter Per Hour </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicMetrePerSecond">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MQS - 596 - Cubic Metre Per Second </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicMeterPerSecond">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MQS - 596 - Cubic Meter Per Second </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MetrePerSecondSquared">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MSK - 335 - Metre Per Second Squared </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MeterPerSecondSquared">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MSK - 335 - Meter Per Second Squared </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareMetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTK - 055 - Square Metre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareMeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTK - 055 - Square Meter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicMetre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTQ - 113 - Cubic Metre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicMeter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTQ - 113 - Cubic Meter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Metre">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTR - 006 - Metre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Meter">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTR - 006 - Meter </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MetrePerSecond">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTS - 328 - Metre Per Second </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MeterPerSecond">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTS - 328 - Meter Per Second </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MegavoltAmpere">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MVA - 228 - Megavolt - Ampere </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MegawattHour1000KWH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MWH - 246 - Megawatt Hour (1000 KWH) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NumberOfArticles">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NAR - 657 - Number Of Articles </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NumberOfBobbins">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NBB - 616 - Number Of Bobbins </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NumberOfCells">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NCL - 745 - Number Of Cells </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Newton">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NEW - 289 - Newton </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NumberOfInternationalUnits">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NIU - 851 - Number Of International Units </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NauticalMile">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NMI - 047 - Nautical Mile </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NumberOfPacks">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NMP - 778 - Number Of Packs </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NumberOfParcels">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NPL - 734 - Number Of Parcels </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NumberOfPairs">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NPR - 715 - Number Of Pairs </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NumberOfParts">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NPT - 735 - Number Of Parts </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NumberOfRolls">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NRL - 736 - Number Of Rolls </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NetRegisterTon">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NTT - 182 - Net Register Ton </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ohm">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OHM - 274 - Ohm </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ounce">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ONZ - 187 - Ounce </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FluidOunceUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OZA - 141 - Fluid Ounce (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FluidOunceUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OZI - 135 - Fluid Ounce (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Pascal">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAL - 294 - Pascal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Piece">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PCE - 796 - Piece </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ProofGallon">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PGL - 835 - Proof Gallon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DryPintUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PTD - 147 - Dry Pint (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PintUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PTI - 137 - Pint (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LiquidPintUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PTL - 143 - Liquid Pint (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QuarterOfAYear">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> QAN - 364 - Quarter Of A Year </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DryQuartUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> QTD - 148 - Dry Quart (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QuartUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> QTI - 138 - Quart (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LiquidQuartUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> QTL - 144 - Liquid Quart (US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QuarterUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> QTR - 191 - Quarter (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RevolutionsPerMinute">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RPM - 331 - Revolutions Per Minute </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RevolutionsPerSecond">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RPS - 330 - Revolutions Per Second </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HalfYear6Months">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAN - 365 - Half Year (6 Months) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Score">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SCO - 730 - Score </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Scruple">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SCR - 197 - Scruple </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Second">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SEC - 354 - Second </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Set">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SET - 704 - Set </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ShippingTon">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SHT - 183 - Shipping Ton </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Siemens">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SIE - 296 - Siemens </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MileStatuteMile">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SMI - 045 - Mile (Statute Mile) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ShortStandard7200Matches">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SST - 738 - Short Standard (7200 Matches) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="StoneUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> STI - 190 - Stone (UK) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TonUSOrShortTonUKUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> STN - 195 - Ton (US) Or Short Ton (UK/US) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KiloampereHourThousandAmpereHour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TAH - 264 - Kiloampere Hour (Thousand Ampere Hour) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TonneMetricTon">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TNE - 168 - Tonne (Metric Ton) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TenPair">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TPR - 732 - Ten Pair </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ThousandCubicMetrePerDay">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TQD - 599 - Thousand Cubic Metre Per Day </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ThousandCubicMeterPerDay">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TQD - 599 - Thousand Cubic Meter Per Day </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TrillionEUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TRL - 802 - Trillion (EUR) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TonneOfSubstance90PercentDry">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TSD - 847 - Tonne Of Substance 90% Dry </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TonOfSteamPerHour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TSH - 533 - Ton Of Steam Per Hour </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Volt">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VLT - 222 - Volt </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Cord">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WCD - 153 - Cord </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Weber">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WEB - 324 - Weber </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Week">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WEE - 360 - Week </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WattHour">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WHR - 243 - Watt Hour </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Standard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WSD - 152 - Standard </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Watt">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WTT - 212 - Watt </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SquareYard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YDK - 075 - Square Yard </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CubicYard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YDQ - 133 - Cubic Yard </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Yard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YRD - 043 - Yard </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TypeUnitOfMeasure" type="tns:TypeUnitOfMeasure" nillable="true"/>
+	<xs:complexType name="IIASData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Inventory Information Approval System (IIAS) data including amounts for FSA eligible items. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="HealthcareAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the total amount of eligible healthcare items associated with the authorization. Conditional, required for IIAS transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ClinicOtherAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the portion of HealthCareAmt related to clinic or other qualified expenses. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DentalAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the portion of HealthCareAmt related to dental expenses. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PrescriptionAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the portion of HealthCareAmt related to prescription expenses. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VisionAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the portion of HealthCareAmt related to vision or optical expenses. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IIASDesignation" type="tns:IIASDesignation" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies merchants IIAS status. Conditional, required for IIAS transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="IIASData" type="tns:IIASData" nillable="true"/>
+	<xs:simpleType name="IIASDesignation">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Type of goods purchased. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IIASVerified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IIASVerified </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IIASExempt">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IIASExempt </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="IIASDesignation" type="tns:IIASDesignation" nillable="true"/>
+	<xs:complexType name="BankcardReturn" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information for returning Bankcard transactions (Credit and PIN Debit). Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="q7:Return">
+				<xs:sequence>
+					<xs:element name="Amount" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies the amount to return. Conditional, required when performing a partial return. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TenderData" type="tns:BankcardTenderData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Details about the card tender. Conditional, required by ReturnById for PIN Debit transactions. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FeeAmount" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies a fee amount associated with the authorization, such as convenience fees. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TransactionCode" type="tns:TransactionCode" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the transaction code. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardReturn" type="tns:BankcardReturn" nillable="true"/>
+	<xs:complexType name="BankcardTransactionResponse" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Response to the Bankcard transaction (Credit and PIN Debit). Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="q8:Response">
+				<xs:sequence>
+					<xs:element name="Amount" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies the authorization amount of the transaction. This is the actual amount authorized and used when settling a subsequent authorization completion instead of the request amount. Expected. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CardType" type="tns:TypeCardType" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Type of card used in the transaction. Optional for Credit transactions. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FeeAmount" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Fee amount charged for the transaction. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ApprovalCode" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> A value returned when a transaction is approved. This value should be printed on the receipt, and also recorded for every offline transaction, such as a voice authorization. Expected. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="AVSResult" type="tns:AVSResult" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Collection of AVS response data. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="BatchId" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Batch Identifier. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CVResult" type="q8:CVResult" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Response code returned by the card issuer indicating the result of Card Verification (CVV2/CVC2/CID). Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CardLevel" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Code returned by the card association that indicates the type of card used by the customer. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DowngradeCode" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Downgrade reason. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MaskedPAN" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Masked PAN for storage. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PaymentAccountDataToken" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Token specified by a tokenization (offsite payment account data storage) Service Provider, used to retrieve securely stored payment account data. Conditional, required if any one of the following must be provided: CardDataToken, SecureCardData, or tender-specific payment account data. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RetrievalReferenceNumber" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Retrieval reference number generated by the processor used for settlement and reversals. If present in the response, this same data element and value must be provided during settlement of any subsequent authorization linked to this transaction. Optional </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Resubmit" type="tns:Resubmit" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies whether resubmission is supported for PIN Debit transactions. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SettlementDate" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Settlement date. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FinalBalance" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The account balance after the transaction. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OrderId" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The order id generated by CWS. This value is often used by Service Providers for transaction correlation. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CashBackAmount" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The approved cash back amount. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PrepaidCard" type="tns:PrepaidCard" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies whether or not the card is a prepaid card. The identification of prepaid cards is at the discretion of the payment brand or issuer. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Expire" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The 4-digit expiration date embossed on the front of a card. Expected. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardTransactionResponse" type="tns:BankcardTransactionResponse" nillable="true"/>
+	<xs:simpleType name="AdviceResponse">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the reason for issuer decline of recurring payment transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unsupported">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not supported. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NewAccountInfoAvailable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New account info available. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TryAgainLater">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Try again later. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DoNotTryAgainLater">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Do not try again later. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DoNotHonor">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Service provider recommends the merchant not honor the card. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="AdviceResponse" type="tns:AdviceResponse" nillable="true"/>
+	<xs:simpleType name="CommercialCardResponse">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the status of the card with respect to its ability to utilize purchase card data. When the card is a Business, Corporate, or Purchase card, providing purchase card data can result in improved interchange rates. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotImplemented">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not implemented. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PurchaseCard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Purchase Card. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CorporateCard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Corporate Card. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BusinessCard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Business Card. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NonCommercialCard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not a commercial card. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PurchaseCardDataUnsupported">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Commercial card does not support purchase card data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CommercialCardResponse" type="tns:CommercialCardResponse" nillable="true"/>
+	<xs:complexType name="BankcardCaptureResponse" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="q9:Response">
+				<xs:sequence>
+					<xs:element name="BatchId" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Batch Identifier. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TransactionSummaryData" type="tns:TransactionSummaryData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Summary of transaction data. Conditional, expected for CaptureAll and CaptureSelective. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PrepaidCard" type="tns:PrepaidCard" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies whether or not the card is a prepaid card. The identification of prepaid cards is at the discretion of the payment brand or issuer. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardCaptureResponse" type="tns:BankcardCaptureResponse" nillable="true"/>
+	<xs:complexType name="TransactionSummaryData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Summary information (item count and total amount) when transactions are captured. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CashBackTotals" type="tns:Totals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The sum of all PIN Debit transaction cash back amounts included in the batch. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NetTotals" type="tns:Totals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Total count and net amount of transactions for the entire batch independent of transaction class. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReturnTotals" type="tns:Totals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Total count and amount of returns for the entire batch independent of transaction class. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SaleTotals" type="tns:Totals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Total count and amount of sales for the entire batch independent of transaction class. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VoidTotals" type="tns:Totals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Total count and amount of voids for the entire batch independent of transaction class. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PINDebitReturnTotals" type="tns:Totals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Total count and amount of PIN Debit returns. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PINDebitSaleTotals" type="tns:Totals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Total count and amount of PIN Debit sales. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TransactionSummaryData" type="tns:TransactionSummaryData" nillable="true"/>
+	<xs:complexType name="Totals">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains net amount and total count. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NetAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Net amount. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Count" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Total item count. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Totals" type="tns:Totals" nillable="true"/>
+	<xs:simpleType name="PrepaidCard">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies whether or not the card is a prepaid card. The identification of prepaid cards is at the discretion of the payment brand or issuer. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Yes">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Card is a prepaid card. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="No">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Card is not a prepaid card. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="PrepaidCard" type="tns:PrepaidCard" nillable="true"/>
+	<xs:complexType name="AVSResult">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the result of an Address Verification System (AVS) lookup by the Service Provider. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ActualResult" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the actual result of AVS from the Service Provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AddressResult" type="tns:AddressResult" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the result of AVS as it pertains to address matching. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountryResult" type="tns:CountryResult" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the result of AVS as it pertains to country matching. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StateResult" type="tns:StateResult" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the result of AVS as it pertains to state matching. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostalCodeResult" type="tns:PostalCodeResult" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the result of AVS as it pertains to postal code matching. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PhoneResult" type="tns:PhoneResult" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the result of AVS as it pertains to phone matching. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CardholderNameResult" type="tns:CardholderNameResult" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the result of AVS as it pertains to cardholder name matching. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CityResult" type="tns:CityResult" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the result of AVS as it pertains to city matching. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AVSResult" type="tns:AVSResult" nillable="true"/>
+	<xs:simpleType name="AddressResult">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the result of AVS as it pertains to address matching. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotIncluded">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not included. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Match">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoMatch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IssuerNotCertified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Issuer is not certified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No response from card association. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnknownResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The response code from the card association was not recognized. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotVerified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AVS data was not verified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BadFormat">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Supplied AVS data was incorrectly formatted. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="AddressResult" type="tns:AddressResult" nillable="true"/>
+	<xs:simpleType name="CountryResult">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the result of AVS as it pertains to country matching. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotIncluded">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not included. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Match">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoMatch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IssuerNotCertified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Issuer is not certified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No response from card association. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnknownResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The response code from the card association was not recognized. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotVerified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AVS data was not verified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BadFormat">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Supplied AVS data was incorrectly formatted. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CountryResult" type="tns:CountryResult" nillable="true"/>
+	<xs:simpleType name="StateResult">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the result of AVS as it pertains to state matching. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotIncluded">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not included. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Match">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoMatch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IssuerNotCertified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Issuer is not certified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No response from card association. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnknownResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The response code from the card association was not recognized. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotVerified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AVS data was not verified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BadFormat">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Supplied AVS data was incorrectly formatted. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="StateResult" type="tns:StateResult" nillable="true"/>
+	<xs:simpleType name="PostalCodeResult">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the result of AVS as it pertains to postal code matching. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotIncluded">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not included. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Match">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoMatch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IssuerNotCertified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Issuer is not certified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No response from card association. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnknownResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The response code from the card association was not recognized. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotVerified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AVS data was not verified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BadFormat">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Supplied AVS data was incorrectly formatted. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="PostalCodeResult" type="tns:PostalCodeResult" nillable="true"/>
+	<xs:simpleType name="PhoneResult">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the result of AVS as it pertains to phone matching. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotIncluded">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not included. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Match">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoMatch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IssuerNotCertified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Issuer is not certified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No response from card association. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnknownResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The response code from the card association was not recognized. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotVerified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AVS data was not verified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BadFormat">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Supplied AVS data was incorrectly formatted. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="PhoneResult" type="tns:PhoneResult" nillable="true"/>
+	<xs:simpleType name="CardholderNameResult">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the result of AVS as it pertains to cardholder name matching. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotIncluded">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not included. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Match">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoMatch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IssuerNotCertified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Issuer is not certified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No response from card association. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnknownResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The response code from the card association was not recognized. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotVerified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AVS data was not verified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BadFormat">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Supplied AVS data was incorrectly formatted. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CardholderNameResult" type="tns:CardholderNameResult" nillable="true"/>
+	<xs:simpleType name="CityResult">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the result of AVS as it pertains to city matching. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotIncluded">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not included. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Match">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoMatch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IssuerNotCertified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Issuer is not certified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No response from card association. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnknownResponseFromCardAssociation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The response code from the card association was not recognized. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotVerified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AVS data was not verified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BadFormat">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Supplied AVS data was incorrectly formatted. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CityResult" type="tns:CityResult" nillable="true"/>
+	<xs:simpleType name="Resubmit">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies whether resubmission is supported for PIN Debit transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unspecified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unspecified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Permitted">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Permitted. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotPermitted">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not permitted. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Resubmit" type="tns:Resubmit" nillable="true"/>
+	<xs:complexType name="BankcardUndo" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information for undoing (voiding) Bankcard transactions (Credit and PIN Debit). Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="q10:Undo">
+				<xs:sequence>
+					<xs:element name="PINDebitReason" type="tns:PINDebitUndoReason" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies the reason for the void. Conditional, required for PIN Debit. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TenderData" type="tns:BankcardTenderData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Details about the card tender. Conditional, required if BankcardService.Tenders.PINDebitUndoTenderDataRequired is true. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ForceVoid" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates that the authorized transaction should be removed from the batch regardless of whether the Undo() is approved or declined. Otherwise, authorized transactions will only be removed from the batch if the void is approved. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardUndo" type="tns:BankcardUndo" nillable="true"/>
+	<xs:simpleType name="PINDebitUndoReason">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the reason for the undo. Required for PIN Debit transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotApplicable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not applicable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoResponse">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No response. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LateResponse">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Late response. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnableToDeliverToPOS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unable to deliver to POS. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CustomerCancellation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Customer cancellation. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SuspectMalfunction">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Suspect malfunction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PartiallyCompleted">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Partially completed. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OriginalAmountIncorrect">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Original amount incorrect. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ResponseIncomplete">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Response incomplete. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CADFailure">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAD failure. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UnableToDeliverResponse">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unable to deliver response. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ResponseTimeout">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Response timeout. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="PINDebitUndoReason" type="tns:PINDebitUndoReason" nillable="true"/>
+	<xs:complexType name="BankcardCapture" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information for capturing Bankcard transactions (Credit and PIN Debit). Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="q11:Capture">
+				<xs:sequence>
+					<xs:element name="Amount" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Amount to capture if different from the authorized amount. Conditional, required when capturing a different amount than authorized. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ChargeType" type="tns:ChargeType" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the type of charge. In most retail environments, this value will be set to 'RetailOther', but if other enumerations are applicable they should be used. Conditional, required for Retail transactions. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ShipDate" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Date of goods shipment. Conditional, required for MOTO transactions. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TipAmount" type="xs:decimal" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Tip amount, if not specified at the time of authorization. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardCapture" type="tns:BankcardCapture" nillable="true"/>
+	<xs:simpleType name="ChargeType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the type of charge. In most retail environments this value will be set to "RetailOther", but if other enumerations are applicable they should be used. Required for Retail transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Lodging">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Lodging. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Restaurant">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Restaurant. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GiftShop">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Gift Shop. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HealthSpa">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Health Spa. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BeautyShop">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Beauty Shop. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ConventionFee">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Convention Fee. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TennisProShop">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Tennis/Pro Shop. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GolfProShop">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Golf/Pro Shop. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RetailOther">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Retail/Other. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ChargeType" type="tns:ChargeType" nillable="true"/>
+	<xs:complexType name="ArrayOfTypeCardType">
+		<xs:sequence>
+			<xs:element name="TypeCardType" type="tns:TypeCardType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfTypeCardType" type="tns:ArrayOfTypeCardType" nillable="true"/>
+</xs:schema>

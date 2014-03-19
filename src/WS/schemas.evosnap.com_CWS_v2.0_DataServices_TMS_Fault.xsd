@@ -1,0 +1,108 @@
+<!-- edited with XMLSpy v2013 rel. 2 sp2 (x64) (http://www.altova.com) by Darren Adelgren (PowerPay) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/Fault" xmlns:q1="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/Faults" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/Fault" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/Faults" schemaLocation="schemas.evosnap.com_CWS_v2.0_DataServices_TMS_Faults.xsd"/>
+	<xs:complexType name="TMSValidationResultFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains a collection of one or more PTLS XML error messages in CWSValidationErrorFault. The application should respond to these validation errors and correct the data being sent in. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="q1:TMSBaseFault">
+				<xs:sequence>
+					<xs:element name="Errors" type="tns:ArrayOfTMSValidationError" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> List of specific validation errors from CWSValidationErrorFault. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="TMSValidationResultFault" type="tns:TMSValidationResultFault" nillable="true"/>
+	<xs:complexType name="ArrayOfTMSValidationError">
+		<xs:sequence>
+			<xs:element name="TMSValidationError" type="tns:TMSValidationError" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfTMSValidationError" type="tns:ArrayOfTMSValidationError" nillable="true"/>
+	<xs:complexType name="TMSValidationError">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains the details of the CWSValidationResultFault. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ErrorType" type="tns:TMSValidationError.EErrorType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the type of error. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RuleKey" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the data rule that failed. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RuleLocationKey" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates where the data rule failed. This can be null. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RuleMessage" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The verbose message that describes the failure. Do not put stack traces here; use the logger. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TMSValidationError" type="tns:TMSValidationError" nillable="true"/>
+	<xs:simpleType name="TMSValidationError.EErrorType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> The type of possible errors. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Validation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Rule failed validation. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Processing">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Processing error. An error that has nothing to do with the message nor with the validator engine. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="System">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Systems error. An error that has nothing to do with the message and indicates that something failed in the validator engine. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TMSValidationError.EErrorType" type="tns:TMSValidationError.EErrorType" nillable="true"/>
+</xs:schema>

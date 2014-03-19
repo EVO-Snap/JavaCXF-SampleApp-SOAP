@@ -1,0 +1,585 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/Transactions/ElectronicChecking" elementFormDefault="qualified" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/ElectronicChecking">
+	<xs:import schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions"/>
+	<xs:complexType name="ElectronicCheckingTransactionResponse">
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q1="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q1:Response">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ACHCapable" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates if the customer's account will accept ACH transactions. Returned only on QueryAccount transactions. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="Amount" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the amount of the transaction. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ApprovalCode" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> A code provided when a transaction is approved. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ModifiedAccountNumber" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the corrected account number that should be used for electronic check processing. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ModifiedRoutingNumber" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the corrected 9-digit Bank Routing number that should be used for electronic check processing. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="PaymentAccountDataToken" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Token specified by a tokenization (offsite payment account data storage) Service Provider, used to retrieve securely stored payment account data. Conditional, required if any one of the following must be provided: CardDataToken, SecureCardData, or tender-specific payment account data. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ReturnInformation" nillable="true" type="tns:ReturnInformation">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Contains information indicating why the transaction was returned. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="SubmitDate" type="xs:dateTime">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The date the transaction was submitted to the bank. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckingTransactionResponse" nillable="true" type="tns:ElectronicCheckingTransactionResponse"/>
+	<xs:complexType name="ReturnInformation">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the reason the bank rejected the transaction. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ReturnCode" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Code that indicates why the transaction was returned. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ReturnDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The date the transaction was returned by the bank. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ReturnReason" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Reason that indicates why the transaction was returned. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ReturnInformation" nillable="true" type="tns:ReturnInformation"/>
+	<xs:complexType name="ElectronicCheckingCaptureResponse">
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q2="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q2:Response">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="SummaryData" nillable="true" type="q2:SummaryData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Summary information (item count and total amount) for the captured transactions. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckingCaptureResponse" nillable="true" type="tns:ElectronicCheckingCaptureResponse"/>
+	<xs:complexType name="ElectronicCheckingCustomerData">
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q3="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q3:TransactionCustomerData">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="AdditionalBillingData" nillable="true" type="q3:PersonalInfo">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Additional billing information which may be required by the Service Provider to process the Electronic Checking transaction. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckingCustomerData" nillable="true" type="tns:ElectronicCheckingCustomerData"/>
+	<xs:complexType name="ElectronicCheckingTenderData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the Electronic Checking transaction tender data. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q4="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q4:TransactionTenderData">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="CheckData" nillable="true" type="tns:CheckData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Basic information about the check being processed. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckingTenderData" nillable="true" type="tns:ElectronicCheckingTenderData"/>
+	<xs:complexType name="CheckData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Basic information about the check being processed. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="AccountNumber" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Account number on the check. Required </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="CheckCountryCode" type="tns:CheckCountryCode">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Bank account country of origin for receiver deposit. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="CheckNumber" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The check number as printed on the check. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="OwnerType" type="tns:OwnerType">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the type of entity which owns the account. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="RoutingNumber" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> 9-digit bank routing number of the receiver deposit account. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="UseType" type="tns:UseType">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the type of account. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CheckData" nillable="true" type="tns:CheckData"/>
+	<xs:simpleType name="CheckCountryCode">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Bank account country of origin for receiver deposit. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="US">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> United States. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Mexico. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Canada. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CheckCountryCode" nillable="true" type="tns:CheckCountryCode"/>
+	<xs:simpleType name="OwnerType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the type of entity which owns the account. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Personal">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Personal. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Business">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Business. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="OwnerType" nillable="true" type="tns:OwnerType"/>
+	<xs:simpleType name="UseType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the type of account. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Savings">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Savings. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Checking">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Checking. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Travelers">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Travelers. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Payroll">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Payroll. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Cash">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Cash. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TwoParty">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Two Party. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Government">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Government. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="UseType" nillable="true" type="tns:UseType"/>
+	<xs:complexType name="ElectronicCheckingTransactionData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the Electronic Checking transaction data. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q5="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q5:TransactionData">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="EffectiveDate" type="xs:dateTime">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies the effective date of the transaction. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="IsRecurring" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates whether the transaction is recurring. Conditional, required if SECCode = 'WEB'. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="PayeeEmail" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies the payees email address. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="PayeeId" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies the reference number used by the payer to identify the payee. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="SECCode" type="tns:SECCode">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The three letter code that indicates what NACHA regulations the transaction must adhere to. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ServiceType" type="tns:ServiceType">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the Electronic Checking service type: ACH, RDC or ECK. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="TransactionType" type="tns:TransactionType">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the transaction type. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckingTransactionData" nillable="true" type="tns:ElectronicCheckingTransactionData"/>
+	<xs:simpleType name="SECCode">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> The three letter code that indicates what NACHA regulations the transaction must adhere to. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BOC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Back Office Conversion. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CCD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Corporate Cash Disbursement. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PPD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Prearranged Payment and Deposits. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TEL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Telephone-initiated Entry. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WEB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Web-initiated Entry. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="SECCode" nillable="true" type="tns:SECCode"/>
+	<xs:simpleType name="ServiceType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the Electronic Checking service type: ACH, RDC or ECK. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ACH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Automated Clearing House. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ECK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Electronic Checking. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RDC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Remote Deposit. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ServiceType" nillable="true" type="tns:ServiceType"/>
+	<xs:simpleType name="TransactionType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the transaction type. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Credit">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Credit. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Debit">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PIN Debit. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TransactionType" nillable="true" type="tns:TransactionType"/>
+	<xs:complexType name="ElectronicCheckingTransaction">
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q6="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q6:Transaction">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="TenderData" nillable="true" type="tns:ElectronicCheckingTenderData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Details about the tender. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="TransactionData" nillable="true" type="tns:ElectronicCheckingTransactionData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Details about the transaction data. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckingTransaction" nillable="true" type="tns:ElectronicCheckingTransaction"/>
+</xs:schema>

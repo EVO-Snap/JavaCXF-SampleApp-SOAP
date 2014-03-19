@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!-- edited with XMLSpy v2013 rel. 2 sp2 (x64) (http://www.altova.com) by Darren Adelgren (PowerPay) -->
+<xs:schema xmlns:tns="http://schemas.evosnap.com/Ipc.General.WCF.Contracts.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:q1="http://schemas.evosnap.com/Ipc.General.WCF.Contracts.Common/External" targetNamespace="http://schemas.evosnap.com/Ipc.General.WCF.Contracts.Common" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.evosnap.com/Ipc.General.WCF.Contracts.Common/External" schemaLocation="schemas.evosnap.com_Ipc.General.WCF.Contracts.Common_External.xsd"/>
+	<xs:element name="Ping">
+		<xs:complexType>
+			<xs:sequence/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PingResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="PingResult" type="q1:PingResponse" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

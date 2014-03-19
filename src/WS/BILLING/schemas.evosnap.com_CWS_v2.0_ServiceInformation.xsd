@@ -1,0 +1,6806 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/ServiceInformation" elementFormDefault="qualified" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/ServiceInformation">
+	<xs:complexType name="ApplicationData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the application that must be supplied to the Service Information endpoint prior to transacting. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ApplicationAttended" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates whether the application is attended or unattended. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ApplicationLocation" type="tns:ApplicationLocation">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Location of the application relative to the merchant. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ApplicationName" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Name of the application. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="DeveloperId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Developer Identifier, or Third-Party Processor Identifier (TPPID). Conditional, required if provided to application developer by application certification entity. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="HardwareType" type="tns:HardwareType">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Type of device running the application. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="PINCapability" type="tns:PINCapability">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates support for cardholder Personal Identification Number (PIN). Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="PTLSSocketId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Unique identifier issued to certified software applications. This value is passed with all subsequent transaction requests as 'applicationProfileId'. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ReadCapability" type="tns:ReadCapability">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Capability of the device to read cardholder data. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SerialNumber" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Serial number of the application provided by the software developer. Unique per installed instance of the application. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SoftwareVersion" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Software version of the application provided by the software developer. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SoftwareVersionDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Software version date of the application provided by the software developer. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="VendorId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Vendor Identifier. Conditional, required if provided to application developer by application certification entity. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="EncryptionType" type="tns:EncryptionType">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the type of encryption block used by the card reader. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="DeviceSerialNumber" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the serial number located on the physical device used to acquire payment account data. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ApplicationData" nillable="true" type="tns:ApplicationData"/>
+	<xs:simpleType name="ApplicationLocation">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Location of the application relative to the merchant. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OnPremises">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> On premises. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OffPremises">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Off premises. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HomeInternet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Home/Internet. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ApplicationLocation" nillable="true" type="tns:ApplicationLocation"/>
+	<xs:simpleType name="HardwareType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Type of device running the application. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PC. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DialTerminal">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Dial Terminal. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ElectronicCashRegister">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Electronic Cash Register. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="InStoreController">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> In-Store Controller. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Mainframe">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Mainframe. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ThirdPartyDeveloper">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Third-party Developer. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POSPort">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> POS Port. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POSPartner">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> POS Partner. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TicketMachine">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Ticket Machine/Kiosk. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ATM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATM </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ScripDevice">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Scrip Device </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Telephone">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Telephone </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="InitiatedCAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Initiated CAT </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VirtualTerminal">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Virtual Terminal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MobileBanking">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Mobile Banking </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="HardwareType" nillable="true" type="tns:HardwareType"/>
+	<xs:simpleType name="PINCapability">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Support for cardholder Personal Identification Number (PIN). </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PINSupported">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Supports PIN. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PINNotSupported">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Does not support PIN. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PINVerifiedByDevice">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PIN verified by device. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PINPadInoperative">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PIN pad inoperative. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="PINCapability" nillable="true" type="tns:PINCapability"/>
+	<xs:simpleType name="ReadCapability">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Capability of the device to read cardholder data. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HasMSR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Has MSR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoMSR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No MSR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KeyOnly">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Key only. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Chip">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Chip. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ContactlessChip">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Contactless chip. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ContactlessMSR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Contactless MSR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ECR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ECR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VSCCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VSC capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RFIDCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RFID capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EmvICC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EMV ICC. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MSREMVICC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MSR/EMV ICC. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Unknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Unknown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OCRReader">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OCR reader. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BarCodeReader">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Bar code reader. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotSpecified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not specified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARUIVR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARU/IVR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoTerminal">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No terminal. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NFCCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NFC capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ReadCapability" nillable="true" type="tns:ReadCapability"/>
+	<xs:simpleType name="EncryptionType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the type of encryption block used by the card reader. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MagneSafeV4V5Compatible">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MagneSafe V4/V5 compatible 2TDEA-CBC Encryption, IV=0. Block contains data only. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IPADV1Compatible">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IPAD V1 compatible 2TDEA-CBC Encryption Block contains header + data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="EncryptionType" nillable="true" type="tns:EncryptionType"/>
+	<xs:complexType name="MerchantProfileMerchantData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information specific to the merchant. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="CustomerServiceInternet" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Merchant's customer service web URL or email address. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="CustomerServicePhone" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Merchant's customer service phone number. Conditional, required for Bankcard MOTO transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Language" type="tns:TypeISOLanguageCodeA3">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Language to be used for the response text message. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Address" nillable="true" type="tns:AddressInfo">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Merchant address. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="MerchantId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Merchant Identifier, or 'MID'. Provisioned by the service provider. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Name" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Name of the merchant. May be provisioned. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Merchant's local telephone number. Conditional, required for Bankcard Ecommerce and MOTO transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="TaxId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Merchant's federal or Value-Added Tax (VAT) identification number. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="BankcardMerchantData" nillable="true" type="tns:BankcardMerchantData">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Additional merchant data for the Bankcard Processing service class, including Credit Card and PIN Debit. Conditional, required for merchants using Credit Card and PIN Debit services. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ElectronicCheckingMerchantData" nillable="true" type="tns:ElectronicCheckingMerchantData">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Additional merchant data for the Electronic Checking service class, including ACH. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="StoredValueMerchantData" nillable="true" type="tns:StoredValueMerchantData">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Additional merchant data for the Stored Value service class. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MerchantProfileMerchantData" nillable="true" type="tns:MerchantProfileMerchantData"/>
+	<xs:simpleType name="TypeISOLanguageCodeA3">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Merchant's language code as defined by the International Standards Organization (ISO). Used for the response text message. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AAR - Afar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ABK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ABK - Abkhazian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ACE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ACE - Achinese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ACH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ACH - Acoli </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ADA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ADA - Adangme </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ADY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ADY - Adyghe </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AFA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AFA - Afro-Asiatic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AFH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AFH - Afrihili </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AFR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AFR - Afrikaans </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AIN - Ainu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AKA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AKA - Akan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AKK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AKK - Akkadian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ALB - Albanian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ALE - Aleut </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ALG - Algonquian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ALT - Southern Altai </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AMH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AMH - Amharic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ANG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ANG - Old English </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ANP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ANP - Angika </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> APA - Apache </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARA - Arabic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARC - Aramaic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARG - Aragonese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARM - Armenian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARN - Araucanian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARP - Arapaho </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARW - Arawak </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ASM - Assamese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AST">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AST - Asturian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ATH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATH - Athapascan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AUS - Australian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AVA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AVA - Avaric </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AVE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AVE - Avestan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AWA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AWA - Awadhi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AYM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AYM - Aymara </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AZE - Azerbaijani </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAD - Banda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAI - Bamileke </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAK - Bashkir </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAL - Baluchi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAM - Bambara </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAN - Balinese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAQ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAQ - Basque </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAS - Basa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAT - Baltic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BEJ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BEJ - Beja </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BEL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BEL - Belarusian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BEM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BEM - Bemba </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BEN - Bengali </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BER">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BER - Berber </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BHO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BHO - Bhojpuri </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BIH - Bihari </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BIK - Bikol </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BIN - Bini </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BIS - Bislama </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BLA - Siksika </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BNT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BNT - Bantu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BOD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BOD - Tibetan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BOS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BOS - Bosnian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BRA - Braj </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BRE - Breton </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BTK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BTK - Batak </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BUA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BUA - Buriat </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BUG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BUG - Buginese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BUL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BUL - Bulgarian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BUR - Burmese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BYN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BYN - Bilin </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAD - Caddo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAI - Central American Indian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAR - Carib </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAT - Catalan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAU - Caucasian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CEB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CEB - Cebuano </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CEL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CEL - Celtic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CES">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CES - Czech </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHA - Chamorro </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHB - Chibcha </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHE - Chechen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHG - Chagatai </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHI - Chinese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHK - Chuukese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHM - Mari </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHN - Chinook Jargon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHO - Choctaw </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHP - Chipewyan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHR - Cherokee </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHU - Church Slavic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHV - Chuvash </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHY - Cheyenne </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CMC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CMC - Chamic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COP - Coptic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COR - Cornish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COS - Corsican </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CPE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CPE - Creoles and Pidgins English based </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CPF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CPF - Creoles and Pidgins French based </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CPP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CPP - Creoles and Pidgins Portuguese based </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CRE - Cree </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CRH - Crimean Tatar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CRP - Creoles and Pidgins </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CSB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CSB - Kashubian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CUS - Cushitic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CYM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CYM - Welsh </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CZE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CZE - Czech </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DAK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DAK - Dakota </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DAN - Danish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DAR - Dargwa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DAY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DAY - Dayak </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DEL - Delaware </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DEN - Slave </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DEU - German </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DGR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DGR - Dogrib </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DIN - Dinka </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DIV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DIV - Divehi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DOI - Dogri </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DRA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DRA - Dravidian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DSB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DSB - Lower Sorbian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DUA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DUA - Duala </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DUM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DUM - Middle Dutch </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DUT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DUT - Dutch Flemish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DYU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DYU - Dyula </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DZO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DZO - Dzongkha </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EFI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EFI - Efik </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EGY - Egyptian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EKA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EKA - Ekajuk </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ELL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ELL - Modern Greek </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ELX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ELX - Elamite </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ENG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ENG - English </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ENM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ENM - Middle English </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EPO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EPO - Esperanto </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EST">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EST - Estonian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EUS - Basque </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EWE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EWE - Ewe </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EWO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EWO - Ewondo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FAN - Fang </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FAO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FAO - Faroese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FAS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FAS - Persian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FAT - Fanti </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FIJ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FIJ - Fijian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FIL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FIL - Filipino </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FIN - Finnish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FIU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FIU - Finno-Ugrian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FON - Fon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRA - French </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRE - French </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRM - Middle French </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRO - Old French </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRR - Northern Frisian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRS - Eastern Frisian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRY - Western Frisian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FUL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FUL - Fulah </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FUR - Friulian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GAA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GAA - Ga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GAY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GAY - Gayo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GBA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GBA - Gbaya </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GEM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GEM - Germanic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GEO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GEO - Georgian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GER">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GER - German </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GEZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GEZ - Geez </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GIL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GIL - Gilbertese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GLA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GLA - Gaelic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GLE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GLE - Irish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GLG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GLG - Galician </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GLV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GLV - Manx </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GMH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GMH - Middle High German </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GOH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GOH - Old High German </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GON - Gondi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GOR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GOR - Gorontalo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GOT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GOT - Gothic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRB - Grebo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRC - Ancient Greek </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRE - Modern Greek </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRN - Guarani </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GSW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GSW - Alemani </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GUJ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GUJ - Gujarati </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GWI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GWI - Gwichin </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HAI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HAI - Haida </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HAT - Haitian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HAU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HAU - Hausa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HAW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HAW - Hawaiian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HEB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HEB - Hebrew </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HER">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HER - Herero </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HIL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HIL - Hiligaynon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HIM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HIM - Himachali </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HIN - Hindi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HIT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HIT - Hittite </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HMN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HMN - Hmong </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HMO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HMO - Hiri Motu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HRV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HRV - Croatian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HSB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HSB - Upper Sorbian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HUN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HUN - Hungarian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HUP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HUP - Hupa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HYE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HYE - Armenian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IBA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IBA - Iban </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IBO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IBO - Igbo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ICE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ICE - Icelandic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IDO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IDO - Ido </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="III">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> III - Sichuan Yi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IJO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IJO - Ijo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IKU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IKU - Inuktitut </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ILE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ILE - Interlingue </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ILO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ILO - Iloko </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> INA - Interlingua </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> INC - Indic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IND - Indonesian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> INE - Indo-European </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> INH - Ingush </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IPK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IPK - Inupiaq </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IRA - Iranian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IRO - Iroquoian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ISL - Icelandic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ITA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ITA - Italian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JAV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JAV - Javanese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JBO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JBO - Lojban </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JPN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JPN - Japanese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JPR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JPR - Judeo-Persian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JRB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JRB - Judeo-Arabic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAA - Kara-Kalpak </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAB - Kabyle </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAC - Kachin </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAL - Kalaallisut Greenlandic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAM - Kamba </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAN - Kannada </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAR - Karen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAS - Kashmiri </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAT - Georgian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAU - Kanuri </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAW - Kawi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAZ - Kazakh </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KBD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KBD - Kabardian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KHA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KHA - Khasi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KHI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KHI - Khoisan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KHM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KHM - Khmer </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KHO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KHO - Khotanese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KIK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KIK - Kikuyu Gikuyu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KIN - Kinyarwanda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KIR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KIR - Kirghiz </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KMB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KMB - Kimbundu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KOK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KOK - Konkani </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KOM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KOM - Komi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KON - Kongo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KOR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KOR - Korean </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KOS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KOS - Kosraean </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KPE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KPE - Kpelle </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KRC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KRC - Karachay-Balkar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KRL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KRL - Karelian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KRO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KRO - Kru </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KRU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KRU - Kurukh </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KUA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KUA - Kuanyama Kwanyama </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KUM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KUM - Kumyk </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KUR - Kurdish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KUT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KUT - Kutenai </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LAD - Ladino </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LAH - Lahnda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LAM - Lamba </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LAO - Lao </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LAT - Latin </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LAV - Latvian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LEZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LEZ - Lezghian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LIM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LIM - Limburgan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LIN - Lingala </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LIT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LIT - Lithuanian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LOL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LOL - Mongo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LOZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LOZ - Lozi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LTZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LTZ - Luxembourgish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LUA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUA - Luba-Lulua </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LUB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUB - Luba-Katanga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LUG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUG - Ganda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LUI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUI - Luiseno </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LUN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUN - Lunda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LUO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUO - Luo Kenya and Tanzania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUS - Lushai </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAC - Macedonian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAD - Madurese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAG - Magahi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAH - Marshallese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAI - Maithili </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAK - Makasar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAL - Malayalam </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAN - Mandingo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAO - Maori </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAP - Austronesian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAR - Marathi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAS - Masai </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAY - Malay </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MDF - Moksha </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MDR - Mandar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MEN - Mende </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MGA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MGA - Middle Irish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MIC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MIC - Micmac </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MIN - Minangkabau </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MKD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MKD - Macedonian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MKH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MKH - Mon-Khmer </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MLG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MLG - Malagasy </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MLT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MLT - Maltese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MNC - Manchu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MNI - Manipuri </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MNO - Manobo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MOH - Mohawk </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MOL - Moldavian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MON - Mongolian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MOS - Mossi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MRI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MRI - Maori </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MSA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MSA - Malay </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MUN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MUN - Munda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MUS - Creek </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MWL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MWL - Mirandese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MWR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MWR - Marwari </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MYA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MYA - Burmese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MYN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MYN - Mayan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MYV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MYV - Erzya </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NAH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NAH - Nahuatl </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NAI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NAI - North American Indian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NAP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NAP - Neapolitan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NAU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NAU - Nauru </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NAV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NAV - Navajo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NBL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NBL - South Ndebele </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NDE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NDE - North Ndebele </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NDO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NDO - Ndonga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NDS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NDS - Low German </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NEP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NEP - Nepali </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NEW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NEW - Nepal Bhasa Newari </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NIA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NIA - Nias </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NIC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NIC - Niger-Kordofanian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NIU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NIU - Niuean </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NLD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NLD - Dutch Flemish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NNO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NNO - Norwegian Nynorsk </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NOB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NOB - Norwegian Bokmål </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NOG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NOG - Nogai </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NON - Old Norse </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NOR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NOR - Norwegian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NQO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NQO - NKo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NSO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NSO - Pedi Sepedi Northern Sotho </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NUB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NUB - Nubian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NWC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NWC - Classical Newari </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NYA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NYA - Chichewa Chewa Nyanja </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NYM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NYM - Nyamwezi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NYN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NYN - Nyankole </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NYO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NYO - Nyoro </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NZI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NZI - Nzima </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OCI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OCI - Occitan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OJI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OJI - Ojibwa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ORI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ORI - Oriya </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ORM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ORM - Oromo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OSA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OSA - Osage </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OSS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OSS - Ossetian Ossetic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OTA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OTA - Ottoman Turkish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OTO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OTO - Otomian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAA - Papuan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAG - Pangasinan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAL - Pahlavi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAM - Pampanga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAN - Panjabi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAP - Papiamento </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAU - Palauan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PEO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PEO - Old Persian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PER">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PER - Persian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PHI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PHI - Philippine </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PHN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PHN - Phoenician </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PLI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PLI - Pali </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> POL - Polish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PON - Pohnpeian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> POR - Portuguese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PRA - Prakrit </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PRO - Old Provençal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PUS - Pushto </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QUE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> QUE - Quechua </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RAJ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RAJ - Rajasthani </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RAP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RAP - Rapanui </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RAR - Rarotongan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ROA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ROA - Romance </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ROH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ROH - Raeto-Romance </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ROM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ROM - Romany </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RON - Romanian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RUM - Romanian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RUN - Rundi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RUP - Aromanian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RUS - Russian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAD - Sandawe </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAG - Sango </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAH - Yakut </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAI - South American Indian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAL - Salishan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAM - Samaritan Aramaic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAN - Sanskrit </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAS - Sasak </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAT - Santali </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SCC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SCC - Serbian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SCN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SCN - Sicilian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SCO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SCO - Scots </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SCR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SCR - Croatian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SEL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SEL - Selkup </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SEM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SEM - Semitic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SGA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SGA - Old Irish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SGN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SGN - Sign Languages </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SHN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SHN - Shan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SID">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SID - Sidamo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SIN - Sinhala Sinhalese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SIO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SIO - Siouan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SIT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SIT - Sino-Tibetan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLA - Slavic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLK - Slovak </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLO - Slovak </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLV - Slovenian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SMA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SMA - Southern Sami </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SME">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SME - Northern Sami </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SMI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SMI - Sami </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SMJ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SMJ - Lule Sami </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SMN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SMN - Inari Sami </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SMO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SMO - Samoan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SMS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SMS - Skolt Sami </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SNA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SNA - Shona </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SND - Sindhi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SNK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SNK - Soninke </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SOG - Sogdian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SOM - Somali </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SON - Songhai </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SOT - Southern Sotho </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SPA - Spanish Castilian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SQI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SQI - Albanian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SRD - Sardinian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SRN - Sranan Togo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SRP - Serbian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SRR - Serer </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SSA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SSA - Nilo-Saharan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SSW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SSW - Swati </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SUK - Sukuma </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SUN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SUN - Sundanese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SUS - Susu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SUX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SUX - Sumerian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SWA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SWA - Swahili </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SWE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SWE - Swedish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SYR - Syriac </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TAH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TAH - Tahitian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TAI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TAI - Tai </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TAM - Tamil </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TAT - Tatar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TEL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TEL - Telugu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TEM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TEM - Timne </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TER">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TER - Tereno </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TET">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TET - Tetum </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TGK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TGK - Tajik </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TGL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TGL - Tagalog </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="THA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> THA - Thai </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TIB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TIB - Tibetan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TIG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TIG - Tigre </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TIR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TIR - Tigrinya </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TIV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TIV - Tiv </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TKL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TKL - Tokelau </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TLH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TLH - Klingon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TLI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TLI - Tlingit </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TMH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TMH - Tamashek </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TOG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TOG - Tonga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TON - Tonga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TPI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TPI - Tok Pisin </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TSI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TSI - Tsimshian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TSN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TSN - Tswana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TSO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TSO - Tsonga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUK - Turkmen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUM - Tumbuka </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUP - Tupi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUR - Turkish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUT - Altaic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TVL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TVL - Tuvalu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TWI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TWI - Twi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TYV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TYV - Tuvinian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UDM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UDM - Udmurt </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UGA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UGA - Ugaritic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UIG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UIG - Uighur Uyghur </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UKR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UKR - Ukrainian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UMB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UMB - Umbundu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="URD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> URD - Urdu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UZB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UZB - Uzbek </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VAI - Vai </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VEN - Venda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VIE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VIE - Vietnamese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VOL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VOL - Volapük </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VOT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VOT - Votic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WAK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WAK - Wakashan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WAL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WAL - Walamo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WAR - Waray </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WAS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WAS - Washo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WEL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WEL - Welsh </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WEN - Sorbian </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WLN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WLN - Walloon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WOL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WOL - Wolof </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XAL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XAL - Kalmyk Oirat </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XHO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XHO - Xhosa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YAO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YAO - Yao </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YAP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YAP - Yapese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YID">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YID - Yiddish </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YOR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YOR - Yoruba </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YPK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YPK - Yupik </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZAP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZAP - Zapotec </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZEN - Zenaga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZHA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZHA - Zhuang Chuang </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZHO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZHO - Chinese </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZND - Zande </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZUL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZUL - Zulu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZUN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZUN - Zuni </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZZA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZZA - Zaza </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TypeISOLanguageCodeA3" nillable="true" type="tns:TypeISOLanguageCodeA3"/>
+	<xs:complexType name="AddressInfo">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains merchant address information. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Street1" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Street Address Line 1. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Street2" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Street Address Line 2. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="City" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> City. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="StateProvince" type="tns:TypeStateProvince">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> State or Province. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Postal Code. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="CountryCode" type="tns:TypeISOCountryCodeA3">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Country. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AddressInfo" nillable="true" type="tns:AddressInfo"/>
+	<xs:simpleType name="TypeStateProvince">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> The merchant's State or Province. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Alabama </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Alaska </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> American Samoa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Arizona </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Arkansas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> California </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Colorado </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Connecticut </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Delaware </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> District Of Columbia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Federated States Of Micronesia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Florida </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Georgia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Guam </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Hawaii </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ID">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Idaho </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Illinois </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Indiana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Iowa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Kansas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Kentucky </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Louisiana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ME">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Maine </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Marshall Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Maryland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Massachusetts </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Michigan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Minnesota </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Mississippi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Missouri </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Montana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Nebraska </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Nevada </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New Hampshire </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NJ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New Jersey </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New Mexico </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New York </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> North Carolina </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> North Dakota </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Northern Mariana Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Ohio </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Oklahoma </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Oregon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Palau </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Pennsylvania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Puerto Rico </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Rhode Island </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> South Carolina </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> South Dakota </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Tennessee </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Texas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Utah </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Vermont </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Virgin Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Virginia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Washington </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> West Virginia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Wisconsin </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Wyoming </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Armed Forces Americas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Armed Forces </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Armed Forces Pacific </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Alberta </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> British Columbia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Manitoba </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New Brunswick </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Newfoundland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Northwest Territories </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Nova Scotia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Nunavut </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Ontario </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Prince Edward Island </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Quebec </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Saskatchewan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Yukon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TypeStateProvince" nillable="true" type="tns:TypeStateProvince"/>
+	<xs:simpleType name="TypeISOCountryCodeA3">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Merchant's country code as defined by the International Standards Organization (ISO). </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AFG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AFG - AF - 004 - Afghanistan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ALA - AX - 248 - Åland Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ALB - AL - 008 - Albania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DZA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DZA - DZ - 012 - Algeria </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ASM - AS - 016 - American Samoa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AND - AD - 020 - Andorra </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AGO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AGO - AO - 024 - Angola </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AIA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AIA - AI - 660 - Anguilla </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ATA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATA - AQ - 010 - Antarctica </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ATG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATG - AG - 028 - Antigua and Barbuda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARG - AR - 032 - Argentina </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARM - AM - 051 - Armenia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ABW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ABW - AW - 533 - Aruba </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AUS - AU - 036 - Australia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AUT - AT - 040 - Austria </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AZE - AZ - 031 - Azerbaijan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BHS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BHS - BS - 044 - Bahamas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BHR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BHR - BH - 048 - Bahrain </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BGD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BGD - BD - 050 - Bangladesh </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BRB - BB - 052 - Barbados </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BLR - BY - 112 - Belarus </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BEL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BEL - BE - 056 - Belgium </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BLZ - BZ - 084 - Belize </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BEN - BJ - 204 - Benin </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BMU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BMU - BM - 060 - Bermuda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BTN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BTN - BT - 064 - Bhutan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BOL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BOL - BO - 068 - Bolivia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BIH - BA - 070 - Bosnia and Herzegovina </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BWA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BWA - BW - 072 - Botswana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BVT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BVT - BV - 074 - Bouvet Island </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BRA - BR - 076 - Brazil </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IOT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IOT - IO - 086 - British Indian Ocean Territory </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BRN - BN - 096 - Brunei Darussalam </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BGR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BGR - BG - 100 - Bulgaria </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BFA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BFA - BF - 854 - Burkina Faso </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BDI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BDI - BI - 108 - Burundi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KHM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KHM - KH - 116 - Cambodia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CMR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CMR - CM - 120 - Cameroon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAN - CA - 124 - Canada </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CPV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CPV - CV - 132 - Cape Verde </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CYM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CYM - KY - 136 - Cayman Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAF - CF - 140 - Central African Republic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TCD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TCD - TD - 148 - Chad </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHL - CL - 152 - Chile </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHN - CN - 156 - China </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CXR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CXR - CX - 162 - Christmas Island </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CCK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CCK - CC - 166 - Cocos (Keeling) Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COL - CO - 170 - Colombia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COM - KM - 174 - Comoros </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COG - CG - 178 - Congo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COD - CD - 180 - Congo, Democratic Republic of the </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COK - CK - 184 - Cook Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CRI - CR - 188 - Costa Rica </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CIV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CIV - CI - 384 - Côte d'Ivoire </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HRV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HRV - HR - 191 - Croatia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CUB - CU - 192 - Cuba </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CYP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CYP - CY - 196 - Cyprus </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CZE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CZE - CZ - 203 - Czech Republic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DNK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DNK - DK - 208 - Denmark </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DJI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DJI - DJ - 262 - Djibouti </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DMA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DMA - DM - 212 - Dominica </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DOM - DO - 214 - Dominican Republic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ECU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ECU - EC - 218 - Ecuador </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EGY - EG - 818 - Egypt </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLV - SV - 222 - El Salvador </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GNQ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GNQ - GQ - 226 - Equatorial Guinea </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ERI - ER - 232 - Eritrea </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EST">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EST - EE - 233 - Estonia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ETH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ETH - ET - 231 - Ethiopia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FLK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FLK - FK - 238 - Falkland Islands (Malvinas) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRO - FO - 234 - Faroe Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FJI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FJI - FJ - 242 - Fiji </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FIN - FI - 246 - Finland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRA - FR - 250 - France </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FXX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FXX - FX - 249 - France, Metropolitan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GUF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GUF - GF - 254 - French Guiana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PYF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PYF - PF - 258 - French Polynesia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ATF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATF - TF - 260 - French Southern Territories </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GAB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GAB - GA - 266 - Gabon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GMB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GMB - GM - 270 - Gambia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GEO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GEO - GE - 268 - Georgia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DEU - DE - 276 - Germany </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GHA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GHA - GH - 288 - Ghana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GIB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GIB - GI - 292 - Gibraltar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRC - GR - 300 - Greece </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRL - GL - 304 - Greenland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRD - GD - 308 - Grenada </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GLP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GLP - GP - 312 - Guadeloupe </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GUM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GUM - GU - 316 - Guam </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GTM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GTM - GT - 320 - Guatemala </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GGY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GGY - GG - 831 - Guernsey </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GIN - GN - 324 - Guinea </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GNB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GNB - GW - 624 - Guinea-Bissau </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GUY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GUY - GY - 328 - Guyana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HTI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HTI - HT - 332 - Haiti </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HMD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HMD - HM - 334 - Heard Island and McDonald Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VAT - VA - 336 - Holy See (Vatican City State) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HND - HN - 340 - Honduras </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HKG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HKG - HK - 344 - Hong Kong </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HUN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HUN - HU - 348 - Hungary </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ISL - IS - 352 - Iceland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IND - IN - 356 - India </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IDN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IDN - ID - 360 - Indonesia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IRN - IR - 364 - Iran, Islamic Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRQ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IRQ - IQ - 368 - Iraq </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IRL - IE - 372 - Ireland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IMN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IMN - IM - 833 - Isle of Man </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ISR - IL - 376 - Israel </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ITA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ITA - IT - 380 - Italy </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JAM - JM - 388 - Jamaica </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JPN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JPN - JP - 392 - Japan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JEY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JEY - JE - 832 - Jersey </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JOR - JO - 400 - Jordan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAZ - KZ - 398 - Kazakhstan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KEN - KE - 404 - Kenya </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KIR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KIR - KI - 296 - Kiribati </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PRK - KP - 408 - Korea, Democratic People's Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KOR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KOR - KR - 410 - Korea, Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KWT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KWT - KW - 414 - Kuwait </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KGZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KGZ - KG - 417 - Kyrgyzstan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LAO - LA - 418 - Lao People's Democratic Republic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LVA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LVA - LV - 428 - Latvia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LBN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LBN - LB - 422 - Lebanon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LSO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LSO - LS - 426 - Lesotho </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LBR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LBR - LR - 430 - Liberia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LBY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LBY - LY - 434 - Libyan Arab Jamahiriya </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LIE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LIE - LI - 438 - Liechtenstein </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LTU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LTU - LT - 440 - Lithuania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LUX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUX - LU - 442 - Luxembourg </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAC - MO - 446 - Macao </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MKD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MKD - MK - 807 - Macedonia, the former Yugoslav Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MDG - MG - 450 - Madagascar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MWI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MWI - MW - 454 - Malawi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MYS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MYS - MY - 458 - Malaysia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MDV - MV - 462 - Maldives </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MLI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MLI - ML - 466 - Mali </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MLT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MLT - MT - 470 - Malta </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MHL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MHL - MH - 584 - Marshall Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MTQ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTQ - MQ - 474 - Martinique </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MRT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MRT - MR - 478 - Mauritania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MUS - MU - 480 - Mauritius </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MYT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MYT - YT - 175 - Mayotte </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MEX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MEX - MX - 484 - Mexico </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FSM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FSM - FM - 583 - Micronesia, Federated States of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MDA - MD - 498 - Moldova, Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MCO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MCO - MC - 492 - Monaco </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MNG - MN - 496 - Mongolia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MNE - ME - 499 - Montenegro </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MSR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MSR - MS - 500 - Montserrat </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAR - MA - 504 - Morocco </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MOZ - MZ - 508 - Mozambique </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MMR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MMR - MM - 104 - Myanmar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NAM - NA - 516 - Namibia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NRU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NRU - NR - 520 - Nauru </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NPL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NPL - NP - 524 - Nepal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NLD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NLD - NL - 528 - Netherlands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ANT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ANT - AN - 530 - Netherlands Antilles </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NCL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NCL - NC - 540 - New Caledonia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NZL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NZL - NZ - 554 - New Zealand </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NIC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NIC - NI - 558 - Nicaragua </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NER">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NER - NE - 562 - Niger </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NGA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NGA - NG - 566 - Nigeria </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NIU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NIU - NU - 570 - Niue </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NFK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NFK - NF - 574 - Norfolk Island </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MNP - MP - 580 - Northern Mariana Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NOR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NOR - NO - 578 - Norway </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OMN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OMN - OM - 512 - Oman </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAK - PK - 586 - Pakistan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PLW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PLW - PW - 585 - Palau </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PSE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PSE - PS - 275 - Palestinian Territory, Occupied </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAN - PA - 591 - Panama </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PNG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PNG - PG - 598 - Papua New Guinea </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PRY - PY - 600 - Paraguay </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PER">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PER - PE - 604 - Peru </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PHL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PHL - PH - 608 - Philippines </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PCN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PCN - PN - 612 - Pitcairn </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> POL - PL - 616 - Poland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PRT - PT - 620 - Portugal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PRI - PR - 630 - Puerto Rico </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> QAT - QA - 634 - Qatar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> REU - RE - 638 - Réunion </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ROU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ROU - RO - 642 - Romania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RUS - RU - 643 - Russian Federation </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RWA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RWA - RW - 646 - Rwanda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SHN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SHN - SH - 654 - Saint Helena </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KNA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KNA - KN - 659 - Saint Kitts and Nevis </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LCA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LCA - LC - 662 - Saint Lucia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SPM - PM - 666 - Saint Pierre and Miquelon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VCT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VCT - VC - 670 - Saint Vincent and the Grenadines </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WSM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WSM - WS - 882 - Samoa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SMR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SMR - SM - 674 - San Marino </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> STP - ST - 678 - Sao Tome and Principe </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAU - SA - 682 - Saudi Arabia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SEN - SN - 686 - Senegal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SRB - RS - 688 - Serbia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SCG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SCG - CS - 891 - Serbia and Montenegro </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SYC - SC - 690 - Seychelles </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLE - SL - 694 - Sierra Leone </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SGP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SGP - SG - 702 - Singapore </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SVK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SVK - SK - 703 - Slovakia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SVN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SVN - SI - 705 - Slovenia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLB - SB - 090 - Solomon Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SOM - SO - 706 - Somalia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZAF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZAF - ZA - 710 - South Africa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SGS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SGS - GS - 239 - South Georgia and the South Sandwich Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ESP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ESP - ES - 724 - Spain </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LKA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LKA - LK - 144 - Sri Lanka </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SDN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SDN - SD - 736 - Sudan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SUR - SR - 740 - Suriname </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SJM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SJM - SJ - 744 - Svalbard and Jan Mayen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SWZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SWZ - SZ - 748 - Swaziland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SWE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SWE - SE - 752 - Sweden </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHE - CH - 756 - Switzerland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SYR - SY - 760 - Syrian Arab Republic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TWN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TWN - TW - 158 - Taiwan, Province of China </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TJK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TJK - TJ - 762 - Tajikistan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TZA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TZA - TZ - 834 - Tanzania, United Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="THA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> THA - TH - 764 - Thailand </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TLS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TLS - TL - 626 - Timor-Leste </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TGO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TGO - TG - 768 - Togo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TKL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TKL - TK - 772 - Tokelau </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TMP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TMP - TP - 626 - East Timor </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TON - TO - 776 - Tonga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TTO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TTO - TT - 780 - Trinidad and Tobago </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUN - TN - 788 - Tunisia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUR - TR - 792 - Turkey </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TKM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TKM - TM - 795 - Turkmenistan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TCA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TCA - TC - 796 - Turks and Caicos Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUV - TV - 798 - Tuvalu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UGA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UGA - UG - 800 - Uganda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UKR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UKR - UA - 804 - Ukraine </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARE - AE - 784 - United Arab Emirates </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GBR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GBR - GB - 826 - United Kingdom </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> USA - US - 840 - United States </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UMI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UMI - UM - 581 - United States Minor Outlying Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="URY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> URY - UY - 858 - Uruguay </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UZB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UZB - UZ - 860 - Uzbekistan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VUT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VUT - VU - 548 - Vanuatu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VEN - VE - 862 - Venezuela </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VNM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VNM - VN - 704 - Viet Nam </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VGB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VGB - VG - 092 - Virgin Islands, British </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VIR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VIR - VI - 850 - Virgin Islands, U.S. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WLF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WLF - WF - 876 - Wallis and Futuna </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ESH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ESH - EH - 732 - Western Sahara </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YEM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YEM - YE - 887 - Yemen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YUG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YUG - YU - 891 - Yugoslavia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZMB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZMB - ZM - 894 - Zambia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZWE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZWE - ZW - 716 - Zimbabwe </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TypeISOCountryCodeA3" nillable="true" type="tns:TypeISOCountryCodeA3"/>
+	<xs:complexType name="BankcardMerchantData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information specific to the Bankcard Processing service class for the merchant using the application. Required for merchants using Credit Card and PIN Debit services. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ABANumber" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Identifies the merchant to a direct debit switch. Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="AcquirerBIN" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Acquirer Bank Identification Number. Identifies the merchant's acquiring bank. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="AgentBank" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Agent Bank Identifier. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="AgentChain" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Agent Chain Identifier. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Aggregator" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Identifies the merchant as an aggregator. Typically provisioned by the service provider. If not present, the default value is 'false'. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ClientNumber" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Client number. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="IndustryType" type="tns:IndustryType">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The industry type of the transaction. This will be saved in the MerchantProfile (default) and cannot be overridden on each transaction. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Location" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Unique identifier for the merchant's location. Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="MerchantType" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Merchant type. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="PrintCustomerServicePhone" type="xs:boolean">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates whether to print the customer service telephone number on the customer's transaction receipt. Conditional, required for MOTO transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="QualificationCodes" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Qualification codes. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ReimbursementAttribute" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Designates the reimbursement fee applicable to the transaction. Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SIC" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Standard Industry Code. Identifies the merchant industry classification. May be provisioned by the service provider. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SecondaryTerminalId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Additional transaction device identifier. Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SettlementAgent" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Identifies the merchant settling agent to direct debit networks. Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SharingGroup" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Provides a list of debit and EBT networks that a Point-of-Sale (POS) system can access. Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="StoreId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Unique merchant store identifier. Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction device identifier. Often referred to as Terminal Number or Terminal ID (TID). Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="TimeZoneDifferential" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Timezone of the merchant location and the Daylight Savings Time observation status. Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BankcardMerchantData" nillable="true" type="tns:BankcardMerchantData"/>
+	<xs:simpleType name="IndustryType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> The industry type for the transaction. This will be saved in the MerchantProfile (default) but may be overridden on each transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOTO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Mail Order/Telephone Order. Also referred to as Direct Marketing. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ecommerce">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Electronic Commerce. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Restaurant">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Restaurant. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Retail">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Retail. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="IndustryType" nillable="true" type="tns:IndustryType"/>
+	<xs:complexType name="ElectronicCheckingMerchantData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information specific to the Electronic Checking service class for the merchant using the application. Conditional, required if one of the data elements is required by the Service Provider. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="OrginatorId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Unique identifier that represents the ACH originator in the service provider system. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ProductId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Product Identifier. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SiteId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Site Identifier. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckingMerchantData" nillable="true" type="tns:ElectronicCheckingMerchantData"/>
+	<xs:complexType name="StoredValueMerchantData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information specific to the Bankcard Processing service class for the merchant using the application. Required for merchants using Credit Card and PIN Debit services. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="AgentChain" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Agent Chain identifier. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ClientNumber" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Client number. Typically provisioned by the service provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="IndustryType" type="tns:IndustryType">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The industry type of the transaction. This will be saved in the MerchantProfile (default) but may be overridden on each transaction. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SIC" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Standard Industry Code. Identifies the merchant industry classification. May be provisioned by the service provider. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="StoreId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Unique merchant store identifier. Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction device identifier. Often referred to as Terminal Number or Terminal ID (TID). Conditional, required if provisioned by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="StoredValueMerchantData" nillable="true" type="tns:StoredValueMerchantData"/>
+</xs:schema>

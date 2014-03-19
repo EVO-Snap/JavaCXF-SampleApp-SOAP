@@ -1,0 +1,6 @@
+cmdLine From C:\Download\Java\Apache CXF\apache-cxf-2.3.1\bin
+
+wsdl2java.bat -d Txn -b WS/JaxbBindingsTxn.xml -validate -verbose -autoNameResolution  -client WS/CwsTransactionProcessing.wsdl
+wsdl2java.bat -d Svc -b WS/JaxbBindingsSvcInfo.xml -validate -verbose -autoNameResolution -client WS/CwsServiceInformation.wsdl
+wsdl2java.bat -d Tms -b WS/JaxbBindingsTms.xml -validate -verbose -autoNameResolution  -client WS/CWSDataServices.wsdl
+wsdl2java.bat -d Billing -b WS/JaxbBindingsBilling.xml -validate -verbose -autoNameResolution  -client WS/CWSDataServices.wsdl

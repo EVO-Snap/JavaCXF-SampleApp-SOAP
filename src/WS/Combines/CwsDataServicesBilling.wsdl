@@ -1,0 +1,107 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/Imports">
+			<xsd:import schemaLocation="schemas.evosnap.com_Ipc.General.WCF.Contracts.Common.xsd" namespace="http://schemas.evosnap.com/Ipc.General.WCF.Contracts.Common"/>
+			<xsd:import schemaLocation="schemas.microsoft.com_2003_10_Serialization.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_DataServices_TMS.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_ServiceInformation.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/ServiceInformation"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions"/>
+			<xsd:import schemaLocation="schemas.microsoft.com_2003_10_Serialization_Arrays.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions_ElectronicChecking.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/ElectronicChecking"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions_Bankcard.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions_Bankcard_Pro.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard/Pro"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions_StoredValue.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/StoredValue"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_DataServices.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/DataServices"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_Ipc.General.WCF.Contracts.Common_External.xsd" namespace="http://schemas.evosnap.com/Ipc.General.WCF.Contracts.Common/External"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_Identity_1.0.xsd" namespace="http://schemas.evosnap.com/Identity/1.0/"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_DataServices_TMS_Faults.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/Faults"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_DataServices_TMS_Fault.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/Fault"/>
+			<xsd:import schemaLocation="schemas.evosnap.com_CWS_v2.0_DataServices_Billing.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_InputMessage">
+		<wsdl:part name="parameters" element="tns:QueryBillingEventSummary"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_OutputMessage">
+		<wsdl:part name="parameters" element="tns:QueryBillingEventSummaryResponse"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_DataServicesUnavailableFaultFault_FaultMessage">
+		<wsdl:part xmlns:q1="http://schemas.evosnap.com/CWS/v2.0/DataServices" name="detail" element="q1:DataServicesUnavailableFault"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_BillingTransactionFailedFaultFault_FaultMessage">
+		<wsdl:part name="detail" element="tns:BillingTransactionFailedFault"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_ExpiredTokenFaultFault_FaultMessage">
+		<wsdl:part xmlns:q2="http://schemas.evosnap.com/Identity/1.0/" name="detail" element="q2:ExpiredTokenFault"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_InvalidTokenFaultFault_FaultMessage">
+		<wsdl:part xmlns:q3="http://schemas.evosnap.com/Identity/1.0/" name="detail" element="q3:InvalidTokenFault"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_AuthenticationFaultFault_FaultMessage">
+		<wsdl:part xmlns:q4="http://schemas.evosnap.com/Identity/1.0/" name="detail" element="q4:AuthenticationFault"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_InputMessage">
+		<wsdl:part name="parameters" element="tns:QueryBillingEventDetail"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_OutputMessage">
+		<wsdl:part name="parameters" element="tns:QueryBillingEventDetailResponse"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_InvalidTokenFaultFault_FaultMessage">
+		<wsdl:part xmlns:q5="http://schemas.evosnap.com/Identity/1.0/" name="detail" element="q5:InvalidTokenFault"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_BillingTransactionFailedFaultFault_FaultMessage">
+		<wsdl:part name="detail" element="tns:BillingTransactionFailedFault"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_ExpiredTokenFaultFault_FaultMessage">
+		<wsdl:part xmlns:q6="http://schemas.evosnap.com/Identity/1.0/" name="detail" element="q6:ExpiredTokenFault"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_DataServicesUnavailableFaultFault_FaultMessage">
+		<wsdl:part xmlns:q7="http://schemas.evosnap.com/CWS/v2.0/DataServices" name="detail" element="q7:DataServicesUnavailableFault"/>
+	</wsdl:message>
+	<wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_AuthenticationFaultFault_FaultMessage">
+		<wsdl:part xmlns:q8="http://schemas.evosnap.com/Identity/1.0/" name="detail" element="q8:AuthenticationFault"/>
+	</wsdl:message>
+	<wsdl:portType name="IDataServicesBilling">
+		<wsdl:documentation>
+			<summary>
+ Operations for querying billing event data
+ </summary>
+		</wsdl:documentation>
+		<wsdl:operation name="QueryBillingEventSummary">
+			<wsdl:documentation>
+				<summary>
+ Queries for summary billing event data.
+ </summary>
+				<param name="sessionToken">The short-lived token used to authenticate to the Billing Web Service.</param>
+				<param name="queryBillingEventParameters">Query parameters for querying billing event data.</param>
+				<param name="pagingParameters">Defines the parameters for the service to use for paging large datasets.</param>
+				<returns>A list of all defined billing event summary data.</returns>
+			</wsdl:documentation>
+			<wsdl:input wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummary" message="tns:IDataServicesBilling_QueryBillingEventSummary_InputMessage"/>
+			<wsdl:output wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryResponse" message="tns:IDataServicesBilling_QueryBillingEventSummary_OutputMessage"/>
+			<wsdl:fault wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryDataServicesUnavailableFaultFault" name="DataServicesUnavailableFaultFault" message="tns:IDataServicesBilling_QueryBillingEventSummary_DataServicesUnavailableFaultFault_FaultMessage"/>
+			<wsdl:fault wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryBillingTransactionFailedFaultFault" name="BillingTransactionFailedFaultFault" message="tns:IDataServicesBilling_QueryBillingEventSummary_BillingTransactionFailedFaultFault_FaultMessage"/>
+			<wsdl:fault wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:IDataServicesBilling_QueryBillingEventSummary_ExpiredTokenFaultFault_FaultMessage"/>
+			<wsdl:fault wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:IDataServicesBilling_QueryBillingEventSummary_InvalidTokenFaultFault_FaultMessage"/>
+			<wsdl:fault wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:IDataServicesBilling_QueryBillingEventSummary_AuthenticationFaultFault_FaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="QueryBillingEventDetail">
+			<wsdl:documentation>
+				<summary>
+ Queries for detailed billing event data.
+ </summary>
+				<param name="sessionToken">The short-lived token used to authenticate to the Billing Web Service.</param>
+				<param name="queryBillingEventParameters">Query parameters for querying billing event data.</param>
+				<param name="pagingParameters">Defines the parameters for the service to use for paging large datasets.</param>
+				<returns>A list of all defined billing event detail data.</returns>
+			</wsdl:documentation>
+			<wsdl:input wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetail" message="tns:IDataServicesBilling_QueryBillingEventDetail_InputMessage"/>
+			<wsdl:output wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailResponse" message="tns:IDataServicesBilling_QueryBillingEventDetail_OutputMessage"/>
+			<wsdl:fault wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:IDataServicesBilling_QueryBillingEventDetail_InvalidTokenFaultFault_FaultMessage"/>
+			<wsdl:fault wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailBillingTransactionFailedFaultFault" name="BillingTransactionFailedFaultFault" message="tns:IDataServicesBilling_QueryBillingEventDetail_BillingTransactionFailedFaultFault_FaultMessage"/>
+			<wsdl:fault wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:IDataServicesBilling_QueryBillingEventDetail_ExpiredTokenFaultFault_FaultMessage"/>
+			<wsdl:fault wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailDataServicesUnavailableFaultFault" name="DataServicesUnavailableFaultFault" message="tns:IDataServicesBilling_QueryBillingEventDetail_DataServicesUnavailableFaultFault_FaultMessage"/>
+			<wsdl:fault wsaw:Action="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:IDataServicesBilling_QueryBillingEventDetail_AuthenticationFaultFault_FaultMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+</wsdl:definitions>

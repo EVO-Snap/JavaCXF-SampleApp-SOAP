@@ -1,0 +1,295 @@
+<!-- edited with XMLSpy v2013 rel. 2 sp2 (x64) (http://www.altova.com) by Darren Adelgren (PowerPay) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/Transactions/Faults" xmlns:q1="http://schemas.evosnap.com/CWS/v2.0/Transactions" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/Faults" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions" schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions.xsd"/>
+	<xs:complexType name="CWSConnectionFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> A fault that inidicates that a temporary connection issue caused the fault and that the client should retry the connection. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSConnectionFault" type="tns:CWSConnectionFault" nillable="true"/>
+	<xs:complexType name="CWSBaseFault">
+		<xs:sequence>
+			<xs:element name="BatchId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The batch Id for the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ErrorID" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The error code of the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="HelpURL" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The web URL that will display more information about the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Operation" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The CWS operation name that originated the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProblemType" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Lists the specific error message for the associated fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The transaction Id associated with the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionState" type="q1:TransactionState" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The transaction state of the transaction Id associated with the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CWSBaseFault" type="tns:CWSBaseFault" nillable="true"/>
+	<xs:complexType name="CWSTransactionServiceUnavailableFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates that the Transaction Processing Service is temporary unavailable. The client application should Undo the transaction and try again. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSTransactionServiceUnavailableFault" type="tns:CWSTransactionServiceUnavailableFault" nillable="true"/>
+	<xs:complexType name="CWSTransactionAlreadySettledFault" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSTransactionAlreadySettledFault" type="tns:CWSTransactionAlreadySettledFault" nillable="true"/>
+	<xs:complexType name="CWSValidationResultFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains a collection of one or more PTLS XML error messages in CWSValidationErrorFault. The application should respond to these validation errors and correct the data being sent in. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence>
+					<xs:element name="Errors" type="tns:ArrayOfCWSValidationErrorFault" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> List of specific validation errors from CWSValidationErrorFault. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSValidationResultFault" type="tns:CWSValidationResultFault" nillable="true"/>
+	<xs:complexType name="ArrayOfCWSValidationErrorFault">
+		<xs:sequence>
+			<xs:element name="CWSValidationErrorFault" type="tns:CWSValidationErrorFault" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfCWSValidationErrorFault" type="tns:ArrayOfCWSValidationErrorFault" nillable="true"/>
+	<xs:complexType name="CWSValidationErrorFault">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains the details of the CWSValidationResultFault. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ErrorType" type="tns:CWSValidationErrorFault.EErrorType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the type of error. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RuleKey" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the data rule that failed. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RuleLocationKey" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates where the data rule failed. This can be null. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RuleMessage" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The verbose message that describes the failure. Do not put stack traces here; use the logger. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the transaction Id where the rule failed. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CWSValidationErrorFault" type="tns:CWSValidationErrorFault" nillable="true"/>
+	<xs:simpleType name="CWSValidationErrorFault.EErrorType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> The type of possible errors. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Validation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Rule failed validation. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Processing">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Processing error. An error that has nothing to do with the message nor with the validator engine. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="System">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Systems error. An error that has nothing to do with the message and indicates that something failed in the validator engine. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CWSValidationErrorFault.EErrorType" type="tns:CWSValidationErrorFault.EErrorType" nillable="true"/>
+	<xs:complexType name="CWSFault" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSFault" type="tns:CWSFault" nillable="true"/>
+	<xs:complexType name="CWSTransactionFailedFault" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSTransactionFailedFault" type="tns:CWSTransactionFailedFault" nillable="true"/>
+	<xs:complexType name="CWSExtendedDataNotSupportedFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates that extended credit card data, such as Level 2, Level 3, and/or Managed Billing data, is not supported by the Service Provider. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSExtendedDataNotSupportedFault" type="tns:CWSExtendedDataNotSupportedFault" nillable="true"/>
+	<xs:complexType name="CWSInvalidMessageFormatFault" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSInvalidMessageFormatFault" type="tns:CWSInvalidMessageFormatFault" nillable="true"/>
+	<xs:complexType name="CWSOperationNotSupportedFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates that an unsupported operation is being attempted, such as an Adjust on a non-Bankcard transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSOperationNotSupportedFault" type="tns:CWSOperationNotSupportedFault" nillable="true"/>
+	<xs:complexType name="CWSInvalidOperationFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates an invalid operation is being attempted, such as an unsupported transaction type or an attempt to process a return for more than original amount. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSInvalidOperationFault" type="tns:CWSInvalidOperationFault" nillable="true"/>
+	<xs:complexType name="CWSDeserializationFault" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSDeserializationFault" type="tns:CWSDeserializationFault" nillable="true"/>
+	<xs:complexType name="CWSInvalidServiceInformationFault" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="tns:CWSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CWSInvalidServiceInformationFault" type="tns:CWSInvalidServiceInformationFault" nillable="true"/>
+</xs:schema>

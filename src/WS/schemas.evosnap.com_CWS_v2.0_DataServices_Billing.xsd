@@ -1,0 +1,343 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing" elementFormDefault="qualified" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/Billing">
+	<xs:import schemaLocation="schemas.microsoft.com_2003_10_Serialization_Arrays.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+	<xs:import schemaLocation="schemas.evosnap.com_CWS_v2.0_DataServices.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/DataServices"/>
+	<xs:element name="QueryBillingEventSummary">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string"/>
+				<xs:element minOccurs="0" name="queryBillingEventParameters" nillable="true" type="tns:QueryBillingEventParameters"/>
+				<xs:element xmlns:q1="http://schemas.evosnap.com/CWS/v2.0/DataServices" minOccurs="0" name="pagingParameters" nillable="true" type="q1:PagingParameters"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="QueryBillingEventParameters">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains the parameters for querying billing event data. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="BillingEventSourceIds" nillable="true" type="q2:ArrayOfstring">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Restricts the query to specific billing event source ids. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="BreakdownType" type="tns:BreakdownType">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The category of the requested summary data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element xmlns:q3="http://schemas.evosnap.com/CWS/v2.0/DataServices" minOccurs="0" name="EventDateRange" nillable="true" type="q3:DateRange">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Restricts the query to a specfic date range that the billing event data was generated. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="MerchantProfileIds" nillable="true" type="q4:ArrayOfstring">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Restricts the query to specific merchant profile ids. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ServiceKeys" nillable="true" type="q5:ArrayOfstring">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Restricts the query to specific service keys. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="QueryBillingEventParameters" nillable="true" type="tns:QueryBillingEventParameters"/>
+	<xs:simpleType name="BreakdownType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Allows summary billing event data to be broken down by category </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No breakdown has been requested </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ServiceKey">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Billing event data is broken down by service key </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MerchantProfileId">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Billing event data is broken down by merchant profile id </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="BreakdownType" nillable="true" type="tns:BreakdownType"/>
+	<xs:element name="QueryBillingEventSummaryResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="QueryBillingEventSummaryResult" nillable="true" type="tns:ArrayOfBillingEventSummary"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ArrayOfBillingEventSummary">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="BillingEventSummary" nillable="true" type="tns:BillingEventSummary"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfBillingEventSummary" nillable="true" type="tns:ArrayOfBillingEventSummary"/>
+	<xs:complexType name="BillingEventSummary">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains summary data for billing event queries. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Breakdown" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The breakdown value. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Breakdown2" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The breakdown2 value. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="EventCount" type="xs:int">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The number of billing events for this breakdown. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SourceId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Source Id that generated the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SourceName" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Source Name that generated the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BillingEventSummary" nillable="true" type="tns:BillingEventSummary"/>
+	<xs:complexType name="BillingTransactionFailedFault">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates that the Transaction Processing Service is temporarily unavailable. The client application should Undo the transaction and try again. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:BillingBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BillingTransactionFailedFault" nillable="true" type="tns:BillingTransactionFailedFault"/>
+	<xs:complexType name="BillingBaseFault">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ErrorID" type="xs:int">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The error code of the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="HelpURL" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The web URL that will display more information about the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Operation" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The CWS operation name that originated the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ProblemType" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Lists the specific error message for the associated fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BillingBaseFault" nillable="true" type="tns:BillingBaseFault"/>
+	<xs:element name="QueryBillingEventDetail">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string"/>
+				<xs:element minOccurs="0" name="queryBillingEventParameters" nillable="true" type="tns:QueryBillingEventParameters"/>
+				<xs:element xmlns:q6="http://schemas.evosnap.com/CWS/v2.0/DataServices" minOccurs="0" name="pagingParameters" nillable="true" type="q6:PagingParameters"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QueryBillingEventDetailResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" name="QueryBillingEventDetailResult" nillable="true" type="tns:ArrayOfBillingEventDetail"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ArrayOfBillingEventDetail">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="BillingEventDetail" nillable="true" type="tns:BillingEventDetail"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfBillingEventDetail" nillable="true" type="tns:ArrayOfBillingEventDetail"/>
+	<xs:complexType name="BillingEventDetail">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains all defined billing event data. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="BillingEventMetaData" nillable="true" type="tns:BillingEventMetaData">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Metadata for the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SerializedBillingData" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The actual serialized billing event data object. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BillingEventDetail" nillable="true" type="tns:BillingEventDetail"/>
+	<xs:complexType name="BillingEventMetaData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains metadata that defines billing event data. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="EventTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The event time that the generated billing event data was generated. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="EventType" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The event type that generated the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="MerchantProfileId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The MerchantProfileId that generated the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="ServiceKey" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The service key that generated the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SourceId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The source id that generated the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="SourceName" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The source name that generated the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="TransactionId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The transaction id that generated the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The user name that generated the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="WorkflowId" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The workflow id that generated the billing event data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BillingEventMetaData" nillable="true" type="tns:BillingEventMetaData"/>
+</xs:schema>

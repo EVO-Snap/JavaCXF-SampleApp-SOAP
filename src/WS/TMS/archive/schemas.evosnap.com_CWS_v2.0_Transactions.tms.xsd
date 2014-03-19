@@ -1,0 +1,5142 @@
+<!-- edited with XMLSpy v2013 rel. 2 sp2 (x64) (http://www.altova.com) by Darren Adelgren (PowerPay) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ns1="http://schemas.microsoft.com/2003/10/Serialization/" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/Transactions" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" schemaLocation="schemas.microsoft.com_2003_10_Serialization_Arrays.xsd"/>
+	<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="schemas.microsoft.com_2003_10_Serialization.xsd"/>
+	<xs:simpleType name="TransactionState">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the current state of the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Declined">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The original transaction was successfully transmitted but declined by the service. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Verified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> A verify transaction was successfully run. Check response for details. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Authorized">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The original transaction was successfully authorized. The transaction has not yet been captured. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Adjusted">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The original transaction was successfully authorized and the amount subsequently successfully adjusted. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Captured">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The transaction was successfully captured. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CaptureDeclined">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> An attempt to capture the transaction was declined by the service provider. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PartiallyCaptured">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The transaction was captured for a partial amount with the expectation that another capture may be attempted for the additional authorized funds. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Undone">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The transaction was completely voided or reversed. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ReturnRequested">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Either the original transaction was a standalone return, or a successfully captured transaction was subsequently returned for the full amount. The return has not yet been captured. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PartialReturnRequested">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> A successfully captured transaction was returned for less than the captured amount. The return has not yet been captured. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ReturnUndone">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> A standalone return or a return of a successfully captured transaction was voided. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Returned">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Either the original transaction was a standalone return, or a successfully captured transaction was subsequently returned for the full amount. The return has been captured. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PartiallyReturned">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> A successfully captured transaction was returned for less than the captured amount. The return has been captured. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="InProcess">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Transaction is in process. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ErrorValidation">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> There was a validation error on the transaction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ErrorUnknown">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> An unknown error occured during the processing of this error. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ErrorConnecting">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> There was a connection error during the processing of this transaction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FundsRequested">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Indicated funds have been requested for Disburse transaction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FundsTransferred">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Indicated funds have been transferred for Disburse transaction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TransactionState" type="tns:TransactionState" nillable="true"/>
+	<xs:complexType name="Response">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains detailed transaction response data always returned to the client application. Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Status" type="tns:Status" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Shows whether transaction was a success or failure. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StatusCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Status code returned from the service. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StatusMessage" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Verbose message describing the status of the transaction. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction identifier that may be used for subsequent Commerce Web Services transactions. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OriginatorTransactionId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction identifier assigned by Commerce Web Services before sending the transaction to the Service Provider. May be useful for identifying the transaction when contacting the service offline. This will always be returned to the client application. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceTransactionId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction identifier assigned by the Service Provider. May be useful for identifying the transaction when contacting the Service Provider offline. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceTransactionDateTime" type="tns:ServiceTransactionDateTime" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The local date and time of the transaction as calculated by the service. Expected, although amount of detail varies between services. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Addendum" type="tns:Addendum" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Managed and unmanaged addendum. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CaptureState" type="tns:CaptureState" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the state of the transaction as it relates to capture. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionState" type="tns:TransactionState" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the current state of a transaction. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsAcknowledged" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates if the transaction has been acknowledged by the client application. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Reference" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies user or customer reference data echoed from the request. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Response" type="tns:Response" nillable="true"/>
+	<xs:simpleType name="Status">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the authorization status of the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Successful">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The transaction was successfully approved. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Failure">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> The transaction was declined or errored. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Status" type="tns:Status" nillable="true"/>
+	<xs:complexType name="ServiceTransactionDateTime">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> The local date and time of the transaction as calculated by the Service Provider. If present in the response, this same data element and value must be provided when settling a subsequent authorization completion. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Date" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Date. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Time" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Time. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TimeZone" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Timezone. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ServiceTransactionDateTime" type="tns:ServiceTransactionDateTime" nillable="true"/>
+	<xs:complexType name="Addendum">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Used to pass optional service-specific information. It is not necessary to pass this object unless specifically directed to do so by your Solutions Consultant. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Unmanaged" type="tns:Unmanaged" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Unmanaged addenda. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Addendum" type="tns:Addendum" nillable="true"/>
+	<xs:complexType name="Unmanaged">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Can be used to pass service-specific information such as username/password or session token credentials. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Any" type="q1:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> One or more xml strings. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Unmanaged" type="tns:Unmanaged" nillable="true"/>
+	<xs:simpleType name="CaptureState">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Defines the state of the transaction as it relates to capture. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CannotCapture">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Transaction cannot be captured due to declined authorization or subsequent undoing of successful authorization. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ReadyForCapture">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> Successfully authorized but capture not requested. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CapturePending">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> Successfully transmitted capture but it is not yet known whether the processor accepted it. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Captured">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> Successfully captured. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CaptureDeclined">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> Capture was successfully submitted but declined by the service. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="InProcess">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> The capture is in process. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CapturedUndoPermitted">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> Indicates if an Undo is permitted for the Captured state. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CapturePendingUndoPermitted">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> Indicates if an Undo is permitted for the CapturePending state. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CaptureError">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> Indicates an error state during capture. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CaptureUnknown">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">11</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> Unknow capture state. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BatchSent">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">12</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> Batch has been sent, response is out of band. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BatchSentUndoPermitted">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">13</EnumerationValue>
+					</xs:appinfo>
+					<xs:documentation>
+						<summary> Batch has been sent, an Undo operation is allowed. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CaptureState" type="tns:CaptureState" nillable="true"/>
+	<xs:simpleType name="CVResult">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Response code returned by the card issuer indicating the result of Card Verification (CVV2/CVC2/CID). </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Match">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CVV2/CVC2/CID match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoMatch">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CVV2/CVC2/CID do not match. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotProcessed">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Not processed. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoCodePresent">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Merchant has indicated that code is not present on card. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ShouldHaveBeenPresent">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CVV2 should have been present. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IssuerNotCertified">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Issuer is not certified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Invalid">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CVV2/CVC2/CID is invalid. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NoResponse">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> No response from card association. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NotApplicable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CVV2/CVC2/CID is not applicable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CVResult" type="tns:CVResult" nillable="true"/>
+	<xs:complexType name="SummaryData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Summary information for credit and debit totals. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CashBackTotals" type="tns:SummaryTotals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Totals for cashback transactions. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CreditReturnTotals" type="tns:SummaryTotals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Totals for returned credit transactions. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CreditTotals" type="tns:SummaryTotals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Totals for credit transactions. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DebitReturnTotals" type="tns:SummaryTotals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Totals for returned debit transactions. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DebitTotals" type="tns:SummaryTotals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Totals for debit transactions. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NetTotals" type="tns:SummaryTotals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Net totals for the batch. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VoidTotals" type="tns:SummaryTotals" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Totals for voided transactions. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SummaryData" type="tns:SummaryData" nillable="true"/>
+	<xs:complexType name="SummaryTotals">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains net amount and total item count. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NetAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Net amount. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Count" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Total item count. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SummaryTotals" type="tns:SummaryTotals" nillable="true"/>
+	<xs:simpleType name="IndustryType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> The industry type of the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOTO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MOTO (Mail Order/Telephone Order). Also referred to as Direct Marketing. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ecommerce">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Electronic Commerce. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Restaurant">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Restaurant. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Retail">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Retail. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="IndustryType" type="tns:IndustryType" nillable="true"/>
+	<xs:complexType name="Transaction">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains all information which may be required to send a transaction to a Service Provider. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CustomerData" type="tns:TransactionCustomerData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Details about the customer. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReportingData" type="tns:TransactionReportingData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Additional data to be printed on reports. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Addendum" type="tns:Addendum" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Managed and unmanaged addendum. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Transaction" type="tns:Transaction" nillable="true"/>
+	<xs:complexType name="TransactionCustomerData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the customer. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BillingData" type="tns:CustomerInfo" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Customer billing or home details. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomerId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Identifier used by the merchant to identify the customer. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomerTaxId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Customer's federal or VAT identification number. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ShippingData" type="tns:CustomerInfo" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Customer shipping details. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TransactionCustomerData" type="tns:TransactionCustomerData" nillable="true"/>
+	<xs:complexType name="CustomerInfo">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the customer. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="tns:NameInfo" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Parameterized full name. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Address" type="tns:AddressInfo" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Parameterized address. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BusinessName" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Company name. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Phone" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Primary telephone number. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Fax" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Primary fax number. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Email" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Email address. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CustomerInfo" type="tns:CustomerInfo" nillable="true"/>
+	<xs:complexType name="NameInfo">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the customer name. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Title" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Title. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="First" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> First name. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Middle" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Middle name or initial. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Last" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Last name. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Suffix" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Suffix. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="NameInfo" type="tns:NameInfo" nillable="true"/>
+	<xs:complexType name="AddressInfo">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains address information for either the merchant or customer. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Street1" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Street Address Line 1. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Street2" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Street Address Line 2. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="City" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> City. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StateProvince" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> State or Province. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostalCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Postal or ZIP Code. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="County" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> County. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountryCode" type="tns:TypeISOCountryCodeA3" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Country Code. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AddressInfo" type="tns:AddressInfo" nillable="true"/>
+	<xs:simpleType name="TypeISOCountryCodeA3">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Country code as defined by the International Standards Organization (ISO). </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AFG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AFG - AF - 004 - Afghanistan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ALA - AX - 248 - Åland Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ALB - AL - 008 - Albania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DZA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DZA - DZ - 012 - Algeria </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ASM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ASM - AS - 016 - American Samoa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AND - AD - 020 - Andorra </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AGO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AGO - AO - 024 - Angola </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AIA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AIA - AI - 660 - Anguilla </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ATA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATA - AQ - 010 - Antarctica </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ATG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATG - AG - 028 - Antigua and Barbuda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARG - AR - 032 - Argentina </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARM - AM - 051 - Armenia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ABW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ABW - AW - 533 - Aruba </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AUS - AU - 036 - Australia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AUT - AT - 040 - Austria </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AZE - AZ - 031 - Azerbaijan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BHS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BHS - BS - 044 - Bahamas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BHR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BHR - BH - 048 - Bahrain </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BGD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BGD - BD - 050 - Bangladesh </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BRB - BB - 052 - Barbados </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BLR - BY - 112 - Belarus </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BEL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BEL - BE - 056 - Belgium </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BLZ - BZ - 084 - Belize </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BEN - BJ - 204 - Benin </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BMU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BMU - BM - 060 - Bermuda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BTN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BTN - BT - 064 - Bhutan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BOL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BOL - BO - 068 - Bolivia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BIH - BA - 070 - Bosnia and Herzegovina </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BWA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BWA - BW - 072 - Botswana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BVT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BVT - BV - 074 - Bouvet Island </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BRA - BR - 076 - Brazil </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IOT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IOT - IO - 086 - British Indian Ocean Territory </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BRN - BN - 096 - Brunei Darussalam </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BGR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BGR - BG - 100 - Bulgaria </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BFA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BFA - BF - 854 - Burkina Faso </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BDI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BDI - BI - 108 - Burundi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KHM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KHM - KH - 116 - Cambodia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CMR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CMR - CM - 120 - Cameroon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAN - CA - 124 - Canada </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CPV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CPV - CV - 132 - Cape Verde </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CYM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CYM - KY - 136 - Cayman Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAF - CF - 140 - Central African Republic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TCD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TCD - TD - 148 - Chad </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHL - CL - 152 - Chile </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHN - CN - 156 - China </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CXR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CXR - CX - 162 - Christmas Island </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CCK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CCK - CC - 166 - Cocos (Keeling) Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COL - CO - 170 - Colombia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COM - KM - 174 - Comoros </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COG - CG - 178 - Congo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COD - CD - 180 - Congo, Democratic Republic of the </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COK - CK - 184 - Cook Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CRI - CR - 188 - Costa Rica </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CIV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CIV - CI - 384 - Côte d'Ivoire </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HRV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HRV - HR - 191 - Croatia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CUB - CU - 192 - Cuba </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CYP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CYP - CY - 196 - Cyprus </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CZE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CZE - CZ - 203 - Czech Republic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DNK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DNK - DK - 208 - Denmark </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DJI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DJI - DJ - 262 - Djibouti </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DMA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DMA - DM - 212 - Dominica </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DOM - DO - 214 - Dominican Republic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ECU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ECU - EC - 218 - Ecuador </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EGY - EG - 818 - Egypt </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLV - SV - 222 - El Salvador </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GNQ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GNQ - GQ - 226 - Equatorial Guinea </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ERI - ER - 232 - Eritrea </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EST">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EST - EE - 233 - Estonia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ETH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ETH - ET - 231 - Ethiopia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FLK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FLK - FK - 238 - Falkland Islands (Malvinas) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRO - FO - 234 - Faroe Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FJI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FJI - FJ - 242 - Fiji </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FIN - FI - 246 - Finland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FRA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FRA - FR - 250 - France </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FXX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FXX - FX - 249 - France, Metropolitan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GUF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GUF - GF - 254 - French Guiana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PYF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PYF - PF - 258 - French Polynesia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ATF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ATF - TF - 260 - French Southern Territories </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GAB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GAB - GA - 266 - Gabon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GMB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GMB - GM - 270 - Gambia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GEO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GEO - GE - 268 - Georgia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DEU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DEU - DE - 276 - Germany </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GHA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GHA - GH - 288 - Ghana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GIB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GIB - GI - 292 - Gibraltar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRC - GR - 300 - Greece </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRL - GL - 304 - Greenland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GRD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GRD - GD - 308 - Grenada </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GLP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GLP - GP - 312 - Guadeloupe </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GUM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GUM - GU - 316 - Guam </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GTM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GTM - GT - 320 - Guatemala </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GGY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GGY - GG - 831 - Guernsey </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GIN - GN - 324 - Guinea </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GNB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GNB - GW - 624 - Guinea-Bissau </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GUY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GUY - GY - 328 - Guyana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HTI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HTI - HT - 332 - Haiti </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HMD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HMD - HM - 334 - Heard Island and McDonald Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VAT - VA - 336 - Holy See (Vatican City State) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HND - HN - 340 - Honduras </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HKG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HKG - HK - 344 - Hong Kong </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HUN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HUN - HU - 348 - Hungary </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ISL - IS - 352 - Iceland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IND - IN - 356 - India </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IDN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IDN - ID - 360 - Indonesia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IRN - IR - 364 - Iran, Islamic Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRQ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IRQ - IQ - 368 - Iraq </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IRL - IE - 372 - Ireland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IMN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IMN - IM - 833 - Isle of Man </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ISR - IL - 376 - Israel </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ITA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ITA - IT - 380 - Italy </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JAM - JM - 388 - Jamaica </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JPN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JPN - JP - 392 - Japan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JEY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JEY - JE - 832 - Jersey </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JOR - JO - 400 - Jordan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KAZ - KZ - 398 - Kazakhstan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KEN - KE - 404 - Kenya </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KIR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KIR - KI - 296 - Kiribati </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PRK - KP - 408 - Korea, Democratic People's Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KOR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KOR - KR - 410 - Korea, Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KWT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KWT - KW - 414 - Kuwait </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KGZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KGZ - KG - 417 - Kyrgyzstan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LAO - LA - 418 - Lao People's Democratic Republic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LVA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LVA - LV - 428 - Latvia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LBN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LBN - LB - 422 - Lebanon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LSO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LSO - LS - 426 - Lesotho </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LBR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LBR - LR - 430 - Liberia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LBY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LBY - LY - 434 - Libyan Arab Jamahiriya </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LIE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LIE - LI - 438 - Liechtenstein </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LTU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LTU - LT - 440 - Lithuania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LUX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LUX - LU - 442 - Luxembourg </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAC - MO - 446 - Macao </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MKD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MKD - MK - 807 - Macedonia, the former Yugoslav Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MDG - MG - 450 - Madagascar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MWI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MWI - MW - 454 - Malawi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MYS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MYS - MY - 458 - Malaysia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MDV - MV - 462 - Maldives </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MLI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MLI - ML - 466 - Mali </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MLT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MLT - MT - 470 - Malta </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MHL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MHL - MH - 584 - Marshall Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MTQ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTQ - MQ - 474 - Martinique </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MRT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MRT - MR - 478 - Mauritania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MUS - MU - 480 - Mauritius </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MYT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MYT - YT - 175 - Mayotte </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MEX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MEX - MX - 484 - Mexico </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FSM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FSM - FM - 583 - Micronesia, Federated States of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MDA - MD - 498 - Moldova, Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MCO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MCO - MC - 492 - Monaco </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MNG - MN - 496 - Mongolia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MNE - ME - 499 - Montenegro </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MSR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MSR - MS - 500 - Montserrat </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAR - MA - 504 - Morocco </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MOZ - MZ - 508 - Mozambique </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MMR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MMR - MM - 104 - Myanmar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NAM - NA - 516 - Namibia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NRU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NRU - NR - 520 - Nauru </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NPL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NPL - NP - 524 - Nepal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NLD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NLD - NL - 528 - Netherlands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ANT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ANT - AN - 530 - Netherlands Antilles </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NCL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NCL - NC - 540 - New Caledonia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NZL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NZL - NZ - 554 - New Zealand </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NIC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NIC - NI - 558 - Nicaragua </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NER">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NER - NE - 562 - Niger </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NGA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NGA - NG - 566 - Nigeria </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NIU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NIU - NU - 570 - Niue </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NFK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NFK - NF - 574 - Norfolk Island </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MNP - MP - 580 - Northern Mariana Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NOR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NOR - NO - 578 - Norway </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OMN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OMN - OM - 512 - Oman </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAK - PK - 586 - Pakistan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PLW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PLW - PW - 585 - Palau </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PSE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PSE - PS - 275 - Palestinian Territory, Occupied </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAN - PA - 591 - Panama </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PNG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PNG - PG - 598 - Papua New Guinea </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PRY - PY - 600 - Paraguay </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PER">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PER - PE - 604 - Peru </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PHL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PHL - PH - 608 - Philippines </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PCN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PCN - PN - 612 - Pitcairn </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="POL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> POL - PL - 616 - Poland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PRT - PT - 620 - Portugal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PRI - PR - 630 - Puerto Rico </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QAT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> QAT - QA - 634 - Qatar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> REU - RE - 638 - Réunion </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ROU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ROU - RO - 642 - Romania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RUS - RU - 643 - Russian Federation </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RWA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RWA - RW - 646 - Rwanda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SHN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SHN - SH - 654 - Saint Helena </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KNA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KNA - KN - 659 - Saint Kitts and Nevis </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LCA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LCA - LC - 662 - Saint Lucia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SPM - PM - 666 - Saint Pierre and Miquelon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VCT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VCT - VC - 670 - Saint Vincent and the Grenadines </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WSM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WSM - WS - 882 - Samoa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SMR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SMR - SM - 674 - San Marino </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> STP - ST - 678 - Sao Tome and Principe </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAU - SA - 682 - Saudi Arabia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SEN - SN - 686 - Senegal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SRB - RS - 688 - Serbia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SCG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SCG - CS - 891 - Serbia and Montenegro </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SYC - SC - 690 - Seychelles </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLE - SL - 694 - Sierra Leone </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SGP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SGP - SG - 702 - Singapore </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SVK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SVK - SK - 703 - Slovakia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SVN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SVN - SI - 705 - Slovenia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLB - SB - 090 - Solomon Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SOM - SO - 706 - Somalia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZAF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZAF - ZA - 710 - South Africa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SGS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SGS - GS - 239 - South Georgia and the South Sandwich Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ESP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ESP - ES - 724 - Spain </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LKA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LKA - LK - 144 - Sri Lanka </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SDN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SDN - SD - 736 - Sudan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SUR - SR - 740 - Suriname </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SJM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SJM - SJ - 744 - Svalbard and Jan Mayen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SWZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SWZ - SZ - 748 - Swaziland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SWE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SWE - SE - 752 - Sweden </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHE - CH - 756 - Switzerland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SYR - SY - 760 - Syrian Arab Republic </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TWN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TWN - TW - 158 - Taiwan, Province of China </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TJK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TJK - TJ - 762 - Tajikistan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TZA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TZA - TZ - 834 - Tanzania, United Republic of </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="THA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> THA - TH - 764 - Thailand </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TLS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TLS - TL - 626 - Timor-Leste </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TGO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TGO - TG - 768 - Togo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TKL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TKL - TK - 772 - Tokelau </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TMP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TMP - TP - 626 - East Timor </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TON - TO - 776 - Tonga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TTO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TTO - TT - 780 - Trinidad and Tobago </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUN - TN - 788 - Tunisia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUR - TR - 792 - Turkey </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TKM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TKM - TM - 795 - Turkmenistan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TCA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TCA - TC - 796 - Turks and Caicos Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TUV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TUV - TV - 798 - Tuvalu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UGA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UGA - UG - 800 - Uganda </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UKR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UKR - UA - 804 - Ukraine </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARE - AE - 784 - United Arab Emirates </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GBR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GBR - GB - 826 - United Kingdom </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> USA - US - 840 - United States </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UMI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UMI - UM - 581 - United States Minor Outlying Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="URY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> URY - UY - 858 - Uruguay </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UZB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UZB - UZ - 860 - Uzbekistan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VUT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VUT - VU - 548 - Vanuatu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VEN - VE - 862 - Venezuela </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VNM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VNM - VN - 704 - Viet Nam </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VGB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VGB - VG - 092 - Virgin Islands, British </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VIR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VIR - VI - 850 - Virgin Islands, U.S. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WLF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WLF - WF - 876 - Wallis and Futuna </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ESH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ESH - EH - 732 - Western Sahara </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YEM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YEM - YE - 887 - Yemen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YUG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YUG - YU - 891 - Yugoslavia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZMB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZMB - ZM - 894 - Zambia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZWE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZWE - ZW - 716 - Zimbabwe </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TypeISOCountryCodeA3" type="tns:TypeISOCountryCodeA3" nillable="true"/>
+	<xs:complexType name="PersonalInfo">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains a customer's sensitive personal information. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Company" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Company name. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateOfBirth" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The customer's date of birth. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DriversLicense" type="tns:DriversLicense" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The customer's driver's license information. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EmployeeIdNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Employee identification number, which can be used as an alternate form of identification. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Gender" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The customer's gender. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GovernmentIdNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Government issued identification number, which can be used as an alternate form of identification. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MilitaryIdNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Military issued identification number, which can be used as an alternate form of identification. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SocialSecurityNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The customer's social security number. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TaxId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The customer's federal tax identifier. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="PersonalInfo" type="tns:PersonalInfo" nillable="true"/>
+	<xs:complexType name="DriversLicense">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains driver's license information for the customer. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Number" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Driver's license number. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="State" type="tns:TypeStateProvince" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> State or Province of issue of customer's drivers license. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Track1" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Track 1 data read off of the driver's license magnetic stripe. Should not include the sentinels and LRC. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Track2" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Track 2 data read off of the driver's license magnetic stripe. Should not include the sentinels and LRC. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DriversLicense" type="tns:DriversLicense" nillable="true"/>
+	<xs:simpleType name="TypeStateProvince">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> State or Province. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Alabama </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Alaska </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> American Samoa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Arizona </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Arkansas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> California </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Colorado </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Connecticut </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Delaware </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> District Of Columbia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Federated States Of Micronesia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Florida </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Georgia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Guam </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Hawaii </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ID">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Idaho </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Illinois </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Indiana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Iowa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Kansas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Kentucky </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Louisiana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ME">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Maine </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Marshall Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Maryland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Massachusetts </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Michigan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Minnesota </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Mississippi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Missouri </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Montana </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Nebraska </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Nevada </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New Hampshire </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NJ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New Jersey </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New Mexico </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New York </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> North Carolina </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> North Dakota </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Northern Mariana Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Ohio </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Oklahoma </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Oregon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Palau </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Pennsylvania </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Puerto Rico </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Rhode Island </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> South Carolina </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> South Dakota </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Tennessee </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Texas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Utah </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Vermont </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Virgin Islands </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Virginia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Washington </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> West Virginia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Wisconsin </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Wyoming </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Armed Forces Americas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Armed Forces </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Armed Forces Pacific </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Alberta </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> British Columbia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Manitoba </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> New Brunswick </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Newfoundland </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Northwest Territories </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Nova Scotia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Nunavut </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Ontario </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Prince Edward Island </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Quebec </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Saskatchewan </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Yukon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TypeStateProvince" type="tns:TypeStateProvince" nillable="true"/>
+	<xs:complexType name="TransactionReportingData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains additional transaction data to be printed on reports. Conditional, allowed by some Service Providers. If this value is set on the transaction and not allowed by the Service Provider, the data will not be present on the transaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Comment" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Comment about the transaction. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction description. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Reference" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Merchant or customer reference field that is used for tracking or reporting purposes. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TransactionReportingData" type="tns:TransactionReportingData" nillable="true"/>
+	<xs:complexType name="TransactionTenderData">
+		<xs:sequence>
+			<xs:element name="PaymentAccountDataToken" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Token specified by offsite cardholder data storage Service Providers to retrieve stored payment account data. Optional, may be used in place of detailed tender data. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SecurePaymentAccountData" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Data collected from a magnetic stripe and protected by an encrypting card reader. Track 2 data must be provided. Conditional, at least one of CardData, PaymentAccountDataToken or SecurePaymentAccountData must be provided. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EncryptionKeyId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the identifier for the encryption key used for card data encryption, such as the key serial number for DUK/PT encryption. Conditional, required if SecurePaymentAccountData is used. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SwipeStatus" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the status of the card swipe as returned by the card reader. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DeviceSerialNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the serial number located on the physical device used to acquire payment account data. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TransactionTenderData" type="tns:TransactionTenderData" nillable="true"/>
+	<xs:simpleType name="CVDataProvided">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates whether or not CV data provided. Recommended for card not present authorizations, not used in settlement. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DeliberatelyBypass">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Deliberately bypass. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Provided">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Provided. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ValueIllegible">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value illegible. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CardholderStatesNotAvailable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Cardholder states not available. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CVDataProvided" type="tns:CVDataProvided" nillable="true"/>
+	<xs:complexType name="TransactionData">
+		<xs:sequence>
+			<xs:element name="Amount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Authorization amount of the transaction. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CurrencyCode" type="tns:TypeISOCurrencyCodeA3" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction currency code as defined by the International Standards Organization (ISO). Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionDateTime" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The local date and time of the transaction as calculated by the merchant and printed on the customer receipt. This field should contain a timezone offset representing the timezone in which the transaction is taking place. Optional, but highly recommended. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CampaignId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the identifier associated with a campaign-enabled Commerce Playlist, such as Multi-Party Payments (MPP). Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Reference" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies user or customer reference data that is used for tracking or reporting purposes that may be echoed back in the response. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TransactionData" type="tns:TransactionData" nillable="true"/>
+	<xs:simpleType name="TypeISOCurrencyCodeA3">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Currency code as defined by the International Standards Organization (ISO). </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AFN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AFN - 971 - Afghani </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ALL - 008 - Lek </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DZD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DZD - 012 - Algerian Dinar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> USD - 840 - US Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EUR - 978 - Euro </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AOA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AOA - 973 - Kwanza </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XCD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XCD - 951 - East Caribbean Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ARS - 032 - Argentine Peso </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AMD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AMD - 051 - Armenian Dram </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AWG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AWG - 533 - Aruban Guilder </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AUD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AUD - 036 - Australian Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AZN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AZN - 944 - Azerbaijanian Manat </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BSD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BSD - 044 - Bahamian Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BHD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BHD - 048 - Bahraini Dinar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BDT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BDT - 050 - Taka </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BBD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BBD - 052 - Barbados Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BYR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BYR - 974 - Belarussian Ruble </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BZD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BZD - 084 - Belize Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BMD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BMD - 060 - Bermudian Dollar (customarily known as Bermuda Dollar) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BTN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BTN - 064 - Ngultrum </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BOB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BOB - 068 - Boliviano </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BOV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BOV - 984 - Mvdol </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BAM - 977 - Convertible Marks </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BWP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BWP - 072 - Pula </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BRL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BRL - 986 - Brazilian Real </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BND - 096 - Brunei Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BGN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BGN - 975 - Bulgarian Lev </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XOF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XOF - 952 - CFA Franc BCEAO </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BIF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BIF - 108 - Burundi Franc </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KHR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KHR - 116 - Riel </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CAD - 124 - Canadian Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CVE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CVE - 132 - Cape Verde Escudo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KYD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KYD - 136 - Cayman Islands Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CLP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CLP - 152 - Chilean Peso </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CLF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CLF - 990 - Unidades de fomento </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CNY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CNY - 156 - Yuan Renminbi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COP - 170 - Colombian Peso </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="COU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> COU - 970 - Unidad de Valor Real </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KMF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KMF - 174 - Comoro Franc </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XAF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XAF - 950 - CFA Franc BEAC </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CDF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CDF - 976 - Franc Congolais </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CRC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CRC - 188 - Costa Rican Colon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HRK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HRK - 191 - Croatian Kuna </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CUP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CUP - 192 - Cuban Peso </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CYP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CYP - 196 - Cyprus Pound </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CZK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CZK - 203 - Czech Koruna </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DKK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DKK - 208 - Danish Krone </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DJF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DJF - 262 - Djibouti Franc </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DOP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> DOP - 214 - Dominican Peso </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EGP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EGP - 818 - Egyptian Pound </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SVC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SVC - 222 - El Salvador Colon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ERN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ERN - 232 - Nakfa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EEK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> EEK - 233 - Kroon </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ETB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ETB - 230 - Ethiopian Birr </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FKP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FKP - 238 - Falkland Islands Pound </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FJD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> FJD - 242 - Fiji Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GMD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GMD - 270 - Dalasi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GEL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GEL - 981 - Lari </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GHS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GHS - 936 - Ghana Cedi </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GIP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GIP - 292 - Gibraltar Pound </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GTQ">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GTQ - 320 - Quetzal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GNF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GNF - 324 - Guinea Franc </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GWP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GWP - 624 - Guinea-Bissau Peso </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GYD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GYD - 328 - Guyana Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HTG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HTG - 332 - Gourde </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HNL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HNL - 340 - Lempira </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HKD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HKD - 344 - Hong Kong Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HUF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> HUF - 348 - Forint </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ISK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ISK - 352 - Iceland Krona </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> INR - 356 - Indian Rupee </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IDR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IDR - 360 - Rupiah </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XDR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XDR - 960 - SDR - International Monetary Fund (IMF) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IRR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IRR - 364 - Iranian Rial </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IQD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> IQD - 368 - Iraqi Dinar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ILS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ILS - 376 - New Israeli Sheqel </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JMD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JMD - 388 - Jamaican Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JPY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JPY - 392 - Yen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="JOD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> JOD - 400 - Jordanian Dinar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KZT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KZT - 398 - Tenge </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KES">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KES - 404 - Kenyan Shilling </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KPW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KPW - 408 - North Korean Won </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KRW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KRW - 410 - Won </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KWD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KWD - 414 - Kuwaiti Dinar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KGS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> KGS - 417 - Som </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LAK - 418 - Kip </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LVL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LVL - 428 - Latvian Lats </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LBP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LBP - 422 - Lebanese Pound </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LSL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LSL - 426 - Loti </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LRD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LRD - 430 - Liberian Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LYD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LYD - 434 - Libyan Dinar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LTL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LTL - 440 - Lithuanian Litas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MOP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MOP - 446 - Pataca </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MKD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MKD - 807 - Denar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MGA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MGA - 969 - Malagasy Ariary </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MWK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MWK - 454 - Kwacha </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MYR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MYR - 458 - Malaysian Ringgit </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MVR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MVR - 462 - Rufiyaa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MTL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MTL - 470 - Maltese Lira </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MRO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MRO - 478 - Ouguiya </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MUR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MUR - 480 - Mauritius Rupee </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MXN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MXN - 484 - Mexican Peso </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MXV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MXV - 979 - Mexican Unidad de Inversion (UDI) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MDL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MDL - 498 - Moldovan Leu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MNT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MNT - 496 - Tugrik </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MAD - 504 - Moroccan Dirham </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MZN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MZN - 943 - Metical </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MMK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MMK - 104 - Kyat </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NAD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NAD - 516 - Namibia Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NPR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NPR - 524 - Nepalese Rupee </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ANG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ANG - 532 - Netherlands Antillian Guilder </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XPF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XPF - 953 - CFP Franc </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NZD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NZD - 554 - New Zealand Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NIO">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NIO - 558 - Cordoba Oro </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NGN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NGN - 566 - Naira </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NOK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NOK - 578 - Norwegian Krone </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OMR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OMR - 512 - Rial Omani </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PKR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PKR - 586 - Pakistan Rupee </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PAB - 590 - Balboa </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PGK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PGK - 598 - Kina </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PYG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PYG - 600 - Guarani </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PEN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PEN - 604 - Nuevo Sol </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PHP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PHP - 608 - Philippine Peso </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PLN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PLN - 985 - Zloty </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> QAR - 634 - Qatari Rial </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RON">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RON - 946 - New Leu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RUB - 643 - Russian Ruble </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RWF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RWF - 646 - Rwanda Franc </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SHP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SHP - 654 - Saint Helena Pound </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WST">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> WST - 882 - Tala </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> STD - 678 - Dobra </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SAR - 682 - Saudi Riyal </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RSD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RSD - 941 - Serbian Dinar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SCR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SCR - 690 - Seychelles Rupee </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SLL - 694 - Leone </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SGD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SGD - 702 - Singapore Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SKK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SKK - 703 - Slovak Koruna </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SBD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SBD - 090 - Solomon Islands Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SOS - 706 - Somali Shilling </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZAR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZAR - 710 - Rand </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LKR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> LKR - 144 - Sri Lanka Rupee </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SDG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SDG - 938 - Sudanese Pound </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SRD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SRD - 968 - Surinam Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SZL">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SZL - 748 - Lilangeni </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SEK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SEK - 752 - Swedish Krona </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHF - 756 - Swiss Franc </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHW">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHW - 948 - WIR Franc </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CHE">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> CHE - 947 - WIR Euro </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> SYP - 760 - Syrian Pound </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TWD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TWD - 901 - New Taiwan Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TJS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TJS - 972 - Somoni </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TZS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TZS - 834 - Tanzanian Shilling </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="THB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> THB - 764 - Baht </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TOP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TOP - 776 - Pa'anga </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TTD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TTD - 780 - Trinidad and Tobago Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TND - 788 - Tunisian Dinar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TRY">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TRY - 949 - New Turkish Lira </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TMM">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> TMM - 795 - Manat </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UGX">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UGX - 800 - Uganda Shilling </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UAH">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UAH - 980 - Hryvnia </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AED">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> AED - 784 - UAE Dirham </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GBP">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> GBP - 826 - Pound Sterling </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> USS - 998 - US Dollar(Same day) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> USN - 997 - US Dollar(Next day) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UYU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UYU - 858 - Peso Uruguayo </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UYI">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UYI - 940 - Uruguay Peso en Unidades Indexadas </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UZS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> UZS - 860 - Uzbekistan Sum </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VUV">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VUV - 548 - Vatu </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VEF">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VEF - 937 - Bolivar Fuerte </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VND - 704 - Dong </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="YER">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> YER - 886 - Yemeni Rial </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZMK">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZMK - 894 - Kwacha </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZWD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> ZWD - 716 - Zimbabwe Dollar </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XBA">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XBA - 955 - Bond Markets Units European Composite Unit (EURCO) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XBB">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XBB - 956 - European Monetary Unit (E.M.U.-6) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XBC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XBC - 957 - European Unit of Account 9(E.U.A.-9) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XBD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XBD - 958 - European Unit of Account 17(E.U.A.-17) </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XPD">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XPD - 964 - Palladium </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XPT">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XPT - 962 - Platinum </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XAG">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XAG - 961 - Silver </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XAU">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> XAU - 959 - Gold </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TypeISOCurrencyCodeA3" type="tns:TypeISOCurrencyCodeA3" nillable="true"/>
+	<xs:complexType name="PINlessDebitData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Collection of transaction details related to PINless Debit cards. Conditional, optional when processing a recurring or installment MOTO or Ecommerce transaction with a PIN Debit card without entering a PIN. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BillPayServiceData" type="tns:BillPayServiceData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the bill payment service name and address for PINless Debit bill payment. Conditional, required if different from merchant name and address. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PayeeData" type="tns:PayeeData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the payee information for PINless Debit bill payment. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="PINlessDebitData" type="tns:PINlessDebitData" nillable="true"/>
+	<xs:complexType name="BillPayServiceData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the bill payment service name and address for PINless Debit bill payment. Conditional, required if different from merchant name and address. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CompanyName" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Name of the bill payment service. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CompanyAddress" type="tns:AddressInfo" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Address of the bill payment service. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BillPayServiceData" type="tns:BillPayServiceData" nillable="true"/>
+	<xs:complexType name="PayeeData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the payee information for PINless Debit bill payment. Conditional, required if transaction is PINless Debit. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CompanyName" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Name of the company receiving payment. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Phone" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Phone number of the company receiving payment. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccountNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Customer account number with company receiving payment. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="PayeeData" type="tns:PayeeData" nillable="true"/>
+	<xs:simpleType name="EntryMode">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates how the cardholder data was retrieved. When authorizing with stored card data, either locally or with CardDataToken, indicate that the card data was manually collected (keyed or one of its variants). </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Keyed">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Keyed. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KeyedBadMagRead">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Keyed after bad magnetic stripe read. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TrackDataFromMSR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Track data read from MSR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ChipReliable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Chip, reliable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ChipUnreliable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Chip, unreliable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ContactlessMChipOrSmartCard">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Contactless M/Chip or smart card. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ContactlessStripe">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Contactless stripe. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TerminalNotUsed">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Terminal not used. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BarCode">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Bar code. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OCRReader">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> OCR reader. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VSCCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> VSC capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ChipTrackDataFromRFID">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Chip track data read from RFID. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MSRTrackDataFromRFID">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> MSR track data read from RFID. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NFCCapable">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NFC capable. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Track2DataFromMSR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Track data read from MSR. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="EntryMode" type="tns:EntryMode" nillable="true"/>
+	<xs:complexType name="AlternativeMerchantData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies alternative merchant data that appears on accountholder statements. Subject to Issuer discretion. Conditional, optional when supported by service. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CustomerServiceInternet" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies an alternative customer service web URL or Email address. Conditional, required for Ecommerce transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomerServicePhone" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies an alternative customer service phone number. Conditional, required for MOTO transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies a description of the product or service purchased that is recognizable to the accountholder. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SIC" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the Standard Industry Code or Merchant Category Code that identifies the alternative merchant industry classification. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Address" type="tns:AddressInfo" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies alternative merchant address information. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MerchantId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies an alternative merchant location ID or vendor code. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies an alternative merchant name or DBA name. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AlternativeMerchantData" type="tns:AlternativeMerchantData" nillable="true"/>
+	<xs:complexType name="ArrayOfCaptureState">
+		<xs:sequence>
+			<xs:element name="CaptureState" type="tns:CaptureState" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfCaptureState" type="tns:ArrayOfCaptureState" nillable="true"/>
+	<xs:complexType name="ArrayOfTransactionState">
+		<xs:sequence>
+			<xs:element name="TransactionState" type="tns:TransactionState" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfTransactionState" type="tns:ArrayOfTransactionState" nillable="true"/>
+</xs:schema>

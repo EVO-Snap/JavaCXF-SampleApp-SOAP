@@ -1,0 +1,1461 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:q1="http://schemas.evosnap.com/CWS/v2.0/ServiceInformation" xmlns:q2="http://schemas.evosnap.com/CWS/v2.0/ServiceInformation" xmlns:q3="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q4="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q5="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q6="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q7="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q8="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q9="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q10="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q11="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q12="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q13="http://schemas.evosnap.com/CWS/v2.0/Transactions/ElectronicChecking" xmlns:q14="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q15="http://schemas.evosnap.com/CWS/v2.0/Transactions/StoredValue" xmlns:q16="http://schemas.evosnap.com/CWS/v2.0/DataServices" xmlns:q17="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q18="http://schemas.evosnap.com/CWS/v2.0/DataServices" xmlns:q19="http://schemas.evosnap.com/CWS/v2.0/DataServices" xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q24="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q25="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q26="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q28="http://schemas.evosnap.com/CWS/v2.0/DataServices" xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q32="http://schemas.evosnap.com/CWS/v2.0/DataServices" xmlns:q33="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q34="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q35="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q36="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q37="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q38="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q39="http://schemas.evosnap.com/CWS/v2.0/DataServices" xmlns:q40="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q41="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q42="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q43="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q44="http://schemas.evosnap.com/CWS/v2.0/DataServices" xmlns:q45="http://schemas.evosnap.com/CWS/v2.0/DataServices" xmlns:q46="http://schemas.evosnap.com/CWS/v2.0/DataServices" xmlns:q47="http://schemas.evosnap.com/CWS/v2.0/DataServices" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/ServiceInformation" schemaLocation="schemas.evosnap.com_CWS_v2.0_ServiceInformation.xsd"/>
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions" schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions.xsd"/>
+	<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="schemas.microsoft.com_2003_10_Serialization.xsd"/>
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions_Bankcard.xsd"/>
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/ElectronicChecking" schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions_ElectronicChecking.xsd"/>
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/StoredValue" schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions_StoredValue.xsd"/>
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/DataServices" schemaLocation="schemas.evosnap.com_CWS_v2.0_DataServices.xsd"/>
+	<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" schemaLocation="schemas.microsoft.com_2003_10_Serialization_Arrays.xsd"/>
+	<xs:complexType name="ElectronicCheckingRejectedSummaryResponse" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Summary Electronic Checking reponse to QueryRejectedSummary. Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:QueryResponse">
+				<xs:sequence>
+					<xs:element name="Summary" type="tns:RejectedSummary" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Summary data about the rejected transactions. Expected. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Transactions" type="tns:ArrayOfSummaryDetail" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Collection of summary details for each rejected transaction. Expected. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckingRejectedSummaryResponse" type="tns:ElectronicCheckingRejectedSummaryResponse" nillable="true"/>
+	<xs:complexType name="QueryResponse">
+		<xs:sequence>
+			<xs:element name="StatusCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Status code returned from the service. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StatusMessage" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Verbose message describing the status of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="QueryResponse" type="tns:QueryResponse" nillable="true"/>
+	<xs:complexType name="ElectronicCheckingRejectedDetailResponse" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="tns:QueryResponse">
+				<xs:sequence>
+					<xs:element name="Summary" type="tns:RejectedSummary" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Summary data about the rejected transactions. Expected. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Transactions" type="tns:ArrayOfTransactionDetail" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Collection of transaction details for each rejected transaction. Expected. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckingRejectedDetailResponse" type="tns:ElectronicCheckingRejectedDetailResponse" nillable="true"/>
+	<xs:complexType name="RejectedSummary">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Summary information about the rejected transactions. Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CreditTransactionCount" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The total count of rejected Credit transactions. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CreditTransactionTotal" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The total count of rejected Debit transactions. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DebitTransactionCount" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The total dollar amount for rejected Credit transactions. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DebitTransactionTotal" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The total dollar amount for rejected Debit transactions. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RejectedSummary" type="tns:RejectedSummary" nillable="true"/>
+	<xs:complexType name="ArrayOfTransactionDetail">
+		<xs:sequence>
+			<xs:element name="TransactionDetail" type="tns:TransactionDetail" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfTransactionDetail" type="tns:ArrayOfTransactionDetail" nillable="true"/>
+	<xs:complexType name="TransactionDetail">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains detailed transaction data. Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CompleteTransaction" type="tns:CompleteTransaction" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The entire transaction in CWS or serialized XML format. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FamilyInformation" type="tns:FamilyInformation" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Information about the transaction relative to related transactions. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionInformation" type="tns:TransactionInformation" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> High-level information about the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TransactionDetail" type="tns:TransactionDetail" nillable="true"/>
+	<xs:complexType name="CompleteTransaction">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> The complete transaction, either in CWS format or serialized XML. Conditional, included if querying transaction detail. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CWSTransaction" type="tns:CWSTransaction" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The complete transaction using the CWS object model. Conditional, included if transactionDetailFormat is CWSTransaction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SerializedTransaction" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The complete transaction as serialized XML. Conditional, included if transactionDetailFormat is CWSSerializedTransaction. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CompleteTransaction" type="tns:CompleteTransaction" nillable="true"/>
+	<xs:complexType name="CWSTransaction">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> The complete transaction using the CWS object model. Conditional, included if transactionDetailFormat is CWSTransaction. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ApplicationData" type="q1:ApplicationData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Application data used for the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MerchantProfileMerchantData" type="q2:MerchantProfileMerchantData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Merchant profile data used for the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MetaData" type="tns:TransactionMetaData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction details not represented in CWS object model. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Response" type="q3:Response" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction response details. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Transaction" type="q4:Transaction" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction request details. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CWSTransaction" type="tns:CWSTransaction" nillable="true"/>
+	<xs:complexType name="TransactionMetaData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains transaction details not represented in the CWS object model. Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Amount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The transaction amount. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CardType" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The card type used for the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MaskedPAN" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The cardholder's PAN in masked format. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SequenceNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Sequence number of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Id of the service used for the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionClassTypePair" type="tns:TransactionClassTypePair" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Transaction class and type of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionDateTime" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The date and time the transaction was submitted, in UTC. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Transaction Id of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionState" type="q5:TransactionState" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the current state of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WorkflowId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Identifies the workflow used for the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TransactionMetaData" type="tns:TransactionMetaData" nillable="true"/>
+	<xs:complexType name="TransactionClassTypePair">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Defines a contract for an expected pairing of transaction class and transaction type. Optional on request, expected on response. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TransactionClass" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Transaction Class. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionType" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Transaction Type. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TransactionClassTypePair" type="tns:TransactionClassTypePair" nillable="true"/>
+	<xs:complexType name="FamilyInformation">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains summary information for the family of transactions. Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FamilyId" type="ser:guid" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The ID of the transaction family. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FamilySequenceCount" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The total number of transactions in the family. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FamilySequenceNumber" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The position of this transaction in the family sequence. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FamilyState" type="q6:TransactionState" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The current state of the family, defined as the state of the last transaction in the family. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NetAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The net amount value for the transaction family. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="FamilyInformation" type="tns:FamilyInformation" nillable="true"/>
+	<xs:complexType name="TransactionInformation">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains detailed transaction data for a single transaction. Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Amount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The transaction Amount. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ApprovalCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The transaction ApprovalCode. Expected on transaction types that return an ApprovalCode. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BankcardData" type="tns:BankcardData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction information specific to Bankcard transactions. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BatchId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The BatchId of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CaptureDateTime" type="xs:dateTime" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The date and time the transaction was captured, in UTC. Expected on successfully captured transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CaptureState" type="q7:CaptureState" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The capture state of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CaptureStatusMessage" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The capture status message returned from the service provider. Expected if the service provider suppports partial approved batches. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CapturedAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The captured amount of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomerId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The CustomerId specified by the merchant on the transaction request. Expected when CustomerId was specified. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ElectronicCheckData" type="tns:ElectronicCheckData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction information specific to Electronic Checking transactions. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsAcknowledged" type="tns:BooleanParameter" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Whether transaction was acknowledged. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MaskedPAN" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The cardholder's PAN in masked format. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MerchantProfileId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The MerchantProfileId used for the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OriginatorTransactionId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The OriginatorTransactionId of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Reference" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies user or customer reference data echoed from the request. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The ID of the service used for the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceKey" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The ServiceKey used for the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceTransactionId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The ServiceTransactionId of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="q8:Status" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Approval or decline status of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StoredValueData" type="tns:StoredValueData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction information specific to Stored Value transactions. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionClassTypePair" type="tns:TransactionClassTypePair" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Transaction Class and Type of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The TransactionID of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionState" type="q9:TransactionState" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the current state of the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionStatusCode" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The StatusCode returned from the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionTimestamp" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The timestamp of the transaction, in UTC. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TransactionInformation" type="tns:TransactionInformation" nillable="true"/>
+	<xs:complexType name="BankcardData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Transaction information specific to Bankcard transactions. Conditional, included if the query includes Bankcard transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AVSResult" type="q10:AVSResult" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of elements that indicate the result of AVS returned by the Service Provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CVResult" type="q11:CVResult" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Response code returned by the card issuer indicating the result of Card Verification (CVV2/CVC2/CID) returned by the Service Provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CardType" type="q12:TypeCardType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Type of card used in the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MaskedPAN" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The cardholder's PAN in masked format. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrderId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The order id generated by CWS. This value is often used by Service Providers for transaction correlation. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BankcardData" type="tns:BankcardData" nillable="true"/>
+	<xs:complexType name="ElectronicCheckData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Transaction information specific to Electronic Checking transactions. Conditional, included if query results include Electronic Checking transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CheckNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The check number as printed on the check. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MaskedAccountNumber" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Masked account number from the check. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionType" type="q13:TransactionType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the transaction type; either Credit or Debit. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckData" type="tns:ElectronicCheckData" nillable="true"/>
+	<xs:simpleType name="BooleanParameter">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Enumeration to allow nullable booleans. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="True">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> True. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="False">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> False. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="BooleanParameter" type="tns:BooleanParameter" nillable="true"/>
+	<xs:complexType name="StoredValueData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Transaction information specific to Stored Value transactions. Conditional, included if the query includes Bankcard transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CVResult" type="q14:CVResult" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Response code returned by the card issuer indicating the result of Card Verification (CVV2/CVC2/CID) returned by the Service Provider. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CardRestrictionValue" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the gift card restriction value assigned to a specific card. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CardStatus" type="q15:CardStatus" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the status of the card if one is present. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NewBalance" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The account balance after the transaction. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrderId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The order id generated by CWS. This value is often used by Service Providers for transaction correlation. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PreviousBalance" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The account balance prior to the transaction. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="StoredValueData" type="tns:StoredValueData" nillable="true"/>
+	<xs:complexType name="ArrayOfSummaryDetail">
+		<xs:sequence>
+			<xs:element name="SummaryDetail" type="tns:SummaryDetail" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfSummaryDetail" type="tns:ArrayOfSummaryDetail" nillable="true"/>
+	<xs:complexType name="SummaryDetail">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains transaction summary information. Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FamilyInformation" type="tns:FamilyInformation" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Information about the transaction relative to related transactions. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionInformation" type="tns:TransactionInformation" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> High-level information about the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SummaryDetail" type="tns:SummaryDetail" nillable="true"/>
+	<xs:complexType name="ElectronicCheckQueryRejectedParameters" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Electronic Checking specific query parameters for QueryRejectedDetail and QueryRejectedSummary. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:QueryRejectedParameters">
+				<xs:sequence>
+					<xs:element name="QueryDateRange" type="q16:DateRange" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Date range for the transactions. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="QueryDateType" type="tns:TypeDateType" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates if the date range should query SubmitDate or ReturnDate. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ServiceId" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specific service Id for the Service Provider supporting QueryRejectedDetail and QueryRejectedSummary. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ElectronicCheckQueryRejectedParameters" type="tns:ElectronicCheckQueryRejectedParameters" nillable="true"/>
+	<xs:complexType name="QueryRejectedParameters">
+		<xs:sequence>
+			<xs:element name="Addendum" type="q17:Addendum" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> May be used for managed Query Request Addenda, or unmanaged addenda. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="QueryRejectedParameters" type="tns:QueryRejectedParameters" nillable="true"/>
+	<xs:simpleType name="TypeDateType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates if the date range should query SubmitDate or ReturnDate. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SubmitDate">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Submit Date. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ReturnDate">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Return Date. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LastUpdatedDate">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Last Updated Date. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TypeDateType" type="tns:TypeDateType" nillable="true"/>
+	<xs:element name="QueryBatch">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="queryBatchParameters" type="tns:QueryBatchParameters" nillable="true" minOccurs="0"/>
+				<xs:element name="pagingParameters" type="q18:PagingParameters" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="QueryBatchParameters">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> The filter criteria used to perform transaction batch queries. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BatchDateRange" type="q19:DateRange" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The date range (StartDate and EndDate) of the batch to query. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BatchIds" type="q20:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific BatchId values to query. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MerchantProfileIds" type="q21:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific MerchantProfileId values to query. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceKeys" type="q22:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific ServiceKey values to query. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionIds" type="q23:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific TransactionId values to query. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="QueryBatchParameters" type="tns:QueryBatchParameters" nillable="true"/>
+	<xs:element name="QueryBatchResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="QueryBatchResult" type="tns:ArrayOfBatchDetailData" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ArrayOfBatchDetailData">
+		<xs:sequence>
+			<xs:element name="BatchDetailData" type="tns:BatchDetailData" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfBatchDetailData" type="tns:ArrayOfBatchDetailData" nillable="true"/>
+	<xs:complexType name="BatchDetailData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Detailed data regarding the batch. Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BatchCaptureDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The capture date of the batch, in UTC. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BatchId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The ID of the batch. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BatchSummaryData" type="q24:TransactionSummaryData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Summary data about the transactions in the batch. Deprecated - see SummaryData </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CaptureState" type="q25:CaptureState" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Determines the capture state of the batch. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The batch description. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SummaryData" type="q26:SummaryData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Summary data about the transactions in the batch. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionIds" type="q27:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The IDs of all the transactions within the batch. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BatchDetailData" type="tns:BatchDetailData" nillable="true"/>
+	<xs:element name="QueryTransactionFamilies">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="queryTransactionsParameters" type="tns:QueryTransactionsParameters" nillable="true" minOccurs="0"/>
+				<xs:element name="pagingParameters" type="q28:PagingParameters" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="QueryTransactionsParameters">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Provides parameters used to filter a transaction query. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Amounts" type="q29:ArrayOfdecimal" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific transaction Amount values from transaction requests. This will match the Amount authorized, returned, adjusted by, or captured. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ApprovalCodes" type="q30:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific ApprovalCode values from transaction responses. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BatchIds" type="q31:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific BatchId values from transaction responses. Optional. </summary>
+						<value>The batch ids.</value>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CaptureDateRange" type="q32:DateRange" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Range of transaction capture dates. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CaptureStates" type="q33:ArrayOfCaptureState" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of capture states. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CardTypes" type="q34:ArrayOfTypeCardType" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific CardType values from transaction requests. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsAcknowledged" type="tns:BooleanParameter" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Whether transaction was acknowledged. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MerchantProfileIds" type="q35:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific MerchantProfileId values from transaction requests. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrderNumbers" type="q36:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific OrderNumber values from transaction requests. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="QueryType" type="tns:QueryType" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Specifies the way TMS should filter when two or more parameters are specified. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceIds" type="q37:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific ServiceId values. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceKeys" type="q38:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific ServiceKey values. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionClassTypePairs" type="tns:ArrayOfTransactionClassTypePair" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific Transaction Class / Transaction Type pairs. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionDateRange" type="q39:DateRange" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Range of dates the transactions were processed. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionIds" type="q40:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific TransactionId values from transaction responses. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionStates" type="q41:ArrayOfTransactionState" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Collection of specific transaction states. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="QueryTransactionsParameters" type="tns:QueryTransactionsParameters" nillable="true"/>
+	<xs:simpleType name="QueryType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Specifies the way TMS should filter when two or more parameters are specified. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AND">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Each result must match all the provided parameters. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OR">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Each result must match one or more of the provided parameters. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="QueryType" type="tns:QueryType" nillable="true"/>
+	<xs:complexType name="ArrayOfTransactionClassTypePair">
+		<xs:sequence>
+			<xs:element name="TransactionClassTypePair" type="tns:TransactionClassTypePair" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfTransactionClassTypePair" type="tns:ArrayOfTransactionClassTypePair" nillable="true"/>
+	<xs:element name="QueryTransactionFamiliesResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="QueryTransactionFamiliesResult" type="tns:ArrayOfFamilyDetail" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ArrayOfFamilyDetail">
+		<xs:sequence>
+			<xs:element name="FamilyDetail" type="tns:FamilyDetail" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfFamilyDetail" type="tns:ArrayOfFamilyDetail" nillable="true"/>
+	<xs:complexType name="FamilyDetail">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains detail information for the family of transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BatchId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Id of the batch where the original transaction was captured. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CaptureDateTime" type="xs:dateTime" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The date and time of the original capture, in UTC. Expected on successfully captured transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CapturedAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The amount that was captured. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomerId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The customer Id specified on the original transaction. Expected if present on authorization. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FamilyId" type="ser:guid" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The Family Id taken from the original Transaction Id. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FamilyState" type="q42:TransactionState" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The current state of the family, defined as the state of the last transaction in the family. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastAuthorizedAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The most recently authorized transaction amount. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MerchantProfileId" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The MerchantProfileId used for the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NetAmount" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The net amount charged inclusive of all transactions in the family. This will be negative when the transaction involves more funds are moving to the cardholder than to the merchant, as would be the case with a ReturnUnlinked transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ServiceKey" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The ServiceKey used for the transaction. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionIds" type="q43:ArrayOfstring" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> DEPRECATED: The TransactionIds property does not provide enough data for processing partial returns. Please use the TransactionMetaData property. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransactionMetaData" type="tns:ArrayOfTransactionMetaData" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Transaction metadata, including TransactionId, ServiceId, etc. Expected. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="FamilyDetail" type="tns:FamilyDetail" nillable="true"/>
+	<xs:complexType name="ArrayOfTransactionMetaData">
+		<xs:sequence>
+			<xs:element name="TransactionMetaData" type="tns:TransactionMetaData" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfTransactionMetaData" type="tns:ArrayOfTransactionMetaData" nillable="true"/>
+	<xs:element name="QueryTransactionsDetail">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="queryTransactionsParameters" type="tns:QueryTransactionsParameters" nillable="true" minOccurs="0"/>
+				<xs:element name="transactionDetailFormat" type="tns:TransactionDetailFormat" minOccurs="0"/>
+				<xs:element name="includeRelated" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="pagingParameters" type="q44:PagingParameters" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="TransactionDetailFormat">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Defines the format of the transaction detail returned in the response. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CWSTransaction">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Response should be in the CWS object model. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SerializedCWS">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Response should be in a serialized XML representation of the CWS object model. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TransactionDetailFormat" type="tns:TransactionDetailFormat" nillable="true"/>
+	<xs:element name="QueryTransactionsDetailResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="QueryTransactionsDetailResult" type="tns:ArrayOfTransactionDetail" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QueryTransactionsSummary">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="queryTransactionsParameters" type="tns:QueryTransactionsParameters" nillable="true" minOccurs="0"/>
+				<xs:element name="includeRelated" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="pagingParameters" type="q45:PagingParameters" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QueryTransactionsSummaryResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="QueryTransactionsSummaryResult" type="tns:ArrayOfSummaryDetail" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QueryRejectedSummary">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="queryRejectedParameters" type="tns:QueryRejectedParameters" nillable="true" minOccurs="0"/>
+				<xs:element name="pagingParameters" type="q46:PagingParameters" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QueryRejectedSummaryResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="QueryRejectedSummaryResult" type="tns:QueryResponse" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QueryRejectedDetail">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="queryRejectedParameters" type="tns:QueryRejectedParameters" nillable="true" minOccurs="0"/>
+				<xs:element name="pagingParameters" type="q47:PagingParameters" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QueryRejectedDetailResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="QueryRejectedDetailResult" type="tns:QueryResponse" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

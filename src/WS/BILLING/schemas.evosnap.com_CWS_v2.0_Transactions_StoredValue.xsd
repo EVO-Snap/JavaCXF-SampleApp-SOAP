@@ -1,0 +1,814 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/Transactions/StoredValue" elementFormDefault="qualified" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/StoredValue">
+	<xs:import schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions.xsd" namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions"/>
+	<xs:complexType name="StoredValueTransaction">
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q1="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q1:Transaction">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="TenderData" nillable="true" type="tns:StoredValueTenderData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Details about the card tender used for the transaction. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="TransactionData" nillable="true" type="tns:StoredValueTransactionData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Contains transaction detail information. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="StoredValueTransaction" nillable="true" type="tns:StoredValueTransaction"/>
+	<xs:complexType name="StoredValueTenderData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Stored Value tender data. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q2="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q2:TransactionTenderData">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="CardData" nillable="true" type="tns:CardData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Cardholder data. Conditional, required if IdType is a card (PAN or track data). </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="CardSecurityData" nillable="true" type="tns:CardSecurityData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Contains security information for the payment card. Conditional, required for PIN Debit transactions. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="CardholderId" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Actual cardholder identification data in the form of encrypted PIN. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ConsumerIdentifications" nillable="true" type="tns:ArrayOfConsumerIdentification">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Collection of Consumer Identification data. Conditional, required if CardData is not supplied. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="StoredValueTenderData" nillable="true" type="tns:StoredValueTenderData"/>
+	<xs:complexType name="CardData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Cardholder data. Conditional, required if IdType of the consumer identifier instance is a card (PAN or TrackData). </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="AccountNumber" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Card account number. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Expire" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Card expiration. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Track1Data" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The actual data read from the magnetic stripe on a card. Application should strip Start and End Sentinels, LRC, and Track separators. Conditional, required if at least one track data is required for authorizations unless card not present or keyed entry. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="Track2Data" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The actual data read from the magnetic stripe on a card. Application should strip Start and End Sentinels, LRC, and Track separators. Conditional, required if at least one track data is required for authorizations unless card not present or keyed entry. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CardData" nillable="true" type="tns:CardData"/>
+	<xs:complexType name="CardSecurityData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains security information for the payment card. Conditional, required for PIN Debit transactions. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element xmlns:q3="http://schemas.evosnap.com/CWS/v2.0/Transactions" minOccurs="0" name="CVDataProvided" type="q3:CVDataProvided">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates whether or not CVD2 data was provided. Conditional, required for keyed transactions. Recommended for card-not-present authorizations. Not used in settlement. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="CVData" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Actual CVD2 data. Conditional, required if CVDataInd = 'Provided'. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CardSecurityData" nillable="true" type="tns:CardSecurityData"/>
+	<xs:complexType name="ArrayOfConsumerIdentification">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="ConsumerIdentification" nillable="true" type="tns:ConsumerIdentification"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfConsumerIdentification" nillable="true" type="tns:ArrayOfConsumerIdentification"/>
+	<xs:complexType name="ConsumerIdentification">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Consumer Identification data. Conditional required if CardData is not supplied. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="IdType" type="tns:IdType">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates the type of consumer identifier provided. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="IdData" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Contains the actual consumer identifier data. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="IdEntryMode" type="tns:IdEntryMode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ConsumerIdentification" nillable="true" type="tns:ConsumerIdentification"/>
+	<xs:simpleType name="IdType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the type of consumer identifier provided. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PIN">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PIN </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PINEncrypted">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PIN Encrypted </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PINEncryptedKeySerialNumber">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> PIN Encrypted - Key Serial Number </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PhoneNumber">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Phone Number </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DriversLicenseNumber">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Drivers License Number </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EmailAddress">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Email Address </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BiometricAlgorithm">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Biometric - Algorithm </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BiometricMap">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Biometric - Map </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="X509Certificate">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> x.509 Certificate </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Passphrase">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Passphrase </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Hash">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Hash </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PublicKey">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Public Key </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RetinaAlg">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Retina Algorithm </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RetinaMap">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Retina Map </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BarCode">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Bar code </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="IdType" nillable="true" type="tns:IdType"/>
+	<xs:simpleType name="IdEntryMode">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the method by which the consumer identifier data was received. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TrackData">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Track Data </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Keyed">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Keyed </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Internet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Internet </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BlueTooth">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> BlueTooth </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RFID">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RFID </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Wireless">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Wireless </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Biometric">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Biometric </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NFC">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> NFC </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Transponder">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Transponder </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ContactlessDevice">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Contactless device. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ChipCapableDevice">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Chip capable device. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ProviderIssued">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value to indicate the ConsumerId was generated by the service provider. Should only be used in responses where TxnCode = 'Issue_Account'. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BarCodeReader">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Read from a bar code scanner. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="IdEntryMode" nillable="true" type="tns:IdEntryMode"/>
+	<xs:complexType name="StoredValueTransactionData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the Stored Value transaction data. Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q4="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q4:TransactionData">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="EmployeeId" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The Employee Identifier. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="IndustryType" type="q4:IndustryType">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The industry type of the transaction. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="TipAmount" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Tip amount. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="TenderCurrencyCode" type="q4:TypeISOCurrencyCodeA3">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Currency code as defined by the International Standards Organization (ISO). Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="CardRestrictionValue" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies the gift card restriction value assigned to a specific card. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="EntryMode" type="q4:EntryMode">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates how the cardholder data was retrieved. When authorizing with stored card data, either locally or with CardDataToken, indicate that the card data was manually collected (keyed or one of its variants). Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="Unload" type="xs:boolean">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies if Authorize should unload remaining balance. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="CardStatus" type="tns:CardStatus">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies card status for status update. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="OperationType" type="tns:OperationType">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the operation type for ManageAccount. Conditional, required if processing ManageAccount. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="OrderNumber" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Order number as assigned by the merchant. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Gets or sets the terminalId. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="StoredValueTransactionData" nillable="true" type="tns:StoredValueTransactionData"/>
+	<xs:simpleType name="CardStatus">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the status of the card, if present. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Lost">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Lost </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Stolen">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Stolen </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Suspended">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Suspended </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RemoveStatus">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> RemoveStatus </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="CardStatus" nillable="true" type="tns:CardStatus"/>
+	<xs:simpleType name="OperationType">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates the type of account update. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NotSet">
+				<xs:annotation>
+					<xs:documentation>
+						<summary> Value has not been explicitly set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Activate"/>
+			<xs:enumeration value="BalanceTransfer"/>
+			<xs:enumeration value="Deactivate"/>
+			<xs:enumeration value="Reload"/>
+			<xs:enumeration value="UpdateStatus"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="OperationType" nillable="true" type="tns:OperationType"/>
+	<xs:complexType name="StoredValueBalanceTransferTenderData">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:StoredValueTenderData">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="SourceCardData" nillable="true" type="tns:CardData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Card data for the source account. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ConsumerIdentification" nillable="true" type="tns:ConsumerIdentification">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Consumer Identification data for the source account. Conditional, required if CardData not supplied. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="StoredValueBalanceTransferTenderData" nillable="true" type="tns:StoredValueBalanceTransferTenderData"/>
+	<xs:complexType name="StoredValueActivateTenderData">
+		<xs:complexContent mixed="false">
+			<xs:extension base="tns:StoredValueTenderData">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="VirtualCardData" nillable="true" type="tns:VirtualCardData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Aggregate used to submit account number length and BIN number for virtual card activation. Conditional, for virtual card activation when TxnCode = 'Issue_Account'. At least one of CardData, VirtualCardData, CardDataToken or SecureCardData must be provided. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="StoredValueActivateTenderData" nillable="true" type="tns:StoredValueActivateTenderData"/>
+	<xs:complexType name="VirtualCardData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Aggregate used to submit account number length and BIN number for virtual card activation. Conditional, for virtual card activation when TxnCode = 'Issue_Account'. At least one of CardData, VirtualCardData, CardDataToken or SecureCardData must be provided. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="AccountNumberLength" type="xs:int">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The length of the account number that will be returned by the service provider. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="BIN" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The virtual gift card BIN number assigned by the service provider. Required. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="VirtualCardData" nillable="true" type="tns:VirtualCardData"/>
+	<xs:complexType name="StoredValueCaptureResponse">
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q5="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q5:Response">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="BatchId" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Batch Identifier. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="SummaryData" nillable="true" type="q5:SummaryData">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Summary information for Stored Value totals. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="StoredValueCaptureResponse" nillable="true" type="tns:StoredValueCaptureResponse"/>
+	<xs:complexType name="StoredValueTransactionResponse">
+		<xs:complexContent mixed="false">
+			<xs:extension xmlns:q6="http://schemas.evosnap.com/CWS/v2.0/Transactions" base="q6:Response">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Amount" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies the authorization amount of the transaction. This is the actual amount authorized and should be used in settlement instead of the request amount. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="FeeAmount" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates fees charged to process transaction if applicable. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="ApprovalCode" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> A value returned when a transaction is approved. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="CVResult" type="q6:CVResult">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Response code returned by the card issuer indicating the result of Card Verification (CVV2/CVC2/CID). Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="CashBackAmount" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The amount to return to the cardholder in another tender. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="LockAmount" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The value on the card that is locked due to balance lock transaction received. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="NewBalance" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The account balance after the transaction. Required. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="PreviousBalance" type="xs:decimal">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The account balance prior to the transaction. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="CardStatus" type="tns:CardStatus">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the status of the card if one is present. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="AccountNumber" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Virtual card account number. Conditional, required for virtual card activation. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="CVData" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> CVD2 data (gift card security code) for virtual card activations. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="CardRestrictionValue" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies the gift card restriction value assigned to a specific card. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="PaymentAccountDataToken" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Token specified by a tokenization (offsite payment account data storage) Service Provider, used to retrieve securely stored payment account data. Conditional, required if any one of the following must be provided: CardDataToken, SecureCardData, or tender-specific payment account data. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="MaskedPAN" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Masked PAN for storage. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> The order id generated by CWS. Often used by service providers for transaction correlation. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="Expire" nillable="true" type="xs:string">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Card expiration. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="StoredValueTransactionResponse" nillable="true" type="tns:StoredValueTransactionResponse"/>
+</xs:schema>

@@ -1,0 +1,96 @@
+<!-- edited with XMLSpy v2013 rel. 2 sp2 (x64) (http://www.altova.com) by Darren Adelgren (PowerPay) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/Faults" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/DataServices/TMS/Faults" elementFormDefault="qualified">
+	<xs:complexType name="TMSUnavailableFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates that the Transaction Management Service is temporary unavailable. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:TMSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="TMSUnavailableFault" type="tns:TMSUnavailableFault" nillable="true"/>
+	<xs:complexType name="TMSBaseFault">
+		<xs:sequence>
+			<xs:element name="ErrorID" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The error code of the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="HelpURL" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The web URL that will display more information about the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Operation" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> The TMS operation name that originated the fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProblemType" type="xs:string" nillable="true" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Lists the specific error message for the associated fault. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TMSBaseFault" type="tns:TMSBaseFault" nillable="true"/>
+	<xs:complexType name="TMSTransactionFailedFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Defines a TMS fault type. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:TMSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="TMSTransactionFailedFault" type="tns:TMSTransactionFailedFault" nillable="true"/>
+	<xs:complexType name="TMSOperationNotSupportedFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Indicates that an unsupported operation is being attempted. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:TMSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="TMSOperationNotSupportedFault" type="tns:TMSOperationNotSupportedFault" nillable="true"/>
+	<xs:complexType name="TMSUnknownServiceKeyFault" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Defines a TMS fault type. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:TMSBaseFault">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="TMSUnknownServiceKeyFault" type="tns:TMSUnknownServiceKeyFault" nillable="true"/>
+</xs:schema>

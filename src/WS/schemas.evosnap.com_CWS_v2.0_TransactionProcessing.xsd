@@ -1,0 +1,325 @@
+<!-- edited with XMLSpy v2013 rel. 2 sp2 (x64) (http://www.altova.com) by Darren Adelgren (PowerPay) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/TransactionProcessing" xmlns:q1="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q2="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q3="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q4="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q5="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q6="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q7="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q8="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q9="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q10="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q11="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q12="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q13="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q14="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q15="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q16="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q17="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q18="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q19="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q21="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q22="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q24="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q26="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q27="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:q29="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q30="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q31="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q32="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q33="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q34="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q35="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q36="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q37="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q38="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q39="http://schemas.evosnap.com/CWS/v2.0/Transactions" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/TransactionProcessing" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions" schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions.xsd"/>
+	<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" schemaLocation="schemas.microsoft.com_2003_10_Serialization_Arrays.xsd"/>
+	<xs:element name="QueryAccount">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="transaction" type="q1:Transaction" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="merchantProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QueryAccountResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="QueryAccountResult" type="q2:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Verify">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="transaction" type="q3:Transaction" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="merchantProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="VerifyResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="VerifyResult" type="q4:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Authorize">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="transaction" type="q5:Transaction" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="merchantProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AuthorizeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AuthorizeResult" type="q6:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Adjust">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="differenceData" type="q7:Adjust" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AdjustResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AdjustResult" type="q8:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AuthorizeAndCapture">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="transaction" type="q9:Transaction" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="merchantProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AuthorizeAndCaptureResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AuthorizeAndCaptureResult" type="q10:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReturnUnlinked">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="transaction" type="q11:Transaction" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="merchantProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReturnUnlinkedResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ReturnUnlinkedResult" type="q12:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReturnById">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="differenceData" type="q13:Return" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReturnByIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ReturnByIdResult" type="q14:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Undo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="differenceData" type="q15:Undo" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UndoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="UndoResult" type="q16:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Capture">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="differenceData" type="q17:Capture" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CaptureResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CaptureResult" type="q18:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CaptureAll">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="differenceData" type="q19:ArrayOfCapture" nillable="true" minOccurs="0"/>
+				<xs:element name="batchIds" type="q20:ArrayOfstring" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="merchantProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="forceClose" type="xs:boolean" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CaptureAllResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CaptureAllResult" type="q21:ArrayOfResponse" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CaptureAllAsync">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="differenceData" type="q22:ArrayOfCapture" nillable="true" minOccurs="0"/>
+				<xs:element name="batchIds" type="q23:ArrayOfstring" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="merchantProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="forceClose" type="xs:boolean" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CaptureAllAsyncResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CaptureAllAsyncResult" type="q24:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CaptureSelective">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="transactionIds" type="q25:ArrayOfstring" nillable="true" minOccurs="0"/>
+				<xs:element name="differenceData" type="q26:ArrayOfCapture" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CaptureSelectiveResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CaptureSelectiveResult" type="q27:ArrayOfResponse" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CaptureSelectiveAsync">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="transactionIds" type="q28:ArrayOfstring" nillable="true" minOccurs="0"/>
+				<xs:element name="differenceData" type="q29:ArrayOfCapture" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CaptureSelectiveAsyncResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CaptureSelectiveAsyncResult" type="q30:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Acknowledge">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="transactionId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AcknowledgeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AcknowledgeResult" type="q31:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequestTransaction">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="merchantProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="tenderData" type="q32:TransactionTenderData" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequestTransactionResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="RequestTransactionResult" type="q33:ArrayOfResponse" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ManageAccount">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="transaction" type="q34:Transaction" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="merchantProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ManageAccountResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ManageAccountResult" type="q35:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ManageAccountById">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="differenceData" type="q36:Manage" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ManageAccountByIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ManageAccountByIdResult" type="q37:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Disburse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sessionToken" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="transaction" type="q38:Transaction" nillable="true" minOccurs="0"/>
+				<xs:element name="applicationProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="merchantProfileId" type="xs:string" nillable="true" minOccurs="0"/>
+				<xs:element name="workflowId" type="xs:string" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DisburseResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DisburseResult" type="q39:Response" nillable="true" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

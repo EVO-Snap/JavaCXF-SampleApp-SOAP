@@ -1,0 +1,17 @@
+<jaxb:bindings version="2.0"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <jaxb:bindings schemaLocation="https://api.ciptest.goevo.local/2.0.19/DataServices?xsd=xsd15">
+        <jaxb:bindings node="/xs:schema">
+            <jaxb:globalBindings mapSimpleTypeDef="true" generateElementProperty="false" typesafeEnumMaxMembers="600" underscoreBinding="asCharInWord">
+		<jaxb:javaType name="java.util.Calendar" xmlType="xs:date"
+		        parseMethod="javax.xml.bind.DatatypeConverter.parseDate"
+		        printMethod="javax.xml.bind.DatatypeConverter.printDate"/>
+		<jaxb:javaType name="java.util.Calendar" xmlType="xs:dateTime"
+		        parseMethod="javax.xml.bind.DatatypeConverter.parseDateTime"
+		        printMethod="javax.xml.bind.DatatypeConverter.printDateTime"/>
+            </jaxb:globalBindings>
+        </jaxb:bindings>
+    </jaxb:bindings>
+</jaxb:bindings>

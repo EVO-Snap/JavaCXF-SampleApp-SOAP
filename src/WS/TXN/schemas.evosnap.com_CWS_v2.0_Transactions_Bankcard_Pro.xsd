@@ -1,0 +1,255 @@
+<!-- edited with XMLSpy v2013 rel. 2 sp2 (x64) (http://www.altova.com) by Darren Adelgren (PowerPay) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard/Pro" xmlns:q1="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q2="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q3="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q4="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q5="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q6="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q7="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q8="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q9="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q10="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q11="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" xmlns:q12="http://schemas.evosnap.com/CWS/v2.0/Transactions" xmlns:q13="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" targetNamespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard/Pro" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions/Bankcard" schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions_Bankcard.xsd"/>
+	<xs:import namespace="http://schemas.evosnap.com/CWS/v2.0/Transactions" schemaLocation="schemas.evosnap.com_CWS_v2.0_Transactions.xsd"/>
+	<xs:complexType name="BankcardTransactionDataPro" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information about the Bankcard Pro transaction data. Conditional, required to support Level 2, Level 3, and Managed Billing transaction data. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="q1:BankcardTransactionData">
+				<xs:sequence>
+					<xs:element name="ManagedBilling" type="q1:ManagedBilling" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Configuration to setup and perform an automated recurring payment on the behalf of the merchant. Conditional, optional if ManagedBilling (ServiceInformation) = 'true', otherwise not present. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Level2Data" type="q1:Level2Data" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Aggregate of elements specific to Level 2/Purchase Card transactions. Conditional, required when LineItemDetails are provided, otherwise optional if Service Information indicates PurchaseCardLevel (ServiceInformation) = 'Level2' or 'Level3'. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LineItemDetails" type="q1:ArrayOfLineItemDetail" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Collection of transaction line item details. Conditional, optional if Service Information indicates PurchaseCardLevel (ServiceInformation) = 'Level3'. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PINlessDebitData" type="q2:PINlessDebitData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Collection of transaction details related to PINless Debit cards. Conditional, optional when processing a recurring or installment MOTO or Ecommerce transaction with a PIN Debit card without entering a PIN. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IIASData" type="q1:IIASData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Inventory Information Approval System (IIAS) data including amounts for FSA eligible items. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardTransactionDataPro" type="tns:BankcardTransactionDataPro" nillable="true"/>
+	<xs:complexType name="BankcardTransactionPro" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="q3:BankcardTransaction">
+				<xs:sequence>
+					<xs:element name="InterchangeData" type="tns:BankcardInterchangeData" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Details about a transaction that may lower interchange rates for the transaction. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardTransactionPro" type="tns:BankcardTransactionPro" nillable="true"/>
+	<xs:complexType name="BankcardInterchangeData">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Details about a transaction that may lower interchange rates for the transaction. Optional. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BillPayment" type="q4:BillPayment" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates that the transaction is one in a set of recurring or installment transactions. Conditional, required for recurring or installment transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RequestCommercialCard" type="q5:RequestCommercialCard" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Request commercial card status for the transaction. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExistingDebt" type="q6:ExistingDebt" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates recurring or installment transaction is on existing debt. Conditional, required if BillPayment is set. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RequestACI" type="q7:RequestACI" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Authorization Characteristics Indicator. Identifies the request as potentially qualifying for the Visa CPS or MasterCard Merit programs. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TotalNumberOfInstallments" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Number of installments in the series. Conditional, required for installment transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CurrentInstallmentNumber" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Number of installment represented by this transaction. Conditional, required for installment transactions. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RequestAdvice" type="q8:RequestAdvice" minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo/>
+					<xs:documentation>
+						<summary> Indicates whether to include advice on declined recurring payment transactions. Optional. </summary>
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BankcardInterchangeData" type="tns:BankcardInterchangeData" nillable="true"/>
+	<xs:complexType name="BankcardTransactionResponsePro" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="q9:BankcardTransactionResponse">
+				<xs:sequence>
+					<xs:element name="AdviceResponse" type="q9:AdviceResponse" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Specifies reason for issuer decline of recurring payment transactions. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CommercialCardResponse" type="q9:CommercialCardResponse" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Indicates the status of the card with respect to its ability to utilize purchase card data. When the card is a Business, Corporate, or Purchase card, providing purchase card data can result in improved interchange rates. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ReturnedACI" type="xs:string" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Provides information concerning the status of a transaction's CPS qualification. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardTransactionResponsePro" type="tns:BankcardTransactionResponsePro" nillable="true"/>
+	<xs:complexType name="BankcardReturnPro" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Contains information for returning Bankcard transactions (Credit and PIN Debit). Required. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="q10:BankcardReturn">
+				<xs:sequence>
+					<xs:element name="LineItemDetails" type="q10:ArrayOfLineItemDetail" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Collection of transaction line item details. Conditional, optional if service information indicates PurchaseCardLevel (ServiceInformation) = 'Level3'. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardReturnPro" type="tns:BankcardReturnPro" nillable="true"/>
+	<xs:complexType name="BankcardCapturePro" mixed="false">
+		<xs:complexContent>
+			<xs:extension base="q11:BankcardCapture">
+				<xs:sequence>
+					<xs:element name="MultiplePartialCapture" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> If present (true), indicates a partial capture of the authorized funds. Additional captures will be made against the same authorization. If omitted (false) then this is the last amount to be captured from the authorization. Any additional authorized funds will be released. Conditional, required if MultiplePartialCapture (ServiceInformation) is 'true'. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Level2Data" type="q11:Level2Data" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Aggregate of elements specific to Level 2/Purchase Card transactions. Conditional, required when LineItemDetails are provided, otherwise optional if Service Information indicates PurchaseCardLevel (ServiceInformation) = 'Level2' (or higher) and this data was not passed in the authorization. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LineItemDetails" type="q11:ArrayOfLineItemDetail" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Collection of transaction line item details. Conditional, optional if service information indicates PurchaseCardLevel (ServiceInformation) = 'Level3'. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ShippingData" type="q12:CustomerInfo" nillable="true" minOccurs="0">
+						<xs:annotation>
+							<xs:appinfo/>
+							<xs:documentation>
+								<summary> Customer shipping details. Optional. </summary>
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardCapturePro" type="tns:BankcardCapturePro" nillable="true"/>
+	<xs:complexType name="BankcardCaptureResponsePro" mixed="false">
+		<xs:annotation>
+			<xs:appinfo/>
+			<xs:documentation>
+				<summary> Response to capturing Bankcard Pro transactions. Expected. </summary>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="q13:BankcardCaptureResponse">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankcardCaptureResponsePro" type="tns:BankcardCaptureResponsePro" nillable="true"/>
+</xs:schema>

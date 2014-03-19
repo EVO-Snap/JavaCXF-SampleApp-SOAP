@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF8"?>
+<xs:schema xmlns:tns="http://schemas.evosnap.com/Ipc.General.WCF.Contracts.Common/External" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.evosnap.com/Ipc.General.WCF.Contracts.Common/External" elementFormDefault="qualified">
+	<xs:complexType name="PingResponse">
+		<xs:sequence>
+			<xs:element name="IsSuccess" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="Message" type="xs:string" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="PingResponse" type="tns:PingResponse" nillable="true"/>
+</xs:schema>

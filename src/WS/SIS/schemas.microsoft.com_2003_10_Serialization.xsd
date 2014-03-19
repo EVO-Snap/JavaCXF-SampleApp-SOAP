@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 rel. 2 sp2 (x64) (http://www.altova.com) by Darren Adelgren (PowerPay) -->
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" attributeFormDefault="qualified">
+	<xs:element name="anyType" type="xs:anyType" nillable="true"/>
+	<xs:element name="anyURI" type="xs:anyURI" nillable="true"/>
+	<xs:element name="base64Binary" type="xs:base64Binary" nillable="true"/>
+	<xs:element name="boolean" type="xs:boolean" nillable="true"/>
+	<xs:element name="byte" type="xs:byte" nillable="true"/>
+	<xs:element name="dateTime" type="xs:dateTime" nillable="true"/>
+	<xs:element name="decimal" type="xs:decimal" nillable="true"/>
+	<xs:element name="double" type="xs:double" nillable="true"/>
+	<xs:element name="float" type="xs:float" nillable="true"/>
+	<xs:element name="int" type="xs:int" nillable="true"/>
+	<xs:element name="long" type="xs:long" nillable="true"/>
+	<xs:element name="QName" type="xs:QName" nillable="true"/>
+	<xs:element name="short" type="xs:short" nillable="true"/>
+	<xs:element name="string" type="xs:string" nillable="true"/>
+	<xs:element name="unsignedByte" type="xs:unsignedByte" nillable="true"/>
+	<xs:element name="unsignedInt" type="xs:unsignedInt" nillable="true"/>
+	<xs:element name="unsignedLong" type="xs:unsignedLong" nillable="true"/>
+	<xs:element name="unsignedShort" type="xs:unsignedShort" nillable="true"/>
+	<xs:element name="char" type="tns:char" nillable="true"/>
+	<xs:simpleType name="char">
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:element name="duration" type="tns:duration" nillable="true"/>
+	<xs:simpleType name="duration">
+		<xs:restriction base="xs:duration">
+			<xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+			<xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+			<xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="guid" type="tns:guid" nillable="true"/>
+	<xs:simpleType name="guid">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attribute name="FactoryType" type="xs:QName"/>
+	<xs:attribute name="Id" type="xs:ID"/>
+	<xs:attribute name="Ref" type="xs:IDREF"/>
+</xs:schema>
