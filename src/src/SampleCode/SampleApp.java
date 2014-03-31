@@ -533,7 +533,7 @@ public class SampleApp {
 		try {
 			checkTokenExpire(_CV);// Always verify that the session token has not expired.
 			
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				if (!_CV._bcs.getOperations().isAuthAndCapture()){
 					System.out.println("AuthorizeAndCapture is not supported by this service provider. Moving to next transaction type\r\n");	
 					return true;// Check to see if this transaction type is supported
@@ -583,7 +583,7 @@ public class SampleApp {
 		try {
 			checkTokenExpire(_CV);// Always verify that the session token has not expired.
 
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				if (!_CV._bcs.getOperations().isAuthorize()){
 					System.out.println("Authorize is not supported by this service provider. Moving to next transaction type\r\n");	
 					return true;// Check to see if this transaction type is supported
@@ -664,7 +664,7 @@ public class SampleApp {
 		try {
 			checkTokenExpire(_CV);// Always verify that the session token has not expired.
 
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				if (!_CV._bcs.getOperations().isAdjust()){
 					System.out.println("Adjust is not supported by this service provider. Moving to next transaction type\r\n");	
 					return true;// Check to see if this transaction type is supported
@@ -726,7 +726,7 @@ public class SampleApp {
 		try {
 			checkTokenExpire(_CV);// Always verify that the session token has not expired.
 
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				if (!_CV._bcs.getOperations().isUndo()){
 					System.out.println("Undo is not supported by this service provider. Moving to next transaction type\r\n");	
 					return true;// Check to see if this transaction type is supported
@@ -784,7 +784,7 @@ public class SampleApp {
 			checkTokenExpire(_CV);// Always verify that the session token has not expired.
 			BankcardCaptureResponse BCCR = new BankcardCaptureResponse();
 			
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				if (!_CV._bcs.getOperations().isCapture()){
 					System.out.println("Capture is not supported by this service provider. Moving to next transaction type\r\n");	
 					return true;// Check to see if this transaction type is supported
@@ -842,7 +842,7 @@ public class SampleApp {
 				return true;// Check to see if this transaction type is supported
 			}
 
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				if (!_CV._bcs.getOperations().isCaptureAll()){
 					System.out.println("CaptureAll is not supported by this service provider. Moving to next transaction type\r\n");	
 					return true;// Check to see if this transaction type is supported
@@ -925,7 +925,7 @@ public class SampleApp {
 		try {
 			checkTokenExpire(_CV);// Always verify that the session token has not expired.
 			
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				if (!_CV._bcs.getOperations().isCaptureSelective()){
 					System.out.println("CaptureSelective is not supported by this service provider. Moving to next transaction type\r\n");	
 					return true;// Check to see if this transaction type is supported
@@ -997,7 +997,7 @@ public class SampleApp {
 		try {
 			checkTokenExpire(_CV);// Always verify that the session token has not expired.
 			
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				if (!_CV._bcs.getOperations().isReturnById()){
 					System.out.println("ReturnById is not supported by this service provider. Moving to next transaction type\r\n");	
 					return true;// Check to see if this transaction type is supported
@@ -1058,7 +1058,7 @@ public class SampleApp {
 		try {
 			checkTokenExpire(_CV);// Always verify that the session token has not expired.
 
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				if (!_CV._bcs.getOperations().isReturnUnlinked()){
 					System.out.println("ReturnUnlinked is not supported by this service provider. Moving to next transaction type\r\n");	
 					return true;// Check to see if this transaction type is supported
@@ -1098,7 +1098,7 @@ public class SampleApp {
 		try {
 			checkTokenExpire(_CV);// Always verify that the session token has not expired.
 
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				if (!_CV._bcs.getOperations().isVerify()){
 					System.out.println("Verify is not supported by this service provider. Moving to next transaction type\r\n");	
 					return true;// Check to see if this transaction type is supported
@@ -1136,7 +1136,7 @@ public class SampleApp {
 		try {
 			checkTokenExpire(_CV);// Always verify that the session token has not expired.
 
-			if(_CV.ServiceToProcessAs == "BankcardService" && _CV._bcs != null){
+			if(_CV.ServiceToProcessAs.equals "BankcardService" && _CV._bcs != null){
 				//Presently no service providers support
 				return true;
 			}
