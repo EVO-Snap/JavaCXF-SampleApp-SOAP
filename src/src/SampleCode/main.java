@@ -18,10 +18,24 @@ public class main {
 		 * Service information steps. To simulate this behavior, if you provide the values below the Service 
 		 * Information steps are skipped. 
 		*/
+		
+		if (SA._ActivationKey != "" && SA._MerchantType == "Managed") {
+			CV._BCPMerchantProfileId = SA._ActivationKey;
+			CV._BCPServiceId = "39C6700001";
+		}
+			else if (SA._ActivationKey != "" && SA._MerchantType == "Unmanaged") {
+				CV._BCPMerchantProfileId = SA._ActivationKey + "_TC";
+				CV._BCPServiceId = "4C85600001";
+			}
+			else {
+				CV._BCPMerchantProfileId = "";
+				CV._BCPServiceId = "";
+		}
+		
 		CV._ApplicationProfileId = "";//If you provide a value this step will be skipped
-		CV._BCPServiceId = "";//If you provide a getServiceInformation will attempt to match from the services returned for BankcardService
+		//CV._BCPServiceId = "";//If you provide a getServiceInformation will attempt to match from the services returned for BankcardService
 		CV._ECKServiceId = "";//If you provide a getServiceInformation will attempt to match from the services returned for ElectronicCheckingService
-		CV._BCPMerchantProfileId = "";//If you provide a value this step will attempt to match from the services returned for BankcardService
+		//CV._BCPMerchantProfileId = "";//If you provide a value this step will attempt to match from the services returned for BankcardService
 		CV._ECKMerchantProfileId = "";//If you provide a value this step will attempt to match from the services returned for ElectronicCheckingService
 		CV._WorkFlowId = "";// "A121700001";//For workflows like ReD or Magensa set this value to the proper workflowId
 		CV._UseWorkFlowId = true;//Trigger to use the workflowId in place of the Serviceid
